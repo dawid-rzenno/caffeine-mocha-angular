@@ -1,0 +1,22 @@
+<h2>Outcomes</h2>
+<form [formGroup]="form" (submit)="onSubmit()">
+  <h4>Add a new Outcome</h4>
+
+  <label for="{{Keys.Name}}">Name: </label>
+  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  <br><br>
+  <label for="{{Keys.Value}}">Value: </label>
+  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
+  <br><br>
+  <button type="submit">Create</button>
+</form>
+
+<h4>Added Outcomes</h4>
+<p *ngFor="let outcome of outcomes">
+  <button type="button" (click)="onRemove(outcome.id)">Remove</button>
+  {{outcome | json}}
+</p>
+
+Total Outcome Value: {{totalValue}}
+
+

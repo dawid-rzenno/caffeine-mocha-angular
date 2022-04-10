@@ -1,0 +1,14 @@
+<form [formGroup]="form">
+  <h1>Budget Form</h1>
+
+  <div class="input">
+    <label for="{{Keys.Name}}">Name: </label>
+    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  </div>
+
+  <div class="mocha-outcomes-input">
+    <mocha-outcomes-input [budgetForm]="form"></mocha-outcomes-input>
+  </div>
+
+  <button type="button">Create</button>
+</form>
