@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BudgetFormComponent } from './budget-form/budget-form.component';
 import { ReactiveFormsModule} from "@angular/forms";
-import { OutcomesInputComponent } from './budget-form/outcomes-input/outcomes-input.component';
+import { OutcomesFormComponent } from './budget-form/outcomes-form/outcomes-form.component';
+import { ContributorsFormComponent } from './budget-form/contributors-form/contributors-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BudgetFormComponent,
-    OutcomesInputComponent,
+    OutcomesFormComponent,
+    ContributorsFormComponent,
   ],
   imports: [
     BrowserModule,

@@ -16,11 +16,11 @@ export interface IOutcomeForm {
 }
 
 @Component({
-  selector: 'mocha-outcomes-input',
-  templateUrl: './outcomes-input.component.html',
-  styleUrls: ['./outcomes-input.component.scss']
+  selector: 'mocha-outcomes-form',
+  templateUrl: './outcomes-form.component.html',
+  styleUrls: ['./outcomes-form.component.scss']
 })
-export class OutcomesInputComponent extends FormComponent implements OnInit {
+export class OutcomesFormComponent extends FormComponent implements OnInit {
   @Input() public budgetForm!: FormGroup;
 
   public totalValue = 0;
