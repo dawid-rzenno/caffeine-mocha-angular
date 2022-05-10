@@ -1,0 +1,20 @@
+<h2>Allowances</h2>
+<form [formGroup]="form" (submit)="onAdd()">
+  <h4>Add a new Allowance</h4>
+
+  <label for="{{Keys.Name}}">Name: </label>
+  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  <br><br>
+  <label for="{{Keys.Value}}">Value: </label>
+  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
+  <br><br>
+  <button type="submit">Add</button>
+</form>
+
+<h4>Added Allowances</h4>
+<p *ngFor="let allowance of array">
+  <button type="button" (click)="onRemove(allowance.id)">Remove</button>
+  {{allowance | json}}
+</p>
+
+Total Allowance Value: {{totalValue}}

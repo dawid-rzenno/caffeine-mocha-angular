@@ -1,0 +1,20 @@
+<h2>Deductions</h2>
+<form [formGroup]="form" (submit)="onAdd()">
+  <h4>Add a new Deduction</h4>
+
+  <label for="{{Keys.Name}}">Name: </label>
+  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  <br><br>
+  <label for="{{Keys.Value}}">Value: </label>
+  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
+  <br><br>
+  <button type="submit">Add</button>
+</form>
+
+<h4>Added Deductions</h4>
+<p *ngFor="let deduction of array">
+  <button type="button" (click)="onRemove(deduction.id)">Remove</button>
+  {{deduction | json}}
+</p>
+
+Total Deduction Value: {{totalValue}}

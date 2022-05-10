@@ -5,9 +5,19 @@
   <label for="{{Keys.Name}}">Name: </label>
   <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
   <br><br>
-  <label for="{{Keys.Value}}">Value: </label>
-  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
-  <br><br>
+
+  <div class="mocha-incomes-form">
+    <mocha-incomes-form [parentForm]="form"></mocha-incomes-form>
+  </div>
+
+  <div class="mocha-allowances-form">
+    <mocha-allowances-form [parentForm]="form"></mocha-allowances-form>
+  </div>
+
+  <div class="mocha-deductions-form">
+    <mocha-deductions-form [parentForm]="form"></mocha-deductions-form>
+  </div>
+
   <button type="submit">Add</button>
 </form>
 

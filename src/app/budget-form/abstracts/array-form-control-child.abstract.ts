@@ -31,7 +31,7 @@ export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormCompo
   }
 
   public onRemove(id: string): void {
-    const control = this.parentForm?.get(this.NameInsideParentForm)
+    const control = this.parentForm?.get(this.NameInsideParentForm);
 
     control?.setValue(
       this.array.filter((outcome: ItemModel) => ({...{id: undefined}, ...outcome}['id'] !== id))

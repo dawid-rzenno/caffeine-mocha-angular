@@ -2,17 +2,22 @@ import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {BudgetFormKeys} from "../budget-form.component";
 import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
+import {OutcomeFormKeys} from "../outcomes-form/outcomes-form.component";
 
 export enum ContributorFormKeys {
   ID = 'id',
   Name = 'name',
-  Value = 'value'
+  Incomes = 'incomes',
+  Allowances = 'allowances',
+  Deductions = 'deductions'
 }
 
 export interface IContributorForm {
   [ContributorFormKeys.ID]: string;
   [ContributorFormKeys.Name]: string;
-  [ContributorFormKeys.Value]: number;
+  [ContributorFormKeys.Incomes]: any[];
+  [ContributorFormKeys.Allowances]: any[];
+  [ContributorFormKeys.Deductions]: any[];
 }
 
 @Component({
@@ -28,8 +33,11 @@ export class ContributorsFormComponent extends ArrayFormControlChildAbstract<ICo
   constructor(private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
+      [OutcomeFormKeys.ID]: 0,
       [ContributorFormKeys.Name]: 'Testing',
-      [ContributorFormKeys.Value]: 100
+      [ContributorFormKeys.Incomes]: [],
+      [ContributorFormKeys.Allowances]: [],
+      [ContributorFormKeys.Deductions]: [],
     })
   }
 

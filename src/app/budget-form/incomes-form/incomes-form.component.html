@@ -1,0 +1,20 @@
+<h2>Incomes</h2>
+<form [formGroup]="form" (submit)="onAdd()">
+  <h4>Add a new Income</h4>
+
+  <label for="{{Keys.Name}}">Name: </label>
+  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  <br><br>
+  <label for="{{Keys.Value}}">Value: </label>
+  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
+  <br><br>
+  <button type="submit">Add</button>
+</form>
+
+<h4>Added Incomes</h4>
+<p *ngFor="let income of array">
+  <button type="button" (click)="onRemove(income.id)">Remove</button>
+  {{income | json}}
+</p>
+
+Total Income Value: {{totalValue}}

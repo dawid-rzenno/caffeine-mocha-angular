@@ -39,6 +39,7 @@ export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcom
   constructor(private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
+      [OutcomeFormKeys.ID]: 0,
       [OutcomeFormKeys.Name]: 'Testing',
       [OutcomeFormKeys.Value]: 100
     })
