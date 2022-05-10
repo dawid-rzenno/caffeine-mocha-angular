@@ -1,1 +1,18 @@
-<p>contributors-form works!</p>
+<h2>Contributors</h2>
+<form [formGroup]="form" (submit)="onAdd()">
+  <h4>Add a new Contributor</h4>
+
+  <label for="{{Keys.Name}}">Name: </label>
+  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
+  <br><br>
+  <label for="{{Keys.Value}}">Value: </label>
+  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
+  <br><br>
+  <button type="submit">Add</button>
+</form>
+
+<h4>Added Contributors</h4>
+<p *ngFor="let contributor of array">
+  <button type="button" (click)="onRemove(contributor.id)">Remove</button>
+  {{contributor | json}}
+</p>

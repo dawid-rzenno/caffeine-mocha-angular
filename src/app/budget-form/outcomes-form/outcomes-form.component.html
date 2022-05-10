@@ -1,5 +1,5 @@
 <h2>Outcomes</h2>
-<form [formGroup]="form" (submit)="onSubmit()">
+<form [formGroup]="form" (submit)="onAdd()">
   <h4>Add a new Outcome</h4>
 
   <label for="{{Keys.Name}}">Name: </label>
@@ -8,11 +8,11 @@
   <label for="{{Keys.Value}}">Value: </label>
   <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
   <br><br>
-  <button type="submit">Create</button>
+  <button type="submit">Add</button>
 </form>
 
 <h4>Added Outcomes</h4>
-<p *ngFor="let outcome of outcomes">
+<p *ngFor="let outcome of array">
   <button type="button" (click)="onRemove(outcome.id)">Remove</button>
   {{outcome | json}}
 </p>

@@ -6,8 +6,12 @@
     <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
   </div>
 
-  <div class="mocha-outcomes-input">
-    <mocha-outcomes-form [budgetForm]="form"></mocha-outcomes-form>
+  <div class="mocha-outcomes-form">
+    <mocha-outcomes-form [parentForm]="form"></mocha-outcomes-form>
+  </div>
+
+  <div class="mocha-contributors-form">
+    <mocha-contributors-form [parentForm]="form"></mocha-contributors-form>
   </div>
 
   <button type="button">Create</button>

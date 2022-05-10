@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {BudgetFormKeys} from "../budget-form.component";
-import {FormComponent} from "../../models/form-component.abstract";
+import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
 
 export enum OutcomeFormKeys {
   ID = 'id',
@@ -20,25 +20,19 @@ export interface IOutcomeForm {
   templateUrl: './outcomes-form.component.html',
   styleUrls: ['./outcomes-form.component.scss']
 })
-export class OutcomesFormComponent extends FormComponent implements OnInit {
-  @Input() public budgetForm!: FormGroup;
+export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcomeForm> {
+  @Input() public parentForm!: FormGroup;
+  public readonly Keys = OutcomeFormKeys;
+  public readonly NameInsideParentForm = BudgetFormKeys.Outcomes;
+
+  public override afterAddCallback = () => this.totalValue = this.calculateTotalValue()
+  public override afterRemoveCallback = () => this.totalValue = this.calculateTotalValue()
 
   public totalValue = 0;
 
-  public readonly Keys = OutcomeFormKeys;
-
-  private lastIndexUsed = 0;
-
-  get outcomes(): IOutcomeForm[] {
-    const value = this.budgetForm?.get(BudgetFormKeys.Outcomes)?.value;
-    return value ? value : []
-  }
-
   private calculateTotalValue(): number {
     let total = 0;
-    this.outcomes.forEach(outcome => {
-      total = total + outcome[OutcomeFormKeys.Value]
-    })
+    this.array.forEach((outcome: IOutcomeForm) => total = total + outcome[OutcomeFormKeys.Value])
     return total;
   }
 
@@ -48,30 +42,5 @@ export class OutcomesFormComponent extends FormComponent implements OnInit {
       [OutcomeFormKeys.Name]: 'Testing',
       [OutcomeFormKeys.Value]: 100
     })
-  }
-
-  onSubmit() {
-    const value = this.form.getRawValue()
-    const control = this.budgetForm?.get(BudgetFormKeys.Outcomes)
-
-    control?.setValue(
-      [...this.outcomes, {...value, id: this.lastIndexUsed}]
-    )
-
-    this.totalValue = this.calculateTotalValue()
-    this.lastIndexUsed += 1
-  }
-
-  ngOnInit(): void {
-  }
-
-  onRemove(id: string) {
-    const control = this.budgetForm?.get(BudgetFormKeys.Outcomes)
-
-    control?.setValue(
-      this.outcomes.filter(outcome => outcome[OutcomeFormKeys.ID] !== id)
-    )
-
-    this.totalValue = this.calculateTotalValue()
   }
 }

@@ -4,7 +4,8 @@ import {FormComponent} from "../models/form-component.abstract";
 
 export enum BudgetFormKeys {
   Name = 'Name',
-  Outcomes = 'Outcomes'
+  Outcomes = 'Outcomes',
+  Contributors = 'Contributors'
 }
 
 @Component({
@@ -19,7 +20,8 @@ export class BudgetFormComponent extends FormComponent implements OnInit {
     super();
     this.form = fb.group({
       [BudgetFormKeys.Name]: '',
-      [BudgetFormKeys.Outcomes]: []
+      [BudgetFormKeys.Outcomes]: [],
+      [BudgetFormKeys.Contributors]: []
     })
   }
 
