@@ -1,26 +1,15 @@
 import {Component, Input} from '@angular/core';
-import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
+import {ArrayFormControlChildAbstract} from "../../abstracts/array-form-control-child.abstract";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ContributorFormKeys} from "../contributors-form/contributors-form.component";
-
-export enum DeductionFormKeys {
-  ID = 'id',
-  Name = 'name',
-  Value = 'value'
-}
-
-export interface IDeductionForm {
-  [DeductionFormKeys.ID]: string;
-  [DeductionFormKeys.Name]: string;
-  [DeductionFormKeys.Value]: number;
-}
+import {ContributorFormKeys} from "../contributor-form";
+import {DeductionFormKeys, IDeductionFormValue} from "./deductions-form";
 
 @Component({
   selector: 'mocha-deductions-form',
   templateUrl: './deductions-form.component.html',
   styleUrls: ['./deductions-form.component.scss']
 })
-export class DeductionsFormComponent extends ArrayFormControlChildAbstract<IDeductionForm> {
+export class DeductionsFormComponent extends ArrayFormControlChildAbstract<IDeductionFormValue> {
   @Input() public parentForm!: FormGroup;
   public readonly Keys = DeductionFormKeys;
   public readonly NameInsideParentForm = ContributorFormKeys.Deductions;
@@ -32,7 +21,7 @@ export class DeductionsFormComponent extends ArrayFormControlChildAbstract<IDedu
 
   private calculateTotalValue(): number {
     let total = 0;
-    this.array.forEach((outcome: IDeductionForm) => total = total + outcome[DeductionFormKeys.Value])
+    this.array.forEach((outcome: IDeductionFormValue) => total = total + outcome[DeductionFormKeys.Value])
     return total;
   }
 

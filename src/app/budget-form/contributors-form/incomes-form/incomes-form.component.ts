@@ -1,26 +1,15 @@
 import {Component, Input} from '@angular/core';
-import {ContributorFormKeys} from "../contributors-form/contributors-form.component";
-import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
+import {ArrayFormControlChildAbstract} from "../../abstracts/array-form-control-child.abstract";
 import {FormBuilder, FormGroup} from "@angular/forms";
-
-export enum IncomeFormKeys {
-  ID = 'id',
-  Name = 'name',
-  Value = 'value'
-}
-
-export interface IIncomeForm {
-  [IncomeFormKeys.ID]: string;
-  [IncomeFormKeys.Name]: string;
-  [IncomeFormKeys.Value]: number;
-}
+import {IIncomeFormValue, IncomeFormKeys} from "./incomes-form";
+import {ContributorFormKeys} from "../contributor-form";
 
 @Component({
   selector: 'mocha-incomes-form',
   templateUrl: './incomes-form.component.html',
   styleUrls: ['./incomes-form.component.scss']
 })
-export class IncomesFormComponent extends ArrayFormControlChildAbstract<IIncomeForm> {
+export class IncomesFormComponent extends ArrayFormControlChildAbstract<IIncomeFormValue> {
   @Input() public parentForm!: FormGroup;
   public readonly Keys = IncomeFormKeys;
   public readonly NameInsideParentForm = ContributorFormKeys.Incomes;
@@ -32,7 +21,7 @@ export class IncomesFormComponent extends ArrayFormControlChildAbstract<IIncomeF
 
   private calculateTotalValue(): number {
     let total = 0;
-    this.array.forEach((outcome: IIncomeForm) => total = total + outcome[IncomeFormKeys.Value])
+    this.array.forEach((outcome: IIncomeFormValue) => total = total + outcome[IncomeFormKeys.Value])
     return total;
   }
 

@@ -3,29 +3,14 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {BudgetFormKeys} from "../budget-form.component";
 import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
 import {OutcomeFormKeys} from "../outcomes-form/outcomes-form.component";
-
-export enum ContributorFormKeys {
-  ID = 'id',
-  Name = 'name',
-  Incomes = 'incomes',
-  Allowances = 'allowances',
-  Deductions = 'deductions'
-}
-
-export interface IContributorForm {
-  [ContributorFormKeys.ID]: string;
-  [ContributorFormKeys.Name]: string;
-  [ContributorFormKeys.Incomes]: any[];
-  [ContributorFormKeys.Allowances]: any[];
-  [ContributorFormKeys.Deductions]: any[];
-}
+import {ContributorFormKeys, IContributorFormValue} from "./contributor-form";
 
 @Component({
   selector: 'mocha-contributors-form',
   templateUrl: './contributors-form.component.html',
   styleUrls: ['./contributors-form.component.scss']
 })
-export class ContributorsFormComponent extends ArrayFormControlChildAbstract<IContributorForm> {
+export class ContributorsFormComponent extends ArrayFormControlChildAbstract<IContributorFormValue> {
   @Input() public parentForm!: FormGroup;
   public readonly Keys = ContributorFormKeys;
   public readonly NameInsideParentForm = BudgetFormKeys.Contributors;

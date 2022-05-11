@@ -1,26 +1,15 @@
 import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ContributorFormKeys} from "../contributors-form/contributors-form.component";
-import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
-
-export enum AllowanceFormKeys {
-  ID = 'id',
-  Name = 'name',
-  Value = 'value'
-}
-
-export interface IAllowanceForm {
-  [AllowanceFormKeys.ID]: string;
-  [AllowanceFormKeys.Name]: string;
-  [AllowanceFormKeys.Value]: number;
-}
+import {ArrayFormControlChildAbstract} from "../../abstracts/array-form-control-child.abstract";
+import {AllowanceFormKeys, IAllowanceFormValue} from "./allowances-form";
+import {ContributorFormKeys} from "../contributor-form";
 
 @Component({
   selector: 'mocha-allowances-form',
   templateUrl: './allowances-form.component.html',
   styleUrls: ['./allowances-form.component.scss']
 })
-export class AllowancesFormComponent extends ArrayFormControlChildAbstract<IAllowanceForm> {
+export class AllowancesFormComponent extends ArrayFormControlChildAbstract<IAllowanceFormValue> {
   @Input() public parentForm!: FormGroup;
   public readonly Keys = AllowanceFormKeys;
   public readonly NameInsideParentForm = ContributorFormKeys.Allowances;
@@ -32,7 +21,7 @@ export class AllowancesFormComponent extends ArrayFormControlChildAbstract<IAllo
 
   private calculateTotalValue(): number {
     let total = 0;
-    this.array.forEach((outcome: IAllowanceForm) => total = total + outcome[AllowanceFormKeys.Value])
+    this.array.forEach((outcome: IAllowanceFormValue) => total = total + outcome[AllowanceFormKeys.Value])
     return total;
   }
 
