@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
-import {ArrayFormControlChildAbstract} from "../../abstracts/array-form-control-child.abstract";
+import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ContributorFormKeys} from "../contributor-form";
+import {ContributorFormKeys} from "../contributors-form/contributor-form";
 import {DeductionFormKeys, IDeductionFormValue} from "./deductions-form";
 
 @Component({

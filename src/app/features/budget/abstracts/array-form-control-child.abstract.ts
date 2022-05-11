@@ -1,4 +1,4 @@
-import {FormComponent} from "../../models/form-component.abstract";
+import {FormComponent} from "../../../models/form-component.abstract";
 import {Directive} from "@angular/core";
 import {FormGroup} from "@angular/forms";
 

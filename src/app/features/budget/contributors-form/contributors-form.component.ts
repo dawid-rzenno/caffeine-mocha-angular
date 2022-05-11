@@ -1,9 +1,8 @@
 import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {BudgetFormKeys} from "../budget-form.component";
 import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
-import {OutcomeFormKeys} from "../outcomes-form/outcomes-form.component";
 import {ContributorFormKeys, IContributorFormValue} from "./contributor-form";
+import {BudgetFormKeys} from "../budget-form/budget-form";
 
 @Component({
   selector: 'mocha-contributors-form',
@@ -18,7 +17,7 @@ export class ContributorsFormComponent extends ArrayFormControlChildAbstract<ICo
   constructor(private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
-      [OutcomeFormKeys.ID]: 0,
+      [ContributorFormKeys.ID]: 0,
       [ContributorFormKeys.Name]: 'Testing',
       [ContributorFormKeys.Incomes]: [],
       [ContributorFormKeys.Allowances]: [],

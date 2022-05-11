@@ -1,28 +1,17 @@
 import {Component, Input} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {BudgetFormKeys} from "../budget-form.component";
 import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
-
-export enum OutcomeFormKeys {
-  ID = 'id',
-  Name = 'name',
-  Value = 'value'
-}
-
-export interface IOutcomeForm {
-  [OutcomeFormKeys.ID]: string;
-  [OutcomeFormKeys.Name]: string;
-  [OutcomeFormKeys.Value]: number;
-}
+import {IOutcomesFormValue, OutcomesFormKeys} from "./outcomes-form";
+import {BudgetFormKeys} from "../budget-form/budget-form";
 
 @Component({
   selector: 'mocha-outcomes-form',
   templateUrl: './outcomes-form.component.html',
   styleUrls: ['./outcomes-form.component.scss']
 })
-export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcomeForm> {
+export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcomesFormValue> {
   @Input() public parentForm!: FormGroup;
-  public readonly Keys = OutcomeFormKeys;
+  public readonly Keys = OutcomesFormKeys;
   public readonly NameInsideParentForm = BudgetFormKeys.Outcomes;
 
   public override afterAddCallback = () => this.totalValue = this.calculateTotalValue()
@@ -32,16 +21,16 @@ export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcom
 
   private calculateTotalValue(): number {
     let total = 0;
-    this.array.forEach((outcome: IOutcomeForm) => total = total + outcome[OutcomeFormKeys.Value])
+    this.array.forEach((outcome: IOutcomesFormValue) => total = total + outcome[OutcomesFormKeys.Value])
     return total;
   }
 
   constructor(private fb: FormBuilder) {
     super();
     this.form = this.fb.group({
-      [OutcomeFormKeys.ID]: 0,
-      [OutcomeFormKeys.Name]: 'Testing',
-      [OutcomeFormKeys.Value]: 100
+      [OutcomesFormKeys.ID]: 0,
+      [OutcomesFormKeys.Name]: 'Testing',
+      [OutcomesFormKeys.Value]: 100
     })
   }
 }

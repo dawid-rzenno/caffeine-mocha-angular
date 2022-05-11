@@ -1,6 +1,6 @@
-import {IIncomeFormValue} from "./incomes-form/incomes-form";
-import {IAllowanceFormValue} from "./allowances-form/allowances-form";
-import {IDeductionFormValue} from "./deductions-form/deductions-form";
+import {IIncomeFormValue} from "../incomes-form/incomes-form";
+import {IAllowanceFormValue} from "../allowances-form/allowances-form";
+import {IDeductionFormValue} from "../deductions-form/deductions-form";
 
 export enum ContributorFormKeys {
   ID = 'id',
