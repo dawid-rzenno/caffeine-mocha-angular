@@ -1,7 +1,16 @@
-.mocha-outcomes-form {
-  padding: 1rem;
+.budget-form {
+  display: flex;
+  align-items: start;
 }
 
-.mocha-contributors-form {
-  padding: 1rem;
+.budget-form-item {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  background: linen;
+  border-radius: 0.25rem;
+  border: 1px solid lightgray;
+}
+
+.button {
+  margin: 0.25rem
 }

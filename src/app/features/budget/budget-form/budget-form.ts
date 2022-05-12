@@ -2,9 +2,9 @@ import {IContributorFormValue} from "../contributors-form/contributor-form";
 import {IOutcomesFormValue} from "../outcomes-form/outcomes-form";
 
 export enum BudgetFormKeys {
-  Name = 'Name',
-  Outcomes = 'Outcomes',
-  Contributors = 'Contributors'
+  Name = 'name',
+  Outcomes = 'outcomes',
+  Contributors = 'contributors'
 }
 
 export interface IBudgetFormValue {

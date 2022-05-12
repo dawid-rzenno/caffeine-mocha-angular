@@ -1,18 +1,23 @@
-<form [formGroup]="form">
-  <h1>Budget Form</h1>
+<h2>Budget Form</h2>
 
-  <div class="input">
+<form class="budget-form" [formGroup]="form">
+
+  <div class="budget-form-item">
     <label for="{{Keys.Name}}">Name: </label>
     <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
   </div>
 
-  <div class="mocha-outcomes-form">
+  <div class="budget-form-item">
     <mocha-outcomes-form [parentForm]="form"></mocha-outcomes-form>
   </div>
 
-  <div class="mocha-contributors-form">
+  <div class="budget-form-item">
     <mocha-contributors-form [parentForm]="form"></mocha-contributors-form>
   </div>
 
-  <button type="button">Create</button>
+  <div class="budget-form-item">
+    <button class="button" type="button" (click)="onCreate()">Create</button>
+    <button class="button" type="button" routerLink="/budget">Cancel</button>
+  </div>
+
 </form>
