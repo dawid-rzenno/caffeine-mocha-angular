@@ -9,6 +9,7 @@ import {LogoutComponent} from "./core/user/logout/logout.component";
 import {HomeComponent} from './core/home/home.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserInterceptor} from "./core/user/user.interceptor";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 const routes: Routes = [
   {
@@ -52,6 +53,7 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
+    BrowserAnimationsModule,
   ],
   exports: [RouterModule],
   providers: [
