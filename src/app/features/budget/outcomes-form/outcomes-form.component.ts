@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ArrayFormControlChildAbstract} from "../abstracts/array-form-control-child.abstract";
 import {IOutcomesFormValue, OutcomesFormKeys} from "./outcomes-form";
 import {BudgetFormKeys} from "../budget-form/budget-form";
+import {IListButtonAction} from "../../../models/list-action.model";
 
 @Component({
   selector: 'mocha-outcomes-form',
@@ -13,17 +14,14 @@ export class OutcomesFormComponent extends ArrayFormControlChildAbstract<IOutcom
   @Input() public parentForm!: FormGroup;
   public readonly Keys = OutcomesFormKeys;
   public readonly NameInsideParentForm = BudgetFormKeys.Outcomes;
-
-  public override afterAddCallback = () => this.totalValue = this.calculateTotalValue()
-  public override afterRemoveCallback = () => this.totalValue = this.calculateTotalValue()
-
-  public totalValue = 0;
-
-  private calculateTotalValue(): number {
-    let total = 0;
-    this.array.forEach((outcome: IOutcomesFormValue) => total = total + outcome[OutcomesFormKeys.Value])
-    return total;
-  }
+  public readonly OutcomesListButtonActions: IListButtonAction[] = [
+    {
+      label: 'Remove',
+      type: 'button',
+      color: 'warn',
+      callback: (outcome: IOutcomesFormValue) => this.onRemove(outcome[OutcomesFormKeys.ID])
+    }
+  ]
 
   constructor(private fb: FormBuilder) {
     super();

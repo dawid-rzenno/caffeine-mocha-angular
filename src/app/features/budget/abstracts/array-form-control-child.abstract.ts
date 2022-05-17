@@ -7,8 +7,10 @@ import {FormGroup} from "@angular/forms";
 export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormComponent {
   abstract readonly NameInsideParentForm: string;
   abstract parentForm: FormGroup;
-  protected afterAddCallback: any = () => {};
-  protected afterRemoveCallback: any = () => {};
+  protected afterAddCallback: any = () => {
+  };
+  protected afterRemoveCallback: any = () => {
+  };
 
   protected lastIndexUsed = 0
 
@@ -25,9 +27,10 @@ export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormCompo
       [...this.array, {...value, id: this.lastIndexUsed}]
     )
 
+    this.form.reset()
     this.lastIndexUsed += 1
 
-    this.afterAddCallback();
+    this.afterAddCallback()
   }
 
   public onRemove(id: string): void {

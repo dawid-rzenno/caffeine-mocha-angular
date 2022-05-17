@@ -1,23 +1,35 @@
-<h2>Budget Form</h2>
+<h2>{{ header }}</h2>
 
 <form class="budget-form" [formGroup]="form">
 
-  <div class="budget-form-item">
-    <label for="{{Keys.Name}}">Name: </label>
-    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
-  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}" matInput>
+  </mat-form-field>
 
-  <div class="budget-form-item">
-    <mocha-outcomes-form [parentForm]="form"></mocha-outcomes-form>
-  </div>
+  <mocha-outcomes-form [parentForm]="form"></mocha-outcomes-form>
 
-  <div class="budget-form-item">
-    <mocha-contributors-form [parentForm]="form"></mocha-contributors-form>
-  </div>
+  <mocha-contributors-form [parentForm]="form"></mocha-contributors-form>
 
-  <div class="budget-form-item">
-    <button class="button" type="button" (click)="onCreate()">Create</button>
-    <button class="button" type="button" routerLink="/budget">Cancel</button>
+  <div>
+    <button
+      class="button"
+      type="button"
+      (click)="onCreate()"
+      color="primary"
+      mat-raised-button
+    >
+      Create
+    </button>
+    <button
+      class="button"
+      type="button"
+      routerLink="/budget"
+      color="primary"
+      mat-raised-button
+    >
+      Cancel
+    </button>
   </div>
 
 </form>

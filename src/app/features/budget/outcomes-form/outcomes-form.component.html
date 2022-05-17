@@ -1,22 +1,21 @@
 <h2>Outcomes</h2>
-<form [formGroup]="form" (submit)="onAdd()">
-  <h4>Add a new Outcome</h4>
 
-  <label for="{{Keys.Name}}">Name: </label>
-  <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}">
-  <br><br>
-  <label for="{{Keys.Value}}">Value: </label>
-  <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}">
-  <br><br>
-  <button type="submit">Add</button>
+<h4>Add a new Outcome</h4>
+<form class="form" [formGroup]="form" (submit)="onAdd()">
+
+  <mat-form-field class="name-input" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}" matInput>
+  </mat-form-field>
+
+  <mat-form-field class="value-input" appearance="fill">
+    <mat-label>Value (PLN)</mat-label>
+    <input id="{{Keys.Value}}" type="number" formControlName="{{Keys.Value}}" matInput>
+  </mat-form-field>
+
+  <button class="add-button" type="submit" color="primary" mat-raised-button>Add</button>
 </form>
 
-<h4>Added Outcomes</h4>
-<p *ngFor="let outcome of array">
-  <button type="button" (click)="onRemove(outcome.id)">Remove</button>
-  {{outcome | json}}
-</p>
-
-Total Outcome Value: {{totalValue}}
+<mocha-outcomes-list [outcomes]="array" [actions]="OutcomesListButtonActions"></mocha-outcomes-list>
 
 
