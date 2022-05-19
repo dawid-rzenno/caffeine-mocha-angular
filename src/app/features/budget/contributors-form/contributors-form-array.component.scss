@@ -1,0 +1,35 @@
+$form-gap: 0.5rem;
+
+.flex-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $form-gap;
+  align-items: start;
+  width: 100%;
+}
+
+.name-input {
+  flex-grow: 10;
+}
+
+.remove-button {
+  height: 52px;
+  flex-grow: 1;
+}
+
+.contributors-accordion {
+  width: 100%;
+}
+
+.add-button {
+  height: 52px;
+  width: 100%;
+}

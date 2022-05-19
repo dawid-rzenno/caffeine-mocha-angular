@@ -1,5 +1,5 @@
 import {IContributorFormValue} from "../contributors-form/contributor-form";
-import {IOutcomesInputGroup} from "../outcomes-form/outcomes-input-group.model";
+import {IOutcomesInputGroup} from "../outcomes-form/outcomes-input.model";
 
 export enum BudgetFormSteps {
   Details = 'Details',

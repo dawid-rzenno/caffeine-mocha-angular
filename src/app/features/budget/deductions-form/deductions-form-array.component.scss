@@ -1,0 +1,26 @@
+$form-gap: 0.5rem;
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $form-gap;
+  align-items: start;
+}
+
+.name-input {
+  flex-grow: 10;
+}
+
+.value-input {
+  flex-grow: 1;
+}
+
+.remove-button {
+  height: 52px;
+  flex-grow: 1;
+}
+
+.add-button {
+  height: 52px;
+  width: 100%;
+}

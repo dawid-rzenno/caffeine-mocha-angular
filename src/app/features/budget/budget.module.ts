@@ -2,10 +2,10 @@ import {Injectable, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BudgetFormComponent} from "./budget-form/budget-form.component";
 import {OutcomesFormArrayComponent} from "./outcomes-form/outcomes-form-array.component";
-import {ContributorsFormComponent} from "./contributors-form/contributors-form.component";
-import {IncomesFormComponent} from "./incomes-form/incomes-form.component";
-import {AllowancesFormComponent} from "./allowances-form/allowances-form.component";
-import {DeductionsFormComponent} from "./deductions-form/deductions-form.component";
+import {ContributorsFormArrayComponent} from "./contributors-form/contributors-form-array.component";
+import {IncomesFormArrayComponent} from "./incomes-form/incomes-form-array.component";
+import {AllowancesFormArrayComponent} from "./allowances-form/allowances-form-array.component";
+import {DeductionsFormArrayComponent} from "./deductions-form/deductions-form-array.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BudgetComponent} from './budget.component';
 import {BudgetListComponent} from './budget-list/budget-list.component';
@@ -24,6 +24,7 @@ import {OutcomesListComponent} from './outcomes-list/outcomes-list.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
 import { BudgetDetailsFormGroupComponent } from './budget-details-form/budget-details-form-group.component';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null > {
@@ -90,28 +91,29 @@ const routes: Routes = [
   declarations: [
     BudgetFormComponent,
     OutcomesFormArrayComponent,
-    ContributorsFormComponent,
-    IncomesFormComponent,
-    AllowancesFormComponent,
-    DeductionsFormComponent,
+    ContributorsFormArrayComponent,
+    IncomesFormArrayComponent,
+    AllowancesFormArrayComponent,
+    DeductionsFormArrayComponent,
     BudgetComponent,
     BudgetListComponent,
     ContributionListComponent,
     OutcomesListComponent,
     BudgetDetailsFormGroupComponent,
   ],
-    imports: [
-        RouterModule.forChild(routes),
-        CommonModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatTableModule,
-        MatStepperModule,
-        MatCardModule
-    ],
+  imports: [
+    RouterModule.forChild(routes),
+    CommonModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatStepperModule,
+    MatCardModule,
+    MatExpansionModule
+  ],
   exports: [
     RouterModule,
     BudgetFormComponent

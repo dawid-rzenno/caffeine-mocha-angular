@@ -1,14 +1,13 @@
 <h1>{{ header }}</h1>
 
-{{formGroup.getRawValue() | json}}
-
 <form *ngIf="formGroup" [formGroup]="formGroup" class="budget-form">
 
   <mat-stepper [linear]="true" #stepper>
 
-    <mat-step [stepControl]="details">
-      <ng-template matStepLabel>Budget details</ng-template>
+    <mat-step [stepControl]="details" label="Budget details">
       <mat-card class="mat-card">
+        <mat-card-title>Budget details</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
           <mocha-budget-details-form-group [formGroup]="details"></mocha-budget-details-form-group>
         </mat-card-content>
@@ -24,15 +23,15 @@
           <button [disabled]="details.invalid" mat-button matStepperNext>Next</button>
         </mat-card-actions>
       </mat-card>
-
     </mat-step>
 
     <mat-step [stepControl]="outcomes" label="Outcomes">
       <mat-card class="mat-card">
+        <mat-card-title>Outcomes</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
           <mocha-outcomes-form-array [formArray]="outcomes"></mocha-outcomes-form-array>
         </mat-card-content>
-
         <mat-card-actions class="mat-card-actions">
           <button mat-button matStepperPrevious>Back</button>
           <button [disabled]="outcomes.invalid" mat-button matStepperNext>Next</button>
@@ -40,57 +39,33 @@
       </mat-card>
     </mat-step>
 
-    <mat-step [stepControl]="outcomes" label="Contributors">
+    <mat-step [stepControl]="contributors" label="Contributors">
       <mat-card class="mat-card">
+        <mat-card-title>Contributors</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
-          <mocha-contributors-form></mocha-contributors-form>
+          <mocha-contributors-form-array [formArray]="contributors"></mocha-contributors-form-array>
         </mat-card-content>
-
         <mat-card-actions class="mat-card-actions">
           <button mat-button matStepperPrevious>Back</button>
-          <button [disabled]="outcomes.invalid" mat-button matStepperNext>Next</button>
+          <button [disabled]="contributors.invalid" mat-button matStepperNext>Next</button>
         </mat-card-actions>
       </mat-card>
     </mat-step>
 
-    <mat-step>
-      <ng-template matStepLabel>Done</ng-template>
-      <p>You are now done.</p>
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
-      </div>
+    <mat-step label="Summary">
+      <mat-card class="mat-card">
+        <mat-card-title>Summary</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        <mat-card-content class="form-fields-container">
+          <code>{{formGroup.getRawValue() | json}}</code>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button (click)="stepper.reset()" color="warn" mat-button>Reset</button>
+          <button color="primary" mat-button matStepperPrevious>Save</button>
+        </mat-card-actions>
+      </mat-card>
     </mat-step>
   </mat-stepper>
-
-
-
-<!--  <mat-form-field appearance="fill">-->
-<!--    <mat-label>Name</mat-label>-->
-<!--    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}" matInput>-->
-<!--  </mat-form-field>-->
-
-<!--  <mocha-contributors-form [parentForm]="form"></mocha-contributors-form>-->
-
-<!--  <div>-->
-<!--    <button-->
-<!--      class="button"-->
-<!--      type="button"-->
-<!--      (click)="onCreate()"-->
-<!--      color="primary"-->
-<!--      mat-raised-button-->
-<!--    >-->
-<!--      Create-->
-<!--    </button>-->
-<!--    <button-->
-<!--      class="button"-->
-<!--      type="button"-->
-<!--      routerLink="/budget"-->
-<!--      color="primary"-->
-<!--      mat-raised-button-->
-<!--    >-->
-<!--      Cancel-->
-<!--    </button>-->
-<!--  </div>-->
 
 </form>
