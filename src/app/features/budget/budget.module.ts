@@ -8,8 +8,6 @@ import {AllowancesFormArrayComponent} from "./allowances-form-array/allowances-f
 import {DeductionsFormArrayComponent} from "./deductions-form-array/deductions-form-array.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BudgetComponent} from './budget.component';
-import {BudgetListComponent} from './budget-list/budget-list.component';
-import {ContributionListComponent} from './contribution-list/contribution-list.component';
 import {ActivatedRouteSnapshot, Resolve, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
 import {BudgetService} from "./budget.service";
 import {HttpClientModule} from "@angular/common/http";
@@ -20,7 +18,6 @@ import {Observable, of} from "rxjs";
 import {IBudget} from "./budget";
 import {Headers} from "../../models/headers.enum";
 import {MatTableModule} from "@angular/material/table";
-import {OutcomesListComponent} from './outcomes-list/outcomes-list.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
 import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
@@ -72,16 +69,6 @@ const routes: Routes = [
         data: {
           header: Headers.EditBudget
         }
-      },
-      {
-        path: 'list',
-        component: BudgetListComponent,
-        resolve: {
-          budgets: BudgetsResolver
-        },
-        data: {
-          header: Headers.ListBudgets
-        }
       }
     ]
   }
@@ -90,19 +77,13 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     BudgetComponent,
-
-    BudgetDetailsFormGroupComponent,
     BudgetFormGroupComponent,
-
+    BudgetDetailsFormGroupComponent,
     OutcomesFormArrayComponent,
     ContributorsFormArrayComponent,
     IncomesFormArrayComponent,
     AllowancesFormArrayComponent,
     DeductionsFormArrayComponent,
-
-    BudgetListComponent,
-    ContributionListComponent,
-    OutcomesListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
