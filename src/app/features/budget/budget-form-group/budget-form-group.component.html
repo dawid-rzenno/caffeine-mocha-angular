@@ -58,16 +58,11 @@
         <mat-card-title>Summary</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
-          <code>{{formGroup.getRawValue() | json}}</code>
-
-
-
-
-
+          <mocha-budget-details [budget]="formGroup.getRawValue()"></mocha-budget-details>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button (click)="stepper.reset()" color="warn" mat-button>Reset</button>
-          <button color="primary" mat-button matStepperPrevious>Save</button>
+          <button color="primary" mat-button>Save</button>
         </mat-card-actions>
       </mat-card>
     </mat-step>

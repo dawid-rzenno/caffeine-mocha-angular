@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {IncomeFormArrayElementKeys} from "./incomes-form-array";
 
@@ -7,13 +7,17 @@ import {IncomeFormArrayElementKeys} from "./incomes-form-array";
   templateUrl: './incomes-form-array.component.html',
   styleUrls: ['./incomes-form-array.component.scss']
 })
-export class IncomesFormArrayComponent {
+export class IncomesFormArrayComponent implements OnInit {
   public readonly Keys = IncomeFormArrayElementKeys;
 
   @Input() public formArray!: FormArray;
 
   public get forms(): FormGroup[] {
     return this.formArray.controls as FormGroup[];
+  }
+
+  public ngOnInit() {
+    this.addFormGroup();
   }
 
   public addFormGroup(): void {

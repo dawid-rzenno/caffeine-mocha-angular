@@ -1,50 +1,48 @@
 <div class="flex-container">
-  <ng-container *ngFor="let form of forms; index as i">
-    <form [formGroup]="form" class="form">
+  <form *ngFor="let form of forms; index as i" [formGroup]="form" class="form">
 
-      <mat-form-field appearance="fill" class="name-input">
-        <mat-label>Contributor name</mat-label>
-        <input formControlName="{{Keys.Name}}" id="{{Keys.Name}}" type="text" matInput>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="name-input">
+      <mat-label>Contributor name</mat-label>
+      <input formControlName="{{Keys.Name}}" id="{{Keys.Name}}" type="text" matInput>
+    </mat-form-field>
 
-      <button
-        (click)="removeFormGroup(i)"
-        class="remove-button"
-        color="warn"
-        type="button"
-        mat-raised-button
-      >
-        Remove
-      </button>
+    <button
+      (click)="removeFormGroup(i)"
+      [disabled]="forms.length < 2"
+      class="remove-button"
+      color="warn"
+      type="button"
+      mat-raised-button
+    >
+      Remove
+    </button>
 
-      <mat-accordion class="contributors-accordion" multi="true">
+    <mat-accordion class="contributors-accordion" multi="true">
 
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Incomes</mat-panel-title>
-          </mat-expansion-panel-header>
-          <mocha-incomes-form-array [formArray]="getFormArray(form, Keys.Incomes)"></mocha-incomes-form-array>
-        </mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Incomes</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mocha-incomes-form-array [formArray]="getFormArray(form, Keys.Incomes)"></mocha-incomes-form-array>
+      </mat-expansion-panel>
 
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Allowances</mat-panel-title>
-          </mat-expansion-panel-header>
-          <mocha-allowances-form-array [formArray]="getFormArray(form, Keys.Allowances)"></mocha-allowances-form-array>
-        </mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Allowances</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mocha-allowances-form-array [formArray]="getFormArray(form, Keys.Allowances)"></mocha-allowances-form-array>
+      </mat-expansion-panel>
 
-        <mat-expansion-panel hideToggle>
-          <mat-expansion-panel-header>
-            <mat-panel-title>Deductions</mat-panel-title>
-          </mat-expansion-panel-header>
-          <mocha-deductions-form-array [formArray]="getFormArray(form, Keys.Deductions)"></mocha-deductions-form-array>
-        </mat-expansion-panel>
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Deductions</mat-panel-title>
+        </mat-expansion-panel-header>
+        <mocha-deductions-form-array [formArray]="getFormArray(form, Keys.Deductions)"></mocha-deductions-form-array>
+      </mat-expansion-panel>
 
-      </mat-accordion>
+    </mat-accordion>
 
-    </form>
-
-  </ng-container>
+  </form>
 
   <button
     (click)="addFormGroup()"

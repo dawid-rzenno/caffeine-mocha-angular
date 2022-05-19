@@ -13,6 +13,7 @@
 
     <button
       (click)="removeFormGroup(i)"
+      [disabled]="forms.length < 2"
       class="remove-button"
       color="warn"
       type="button"
