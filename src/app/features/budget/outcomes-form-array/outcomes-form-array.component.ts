@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {OutcomesInputKeys} from "./outcomes-input.model";
+import {OutcomesFormArrayElementKeys} from "./outcomes-form-array";
 
 @Component({
   selector: 'mocha-outcomes-form-array',
@@ -8,7 +8,7 @@ import {OutcomesInputKeys} from "./outcomes-input.model";
   styleUrls: ['./outcomes-form-array.component.scss']
 })
 export class OutcomesFormArrayComponent {
-  public readonly Keys = OutcomesInputKeys;
+  public readonly Keys = OutcomesFormArrayElementKeys;
 
   @Input() public formArray!: FormArray;
 
@@ -18,8 +18,8 @@ export class OutcomesFormArrayComponent {
 
   public addFormGroup(): void {
     this.formArray.push(new FormGroup({
-      [OutcomesInputKeys.Name]: new FormControl('', {validators: [Validators.required]}),
-      [OutcomesInputKeys.Value]: new FormControl(0, {validators: [Validators.required]})
+      [OutcomesFormArrayElementKeys.Name]: new FormControl('', {validators: [Validators.required]}),
+      [OutcomesFormArrayElementKeys.Value]: new FormControl(0, {validators: [Validators.required]})
     }))
   }
 

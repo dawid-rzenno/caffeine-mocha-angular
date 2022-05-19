@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {IncomeFormKeys} from "../incomes-form/incomes-form";
+import {IncomeFormArrayElementKeys} from "../incomes-form-array/incomes-form-array";
 
 @Component({
   selector: 'mocha-allowances-form-array',
@@ -8,7 +8,7 @@ import {IncomeFormKeys} from "../incomes-form/incomes-form";
   styleUrls: ['./allowances-form-array.component.scss']
 })
 export class AllowancesFormArrayComponent {
-  public readonly Keys = IncomeFormKeys;
+  public readonly Keys = IncomeFormArrayElementKeys;
 
   @Input() public formArray!: FormArray;
 
@@ -18,8 +18,8 @@ export class AllowancesFormArrayComponent {
 
   public addFormGroup(): void {
     this.formArray.push(new FormGroup({
-      [IncomeFormKeys.Name]: new FormControl('', {validators: [Validators.required]}),
-      [IncomeFormKeys.Value]: new FormControl(0, {validators: [Validators.required]})
+      [IncomeFormArrayElementKeys.Name]: new FormControl('', {validators: [Validators.required]}),
+      [IncomeFormArrayElementKeys.Value]: new FormControl(0, {validators: [Validators.required]})
     }))
   }
 

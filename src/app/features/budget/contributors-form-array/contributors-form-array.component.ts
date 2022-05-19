@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ContributorFormKeys} from "./contributor-form";
+import {ContributorFormArrayElementKeys} from "./contributors-form-array";
 
 @Component({
   selector: 'mocha-contributors-form-array',
@@ -8,7 +8,7 @@ import {ContributorFormKeys} from "./contributor-form";
   styleUrls: ['./contributors-form-array.component.scss']
 })
 export class ContributorsFormArrayComponent {
-  public readonly Keys = ContributorFormKeys;
+  public readonly Keys = ContributorFormArrayElementKeys;
 
   @Input() public formArray!: FormArray;
 
@@ -18,10 +18,10 @@ export class ContributorsFormArrayComponent {
 
   public addFormGroup(): void {
     this.formArray.push(new FormGroup({
-      [ContributorFormKeys.Name]: new FormControl('', {validators: [Validators.required]}),
-      [ContributorFormKeys.Incomes]: new FormArray([]),
-      [ContributorFormKeys.Allowances]: new FormArray([]),
-      [ContributorFormKeys.Deductions]: new FormArray([]),
+      [ContributorFormArrayElementKeys.Name]: new FormControl('', {validators: [Validators.required]}),
+      [ContributorFormArrayElementKeys.Incomes]: new FormArray([]),
+      [ContributorFormArrayElementKeys.Allowances]: new FormArray([]),
+      [ContributorFormArrayElementKeys.Deductions]: new FormArray([]),
     }))
   }
 
@@ -29,7 +29,7 @@ export class ContributorsFormArrayComponent {
     this.formArray.removeAt(index);
   }
 
-  public getFormArray(formGroup: FormGroup, controlName: ContributorFormKeys): FormArray {
+  public getFormArray(formGroup: FormGroup, controlName: ContributorFormArrayElementKeys): FormArray {
     return formGroup.get(controlName) as FormArray;
   }
 }

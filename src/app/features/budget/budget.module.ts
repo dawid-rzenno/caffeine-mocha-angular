@@ -1,11 +1,11 @@
 import {Injectable, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {BudgetFormComponent} from "./budget-form/budget-form.component";
-import {OutcomesFormArrayComponent} from "./outcomes-form/outcomes-form-array.component";
-import {ContributorsFormArrayComponent} from "./contributors-form/contributors-form-array.component";
-import {IncomesFormArrayComponent} from "./incomes-form/incomes-form-array.component";
-import {AllowancesFormArrayComponent} from "./allowances-form/allowances-form-array.component";
-import {DeductionsFormArrayComponent} from "./deductions-form/deductions-form-array.component";
+import {BudgetFormGroupComponent} from "./budget-form-group/budget-form-group.component";
+import {OutcomesFormArrayComponent} from "./outcomes-form-array/outcomes-form-array.component";
+import {ContributorsFormArrayComponent} from "./contributors-form-array/contributors-form-array.component";
+import {IncomesFormArrayComponent} from "./incomes-form-array/incomes-form-array.component";
+import {AllowancesFormArrayComponent} from "./allowances-form-array/allowances-form-array.component";
+import {DeductionsFormArrayComponent} from "./deductions-form-array/deductions-form-array.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {BudgetComponent} from './budget.component';
 import {BudgetListComponent} from './budget-list/budget-list.component';
@@ -23,11 +23,11 @@ import {MatTableModule} from "@angular/material/table";
 import {OutcomesListComponent} from './outcomes-list/outcomes-list.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
-import { BudgetDetailsFormGroupComponent } from './budget-details-form/budget-details-form-group.component';
+import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 
 @Injectable({providedIn: 'root'})
-export class BudgetResolver implements Resolve<Observable<IBudget> | null > {
+export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget> | null {
     const id: string | null = route.paramMap.get('id')
     return id ? of({id}) : null;
@@ -35,7 +35,7 @@ export class BudgetResolver implements Resolve<Observable<IBudget> | null > {
 }
 
 @Injectable({providedIn: 'root'})
-export class BudgetsResolver implements Resolve<Observable<IBudget[]> | null > {
+export class BudgetsResolver implements Resolve<Observable<IBudget[]> | null> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget[]> | null {
     return of([]);
   }
@@ -48,7 +48,7 @@ const routes: Routes = [
     children: [
       {
         path: 'new',
-        component: BudgetFormComponent,
+        component: BudgetFormGroupComponent,
         resolve: {
           // existing outcomes
           // existing contributors
@@ -61,7 +61,7 @@ const routes: Routes = [
       },
       {
         path: 'edit/:id',
-        component: BudgetFormComponent,
+        component: BudgetFormGroupComponent,
         resolve: {
           budget: BudgetResolver // navigate to "../new" if it can't be resolved
           // existing outcomes
@@ -89,17 +89,20 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    BudgetFormComponent,
+    BudgetComponent,
+
+    BudgetDetailsFormGroupComponent,
+    BudgetFormGroupComponent,
+
     OutcomesFormArrayComponent,
     ContributorsFormArrayComponent,
     IncomesFormArrayComponent,
     AllowancesFormArrayComponent,
     DeductionsFormArrayComponent,
-    BudgetComponent,
+
     BudgetListComponent,
     ContributionListComponent,
     OutcomesListComponent,
-    BudgetDetailsFormGroupComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -116,7 +119,7 @@ const routes: Routes = [
   ],
   exports: [
     RouterModule,
-    BudgetFormComponent
+    BudgetFormGroupComponent
   ],
   providers: [
     BudgetService

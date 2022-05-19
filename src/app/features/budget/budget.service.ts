@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {IBudgetFormValue} from "./budget-form/budget-form";
+import {IBudgetFormGroupRawValue} from "./budget-form-group/budget-form-group";
 
 @Injectable()
 export class BudgetService {
@@ -8,7 +8,7 @@ export class BudgetService {
   constructor(private http: HttpClient) {
   }
 
-  public create(budget: IBudgetFormValue) {
+  public create(budget: IBudgetFormGroupRawValue) {
     return this.http.post('http://localhost/jp2gmd', budget);
   }
 }

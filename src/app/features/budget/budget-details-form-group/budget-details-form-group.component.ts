@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {BudgetDetailsFormKeys} from "../budget-form/budget-form";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {BudgetDetailsFormKeys} from "./budget-details-form-group";
 
 @Component({
   selector: 'mocha-budget-details-form-group',

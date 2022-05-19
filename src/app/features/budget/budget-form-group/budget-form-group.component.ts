@@ -1,19 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {FormComponentAbstract} from "../../../models/form-component.abstract";
-import {BudgetFormKeys} from "./budget-form";
+import {BudgetFormGroupKeys} from "./budget-form-group";
 import {BudgetService} from "../budget.service";
 import {ActivatedRoute} from "@angular/router";
 import {IBudget} from "../budget";
-import {BudgetDetailsFormGroupComponent} from "../budget-details-form/budget-details-form-group.component";
+import {BudgetDetailsFormGroupComponent} from "../budget-details-form-group/budget-details-form-group.component";
 
 @Component({
-  selector: 'mocha-budget-form',
-  templateUrl: './budget-form.component.html',
-  styleUrls: ['./budget-form.component.scss']
+  selector: 'mocha-budget-form-group',
+  templateUrl: './budget-form-group.component.html',
+  styleUrls: ['./budget-form-group.component.scss']
 })
-export class BudgetFormComponent extends FormComponentAbstract implements OnInit {
-  public readonly Keys = BudgetFormKeys
+export class BudgetFormGroupComponent extends FormComponentAbstract implements OnInit {
+  public readonly Keys = BudgetFormGroupKeys
   public budget: IBudget | null = null;
   public header: string = ''
 
@@ -22,22 +22,22 @@ export class BudgetFormComponent extends FormComponentAbstract implements OnInit
   }
 
   public get details(): FormGroup {
-    return this.formGroup.get(BudgetFormKeys.Details) as FormGroup;
+    return this.formGroup.get(BudgetFormGroupKeys.Details) as FormGroup;
   }
 
   public get outcomes(): FormArray {
-    return this.formGroup.get(BudgetFormKeys.Outcomes) as FormArray;
+    return this.formGroup.get(BudgetFormGroupKeys.Outcomes) as FormArray;
   }
 
   public get contributors(): FormArray {
-    return this.formGroup.get(BudgetFormKeys.Contributors) as FormArray;
+    return this.formGroup.get(BudgetFormGroupKeys.Contributors) as FormArray;
   }
 
   public ngOnInit() {
     this.formGroup = new FormGroup({
-      [BudgetFormKeys.Details]: BudgetDetailsFormGroupComponent.attachControlsToFormGroup(new FormGroup({})),
-      [BudgetFormKeys.Outcomes]: new FormArray([]),
-      [BudgetFormKeys.Contributors]: new FormArray([])
+      [BudgetFormGroupKeys.Details]: BudgetDetailsFormGroupComponent.attachControlsToFormGroup(new FormGroup({})),
+      [BudgetFormGroupKeys.Outcomes]: new FormArray([]),
+      [BudgetFormGroupKeys.Contributors]: new FormArray([])
     })
 
     this.route.data.subscribe(data => {
