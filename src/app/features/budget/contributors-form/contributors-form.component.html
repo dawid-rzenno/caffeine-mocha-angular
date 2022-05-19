@@ -1,5 +1,5 @@
 <h2>Contributors</h2>
-<form [formGroup]="form" (submit)="onAdd()">
+<form [formGroup]="formGroup" (submit)="onAdd()">
   <h4>Add a new Contributor</h4>
 
   <label for="{{Keys.Name}}">Name: </label>
@@ -7,15 +7,15 @@
   <br><br>
 
   <div class="mocha-incomes-form">
-    <mocha-incomes-form [parentForm]="form"></mocha-incomes-form>
+    <mocha-incomes-form [parentForm]="formGroup"></mocha-incomes-form>
   </div>
 
   <div class="mocha-allowances-form">
-    <mocha-allowances-form [parentForm]="form"></mocha-allowances-form>
+    <mocha-allowances-form [parentForm]="formGroup"></mocha-allowances-form>
   </div>
 
   <div class="mocha-deductions-form">
-    <mocha-deductions-form [parentForm]="form"></mocha-deductions-form>
+    <mocha-deductions-form [parentForm]="formGroup"></mocha-deductions-form>
   </div>
 
   <button type="submit">Add</button>

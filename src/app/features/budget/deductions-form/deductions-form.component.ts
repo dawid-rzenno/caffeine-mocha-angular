@@ -27,7 +27,7 @@ export class DeductionsFormComponent extends ArrayFormControlChildAbstract<IDedu
 
   constructor(private fb: FormBuilder) {
     super();
-    this.form = this.fb.group({
+    this.formGroup = this.fb.group({
       [DeductionFormKeys.ID]: 0,
       [DeductionFormKeys.Name]: 'Testing',
       [DeductionFormKeys.Value]: 100

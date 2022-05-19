@@ -27,7 +27,7 @@ export class AllowancesFormComponent extends ArrayFormControlChildAbstract<IAllo
 
   constructor(private fb: FormBuilder) {
     super();
-    this.form = this.fb.group({
+    this.formGroup = this.fb.group({
       [AllowanceFormKeys.ID]: 0,
       [AllowanceFormKeys.Name]: 'Testing',
       [AllowanceFormKeys.Value]: 100

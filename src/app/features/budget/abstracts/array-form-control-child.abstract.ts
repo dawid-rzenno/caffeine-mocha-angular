@@ -1,10 +1,10 @@
-import {FormComponent} from "../../../models/form-component.abstract";
+import {FormComponentAbstract} from "../../../models/form-component.abstract";
 import {Directive} from "@angular/core";
 import {FormGroup} from "@angular/forms";
 
 /** Abstract of a form control (within parent form) that can create or remove items from its array value */
 @Directive()
-export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormComponent {
+export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormComponentAbstract {
   abstract readonly NameInsideParentForm: string;
   abstract parentForm: FormGroup;
   protected afterAddCallback: any = () => {
@@ -20,14 +20,14 @@ export abstract class ArrayFormControlChildAbstract<ItemModel> extends FormCompo
   }
 
   public onAdd(): void {
-    const value = this.form.getRawValue()
+    const value = this.formGroup.getRawValue()
     const control = this.parentForm?.get(this.NameInsideParentForm)
 
     control?.setValue(
       [...this.array, {...value, id: this.lastIndexUsed}]
     )
 
-    this.form.reset()
+    this.formGroup.reset()
     this.lastIndexUsed += 1
 
     this.afterAddCallback()

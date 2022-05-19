@@ -16,7 +16,7 @@ export class ContributorsFormComponent extends ArrayFormControlChildAbstract<ICo
 
   constructor(private fb: FormBuilder) {
     super();
-    this.form = this.fb.group({
+    this.formGroup = this.fb.group({
       [ContributorFormKeys.ID]: 0,
       [ContributorFormKeys.Name]: 'Testing',
       [ContributorFormKeys.Incomes]: [],

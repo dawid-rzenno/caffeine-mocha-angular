@@ -1,0 +1,39 @@
+<h2>Outcomes</h2>
+
+<ng-container *ngFor="let form of forms; index as i">
+
+  <form [formGroup]="form" class="form">
+    <mat-form-field appearance="fill" class="name-input">
+      <mat-label>Name</mat-label>
+      <input formControlName="{{Keys.Name}}" id="{{Keys.Name}}" type="text" matInput>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="value-input">
+      <mat-label>Value (PLN)</mat-label>
+      <input formControlName="{{Keys.Value}}" id="{{Keys.Value}}" type="number" matInput>
+    </mat-form-field>
+
+    <button
+      (click)="removeFormGroup(i)"
+      class="remove-button"
+      color="warn"
+      type="button"
+      mat-raised-button
+    >
+      Remove
+    </button>
+  </form>
+
+</ng-container>
+
+<button
+  (click)="addFormGroup()"
+  class="add-button"
+  color="primary"
+  type="submit"
+  mat-button
+>
+  + Add a new Outcome
+</button>
+
+

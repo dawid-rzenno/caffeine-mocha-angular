@@ -1,14 +1,33 @@
 import {IContributorFormValue} from "../contributors-form/contributor-form";
-import {IOutcomesFormValue} from "../outcomes-form/outcomes-form";
+import {IOutcomesInputGroup} from "../outcomes-form/outcomes-input-group.model";
+
+export enum BudgetFormSteps {
+  Details = 'Details',
+  Outcomes = 'Outcomes',
+  Contributors = 'Contributors',
+  Contributions = 'Contributions'
+}
 
 export enum BudgetFormKeys {
-  Name = 'name',
+  Details = 'details',
   Outcomes = 'outcomes',
   Contributors = 'contributors'
 }
 
 export interface IBudgetFormValue {
-  [BudgetFormKeys.Name]: string,
-  [BudgetFormKeys.Outcomes]: IOutcomesFormValue,
+  [BudgetFormKeys.Details]: IBudgetDetailsFormValue,
+  [BudgetFormKeys.Outcomes]: IOutcomesInputGroup,
   [BudgetFormKeys.Contributors]: IContributorFormValue
 }
+
+export enum BudgetDetailsFormKeys {
+  Name = 'name',
+  Owner = 'owner',
+}
+
+export interface IBudgetDetailsFormValue {
+  [BudgetDetailsFormKeys.Name]: string,
+  [BudgetDetailsFormKeys.Owner]: string,
+}
+
+

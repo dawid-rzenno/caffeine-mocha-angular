@@ -27,7 +27,7 @@ export class IncomesFormComponent extends ArrayFormControlChildAbstract<IIncomeF
 
   constructor(private fb: FormBuilder) {
     super();
-    this.form = this.fb.group({
+    this.formGroup = this.fb.group({
       [IncomeFormKeys.ID]: 0,
       [IncomeFormKeys.Name]: 'Testing',
       [IncomeFormKeys.Value]: 100

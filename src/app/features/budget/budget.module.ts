@@ -1,7 +1,7 @@
 import {Injectable, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BudgetFormComponent} from "./budget-form/budget-form.component";
-import {OutcomesFormComponent} from "./outcomes-form/outcomes-form.component";
+import {OutcomesFormArrayComponent} from "./outcomes-form/outcomes-form-array.component";
 import {ContributorsFormComponent} from "./contributors-form/contributors-form.component";
 import {IncomesFormComponent} from "./incomes-form/incomes-form.component";
 import {AllowancesFormComponent} from "./allowances-form/allowances-form.component";
@@ -20,7 +20,10 @@ import {Observable, of} from "rxjs";
 import {IBudget} from "./budget";
 import {Headers} from "../../models/headers.enum";
 import {MatTableModule} from "@angular/material/table";
-import { OutcomesListComponent } from './outcomes-list/outcomes-list.component';
+import {OutcomesListComponent} from './outcomes-list/outcomes-list.component';
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatCardModule} from "@angular/material/card";
+import { BudgetDetailsFormGroupComponent } from './budget-details-form/budget-details-form-group.component';
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null > {
@@ -86,7 +89,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     BudgetFormComponent,
-    OutcomesFormComponent,
+    OutcomesFormArrayComponent,
     ContributorsFormComponent,
     IncomesFormComponent,
     AllowancesFormComponent,
@@ -95,17 +98,20 @@ const routes: Routes = [
     BudgetListComponent,
     ContributionListComponent,
     OutcomesListComponent,
+    BudgetDetailsFormGroupComponent,
   ],
-  imports: [
-    RouterModule.forChild(routes),
-    CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTableModule
-  ],
+    imports: [
+        RouterModule.forChild(routes),
+        CommonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatTableModule,
+        MatStepperModule,
+        MatCardModule
+    ],
   exports: [
     RouterModule,
     BudgetFormComponent

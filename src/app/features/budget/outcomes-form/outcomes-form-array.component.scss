@@ -15,9 +15,14 @@ $form-gap: 0.5rem;
   flex-grow: 1;
 }
 
-.add-button {
+.remove-button {
   height: 52px;
   flex-grow: 1;
+}
+
+.add-button {
+  height: 52px;
+  width: 100%;
 }
 
 

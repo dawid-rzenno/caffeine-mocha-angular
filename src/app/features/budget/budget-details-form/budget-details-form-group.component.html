@@ -1,0 +1,11 @@
+<form *ngIf="formGroup" [formGroup]="formGroup" class="budget-details-form">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Name</mat-label>
+    <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}" matInput>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Owner</mat-label>
+    <input id="{{Keys.Owner}}" type="text" formControlName="{{Keys.Owner}}" matInput>
+  </mat-form-field>
+</form>

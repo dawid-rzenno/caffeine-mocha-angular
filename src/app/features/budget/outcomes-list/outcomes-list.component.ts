@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IOutcomesFormValue, OutcomesFormKeys} from "../outcomes-form/outcomes-form";
+import {IOutcomesInputGroup, OutcomesInputGroupKeys} from "../outcomes-form/outcomes-input-group.model";
 import {IListButtonAction} from "../../../models/list-action.model";
 
 @Component({
@@ -8,14 +8,14 @@ import {IListButtonAction} from "../../../models/list-action.model";
   styleUrls: ['./outcomes-list.component.scss']
 })
 export class OutcomesListComponent {
-  private _outcomes: IOutcomesFormValue[] = [];
+  private _outcomes: IOutcomesInputGroup[] = [];
 
   @Input()
-  public set outcomes(outcomes: IOutcomesFormValue[]) {
+  public set outcomes(outcomes: IOutcomesInputGroup[]) {
     this._outcomes = outcomes
     this.totalValue = this.calculateTotalValue()
   }
-  public get outcomes(): IOutcomesFormValue[] {
+  public get outcomes(): IOutcomesInputGroup[] {
     return this._outcomes;
   }
 
@@ -25,7 +25,7 @@ export class OutcomesListComponent {
 
   private calculateTotalValue(): number {
     let total = 0;
-    this.outcomes.forEach((outcome: IOutcomesFormValue) => total = total + outcome[OutcomesFormKeys.Value])
+    this.outcomes.forEach((outcome: IOutcomesInputGroup) => total = total + outcome[OutcomesInputGroupKeys.Value])
     return total;
   }
 
