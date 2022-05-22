@@ -10,6 +10,7 @@ import {HomeComponent} from './core/home/home.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserInterceptor} from "./core/user/user.interceptor";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -54,6 +55,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
+    FontAwesomeModule,
   ],
   exports: [RouterModule],
   providers: [
