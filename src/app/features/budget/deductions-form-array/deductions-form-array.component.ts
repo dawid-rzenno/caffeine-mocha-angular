@@ -1,34 +1,20 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component} from '@angular/core';
+import {FormControl, FormGroup} from "@angular/forms";
 import {IncomeFormArrayElementKeys} from "../incomes-form-array/incomes-form-array";
+import {InnerFormArray} from "../abstracts/inner-form-array.abstract";
 
 @Component({
   selector: 'mocha-deductions-form-array',
   templateUrl: './deductions-form-array.component.html',
   styleUrls: ['./deductions-form-array.component.scss']
 })
-export class DeductionsFormArrayComponent implements OnInit {
+export class DeductionsFormArrayComponent extends InnerFormArray {
   public readonly Keys = IncomeFormArrayElementKeys;
 
-  @Input() public formArray!: FormArray;
-
-  public get forms(): FormGroup[] {
-    return this.formArray.controls as FormGroup[];
+  protected get newFormGroup(): FormGroup {
+    return new FormGroup({
+      [IncomeFormArrayElementKeys.Name]: new FormControl(''),
+      [IncomeFormArrayElementKeys.Value]: new FormControl(0)
+    })
   }
-
-  public ngOnInit() {
-    this.addFormGroup();
-  }
-
-  public addFormGroup(): void {
-    this.formArray.push(new FormGroup({
-      [IncomeFormArrayElementKeys.Name]: new FormControl('', {validators: [Validators.required]}),
-      [IncomeFormArrayElementKeys.Value]: new FormControl(0, {validators: [Validators.required]})
-    }))
-  }
-
-  public removeFormGroup(index: number): void {
-    this.formArray.removeAt(index);
-  }
-
 }

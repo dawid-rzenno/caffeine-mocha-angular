@@ -1,4 +1,4 @@
-<form *ngIf="formGroup" [formGroup]="formGroup" class="budget-details-form">
+<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="formSubmission.emit(null)" class="budget-details-form">
   <mat-form-field appearance="fill" class="form-field">
     <mat-label>Budget name</mat-label>
     <input id="{{Keys.Name}}" type="text" formControlName="{{Keys.Name}}" matInput>
@@ -8,4 +8,6 @@
     <mat-label>Owner name</mat-label>
     <input id="{{Keys.Owner}}" type="text" formControlName="{{Keys.Owner}}" matInput>
   </mat-form-field>
+
+  <button type="submit" class="invisible"> <!-- triggers ngSubmit --> </button>
 </form>

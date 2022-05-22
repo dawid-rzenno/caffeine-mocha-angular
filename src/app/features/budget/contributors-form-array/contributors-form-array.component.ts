@@ -1,39 +1,43 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ContributorFormArrayElementKeys} from "./contributors-form-array";
+import {MatAccordion, MatExpansionPanel} from "@angular/material/expansion";
+import {InnerFormArray} from "../abstracts/inner-form-array.abstract";
 
 @Component({
   selector: 'mocha-contributors-form-array',
   templateUrl: './contributors-form-array.component.html',
   styleUrls: ['./contributors-form-array.component.scss']
 })
-export class ContributorsFormArrayComponent implements OnInit {
+export class ContributorsFormArrayComponent extends InnerFormArray implements OnInit {
   public readonly Keys = ContributorFormArrayElementKeys;
 
-  @Input() public formArray!: FormArray;
-
-  public get forms(): FormGroup[] {
-    return this.formArray.controls as FormGroup[];
-  }
+  @ViewChildren(MatAccordion) accordions!:  QueryList<MatAccordion>;
 
   public ngOnInit() {
     this.addFormGroup();
   }
 
-  public addFormGroup(): void {
-    this.formArray.push(new FormGroup({
+  protected get newFormGroup(): FormGroup {
+    return new FormGroup({
       [ContributorFormArrayElementKeys.Name]: new FormControl('', {validators: [Validators.required]}),
       [ContributorFormArrayElementKeys.Incomes]: new FormArray([]),
       [ContributorFormArrayElementKeys.Allowances]: new FormArray([]),
       [ContributorFormArrayElementKeys.Deductions]: new FormArray([]),
-    }))
+    })
   }
 
-  public removeFormGroup(index: number): void {
-    this.formArray.removeAt(index);
+  onFocus(incomesPanel: MatExpansionPanel, contributorNameInput: HTMLInputElement) {
+    if(!contributorNameInput.value) {
+      incomesPanel.open();
+    }
   }
 
-  public getFormArray(formGroup: FormGroup, controlName: ContributorFormArrayElementKeys): FormArray {
-    return formGroup.get(controlName) as FormArray;
+  onSubmit(form: FormGroup, incomesPanel: MatExpansionPanel) {
+    if(form.invalid) {
+      incomesPanel.open();
+    } else {
+      this.formArrayElementSubmission.emit(null);
+    }
   }
 }

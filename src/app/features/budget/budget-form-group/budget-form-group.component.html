@@ -9,15 +9,10 @@
         <mat-card-title>Budget details</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
-          <mocha-budget-details-form-group [formGroup]="details"></mocha-budget-details-form-group>
+          <mocha-budget-details-form-group [formGroup]="details" (formSubmission)="stepper.next()"></mocha-budget-details-form-group>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
-          <button
-            type="button"
-            routerLink="/budget"
-            color="warn"
-            mat-button
-          >
+          <button type="button" routerLink="/" color="warn" mat-button>
             Cancel
           </button>
           <button [disabled]="details.invalid" mat-button matStepperNext>Next</button>
@@ -30,7 +25,7 @@
         <mat-card-title>Outcomes</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
-          <mocha-outcomes-form-array [formArray]="outcomes"></mocha-outcomes-form-array>
+          <mocha-outcomes-form-array [formArray]="outcomes" (formArrayElementSubmission)="stepper.next()"></mocha-outcomes-form-array>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button mat-button matStepperPrevious>Back</button>
@@ -44,7 +39,7 @@
         <mat-card-title>Contributors</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
-          <mocha-contributors-form-array [formArray]="contributors"></mocha-contributors-form-array>
+          <mocha-contributors-form-array [formArray]="contributors" (formArrayElementSubmission)="stepper.next()"></mocha-contributors-form-array>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button mat-button matStepperPrevious>Back</button>
