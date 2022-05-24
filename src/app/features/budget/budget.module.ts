@@ -23,6 +23,7 @@ import {MatCardModule} from "@angular/material/card";
 import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { BudgetDetailsComponent } from './budget-details/budget-details.component';
+import { BudgetListComponent } from './budget-list/budget-list.component';
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
@@ -70,6 +71,16 @@ const routes: Routes = [
         data: {
           header: Headers.EditBudget
         }
+      },
+      {
+        path: 'list',
+        component: BudgetListComponent,
+        resolve: {
+          budgets: BudgetsResolver
+        },
+        data: {
+          header: Headers.ListBudgets
+        }
       }
     ]
   }
@@ -86,6 +97,7 @@ const routes: Routes = [
     AllowancesFormArrayComponent,
     DeductionsFormArrayComponent,
     BudgetDetailsComponent,
+    BudgetListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
