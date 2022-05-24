@@ -9,6 +9,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserInterceptor} from "./core/user/user.interceptor";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {UserModule} from "./core/user/user.module";
 
 const routes: Routes = [
   {
@@ -18,10 +19,6 @@ const routes: Routes = [
   {
     path: 'budget',
     loadChildren: () => import('./features/budget/budget.module').then(m => m.BudgetModule)
-  },
-  {
-    path: 'user',
-    loadChildren: () => import('./core/user/user.module').then(m => m.UserModule)
   },
   {
     path: '',
@@ -46,6 +43,7 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    UserModule
   ],
   exports: [RouterModule],
   providers: [
