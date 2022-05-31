@@ -1,3 +1,34 @@
-<pre>{{json(contributors)}}</pre>
-<pre>{{json(totalBudgetOutcome)}}</pre>
-<pre>{{json(totalBudgetIncome)}}</pre>
+<h1 *ngIf="!hideHeader">{{header}} — {{budgetName}}</h1>
+
+<div class="row">
+  <div class="col-12">
+    <mat-card>
+      <mat-card-title>Contributors</mat-card-title>
+      <mat-card-subtitle>Total contributors income — {{totalContributorsIncome | currency: ' '}}</mat-card-subtitle>
+      <mat-card-content>
+        <div class="row">
+          <mocha-contributor-tile
+            *ngFor="let contributorTile of contributorTiles"
+            [data]="contributorTile"
+            class="col-6"
+          ></mocha-contributor-tile>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="col-6 mt-4">
+    <mat-card>
+      <mat-card-title>Outcomes</mat-card-title>
+      <mat-card-subtitle>Total budget outcome — {{totalBudgetOutcome | currency: ' '}}</mat-card-subtitle>
+      <mat-card-content>
+        <mocha-outcome-list [outcomes]="outcomes"></mocha-outcome-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+
+
+
+

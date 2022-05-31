@@ -24,6 +24,10 @@ import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budge
 import {MatExpansionModule} from "@angular/material/expansion";
 import { BudgetDetailsComponent } from './budget-details/budget-details.component';
 import { BudgetListComponent } from './budget-list/budget-list.component';
+import {IBudgetFormGroupRawValue} from "./budget-form-group/budget-form-group";
+import { ContributorTileComponent } from './contributor-tile/contributor-tile.component';
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import { OutcomeListComponent } from './outcome-list/outcome-list.component';
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
@@ -46,16 +50,52 @@ const routes: Routes = [
     component: BudgetComponent,
     children: [
       {
-        path: 'new',
-        component: BudgetFormGroupComponent,
+        path: 'details/:id',
+        component: BudgetDetailsComponent,
         resolve: {
-          // existing outcomes
-          // existing contributors
-          // existing allowances
-          // existing deductions
+          // budget: BudgetResolver // navigate to "../new" if it can't be resolved
         },
         data: {
-          header: Headers.CreateBudget
+          header: Headers.BudgetDetails,
+          budget: {
+            details: {
+              name: 'Home budget',
+              owner: 'Dawid'
+            },
+            outcomes: [
+              {name: 'Flat rent', value: 2600},
+              {name: 'Food', value: 1000},
+              {name: 'Shopping', value: 750},
+            ],
+            contributors: [
+              {
+                name: 'Dawid',
+                incomes: [
+                  {name: 'Job', value: 5500},
+                ],
+                allowances: [],
+                deductions: [],
+              },
+              {
+                name: 'Piotr',
+                incomes: [
+                  {name: 'Job', value: 1800},
+                ],
+                allowances: [],
+                deductions: [],
+              }
+            ]
+          } as IBudgetFormGroupRawValue
+        }
+      },
+      {
+        path: 'list',
+        component: BudgetListComponent,
+        resolve: {
+          budgets: BudgetsResolver
+        },
+        data: {
+          header: Headers.ListBudgets
         }
       },
       {
@@ -73,15 +113,18 @@ const routes: Routes = [
         }
       },
       {
-        path: 'list',
-        component: BudgetListComponent,
+        path: 'new',
+        component: BudgetFormGroupComponent,
         resolve: {
-          budgets: BudgetsResolver
+          // existing outcomes
+          // existing contributors
+          // existing allowances
+          // existing deductions
         },
         data: {
-          header: Headers.ListBudgets
+          header: Headers.CreateBudget
         }
-      }
+      },
     ]
   }
 ];
@@ -98,6 +141,8 @@ const routes: Routes = [
     DeductionsFormArrayComponent,
     BudgetDetailsComponent,
     BudgetListComponent,
+    ContributorTileComponent,
+    OutcomeListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -110,7 +155,8 @@ const routes: Routes = [
     MatTableModule,
     MatStepperModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FontAwesomeModule
   ],
   exports: [
     RouterModule,

@@ -8,8 +8,8 @@ import {HomeComponent} from './core/home/home.component';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {UserInterceptor} from "./core/user/user.interceptor";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {UserModule} from "./core/user/user.module";
+import {FontAwesomeConfigModule} from "./libraries/font-awesome-config.module";
 
 const routes: Routes = [
   {
@@ -42,7 +42,7 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     BrowserModule,
     BrowserAnimationsModule,
-    FontAwesomeModule,
+    FontAwesomeConfigModule,
     UserModule
   ],
   exports: [RouterModule],

@@ -5,12 +5,8 @@ import {IIncomeFormArrayElement} from "../incomes-form-array/incomes-form-array"
 import {IDeductionFormArrayElement} from "../deductions-form-array/deductions-form-array";
 import {IAllowanceFormArrayElement} from "../allowances-form-array/allowances-form-array";
 import {IOutcomesFormArrayElement} from "../outcomes-form-array/outcomes-form-array";
-
-interface IContributor {
-  name: string;
-  totalIncome: number;
-  contributionAmount: number;
-}
+import {ActivatedRoute} from "@angular/router";
+import {IContributorTile} from "../contributor-tile/contributor-tile";
 
 @Component({
   selector: 'mocha-budget-details',
@@ -19,21 +15,48 @@ interface IContributor {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BudgetDetailsComponent {
-  public contributors: IContributor[] = [];
+  public header: string = ''
+  public budgetName: string = ''
+  public contributorTiles: IContributorTile[] = [];
   public totalBudgetOutcome: number = 0;
-  public totalBudgetIncome: number = 0;
+  public totalContributorsIncome: number = 0;
+  public outcomes: IOutcomesFormArrayElement[] = [];
 
-  @Input() set budget(value: IBudgetFormGroupRawValue) {
-    this.totalBudgetOutcome = BudgetDetailsComponent.calculateTotalOutcome(value);
-    this.totalBudgetIncome = BudgetDetailsComponent.calculateTotalIncome(value);
-    this.contributors = BudgetDetailsComponent.calculateContributions(value, this.totalBudgetIncome, this.totalBudgetOutcome);
+  @Input() hideHeader: boolean = false;
+
+  @Input() set budget(budgetFormGroupRawValue: IBudgetFormGroupRawValue) {
+    if (budgetFormGroupRawValue) {
+      this.budgetName = budgetFormGroupRawValue.details.name;
+      this.totalBudgetOutcome = BudgetDetailsComponent.calculateTotalBudgetOutcome(budgetFormGroupRawValue);
+      this.totalContributorsIncome = BudgetDetailsComponent.calculateTotalContributorsIncome(budgetFormGroupRawValue);
+      this.contributorTiles = BudgetDetailsComponent.createDataForContributorTiles(
+        budgetFormGroupRawValue,
+        this.totalContributorsIncome,
+        this.totalBudgetOutcome
+      );
+      this.outcomes = budgetFormGroupRawValue.outcomes;
+    } else {
+      this.budgetName = '';
+      this.totalBudgetOutcome = 0;
+      this.contributorTiles = [];
+      this.outcomes = [];
+    }
   };
 
   json(obj: any): string {
     return JSON.stringify(obj, null, 4);
   }
 
-  private static calculateTotalOutcome(budget: IBudgetFormGroupRawValue): number {
+  constructor(private route: ActivatedRoute) {}
+
+  public ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.header = data['header'];
+      this.budget = data['budget'];
+    })
+  }
+
+  private static calculateTotalBudgetOutcome(budget: IBudgetFormGroupRawValue): number {
     let total = 0;
 
     budget.outcomes.forEach((outcome: IOutcomesFormArrayElement) => total += outcome.value)
@@ -41,7 +64,7 @@ export class BudgetDetailsComponent {
     return total;
   }
 
-  private static calculateTotalIncome(budget: IBudgetFormGroupRawValue): number {
+  private static calculateTotalContributorsIncome(budget: IBudgetFormGroupRawValue): number {
     let total = 0;
 
     budget.contributors.forEach((contributor: IContributorFormArrayElement) => {
@@ -51,26 +74,22 @@ export class BudgetDetailsComponent {
     return total;
   }
 
-  private static calculateContributions(budget: IBudgetFormGroupRawValue, totalBudgetIncome: number, totalBudgetOutcome: number): IContributor[] {
-    const contributors: IContributor[] = [];
-
-    budget.contributors.forEach((contributor: IContributorFormArrayElement) => {
+  private static createDataForContributorTiles(budget: IBudgetFormGroupRawValue, totalBudgetIncome: number, totalBudgetOutcome: number): IContributorTile[] {
+    return [...budget.contributors.map((contributor: IContributorFormArrayElement) => {
 
       let totalContributorIncome: number = 0;
 
-      contributor.incomes.forEach((income: IIncomeFormArrayElement) => totalContributorIncome += income.value)
-      contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalContributorIncome += deduction.value)
-      contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalContributorIncome -= allowance.value)
+      contributor.incomes.forEach((income: IIncomeFormArrayElement) => totalContributorIncome += income.value);
+      contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalContributorIncome += deduction.value);
+      contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalContributorIncome -= allowance.value);
 
-      const percentage: number = totalContributorIncome / totalBudgetIncome
+      const percentage: number = totalContributorIncome / totalBudgetIncome;
 
-      contributors.push({
+      return {
         name: contributor.name,
         totalIncome: totalContributorIncome,
         contributionAmount: percentage * totalBudgetOutcome
-      })
-    })
-
-    return contributors;
+      }
+    })];
   }
 }
