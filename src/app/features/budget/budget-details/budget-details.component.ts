@@ -43,10 +43,6 @@ export class BudgetDetailsComponent {
     }
   };
 
-  json(obj: any): string {
-    return JSON.stringify(obj, null, 4);
-  }
-
   constructor(private route: ActivatedRoute) {}
 
   public ngOnInit() {
@@ -74,8 +70,12 @@ export class BudgetDetailsComponent {
     return total;
   }
 
-  private static createDataForContributorTiles(budget: IBudgetFormGroupRawValue, totalBudgetIncome: number, totalBudgetOutcome: number): IContributorTile[] {
-    return [...budget.contributors.map((contributor: IContributorFormArrayElement) => {
+  private static createDataForContributorTiles(
+    budget: IBudgetFormGroupRawValue,
+    totalBudgetIncome: number,
+    totalBudgetOutcome: number
+  ): IContributorTile[] {
+    return budget.contributors.map((contributor: IContributorFormArrayElement) => {
 
       let totalContributorIncome: number = 0;
 
@@ -83,13 +83,17 @@ export class BudgetDetailsComponent {
       contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalContributorIncome += deduction.value);
       contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalContributorIncome -= allowance.value);
 
-      const percentage: number = totalContributorIncome / totalBudgetIncome;
+      let percentage: number = 0;
+
+      if (totalBudgetIncome > 0) {
+        percentage = totalContributorIncome / totalBudgetIncome;
+      }
 
       return {
         name: contributor.name,
         totalIncome: totalContributorIncome,
         contributionAmount: percentage * totalBudgetOutcome
       }
-    })];
+    });
   }
 }
