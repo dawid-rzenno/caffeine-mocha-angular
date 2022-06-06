@@ -58,7 +58,7 @@
           </mat-card-content>
           <mat-card-actions class="mat-card-actions">
             <button (click)="stepper.reset()" color="warn" mat-button>Reset</button>
-            <button color="primary" mat-button>Save</button>
+            <button (click)="onSave()" [disabled]="loading" color="primary" mat-button>Save</button>
           </mat-card-actions>
         </mat-card>
       </ng-template>

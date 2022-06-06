@@ -5,10 +5,9 @@ import {IBudgetFormGroupRawValue} from "./budget-form-group/budget-form-group";
 @Injectable()
 export class BudgetService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   public create(budget: IBudgetFormGroupRawValue) {
-    return this.http.post('http://localhost/jp2gmd', budget);
+    return this.http.post('http://localhost:8080/api/budgets/new', budget, {observe: "body"});
   }
 }

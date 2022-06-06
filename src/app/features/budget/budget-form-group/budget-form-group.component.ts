@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
 import {FormComponentAbstract} from "../../../models/form-component.abstract";
 import {BudgetFormGroupKeys} from "./budget-form-group";
@@ -6,16 +6,20 @@ import {BudgetService} from "../budget.service";
 import {ActivatedRoute} from "@angular/router";
 import {IBudget} from "../budget";
 import {BudgetDetailsFormGroupComponent} from "../budget-details-form-group/budget-details-form-group.component";
+import {finalize, takeUntil} from "rxjs";
 
 @Component({
   selector: 'mocha-budget-form-group',
   templateUrl: './budget-form-group.component.html',
   styleUrls: ['./budget-form-group.component.scss']
 })
-export class BudgetFormGroupComponent extends FormComponentAbstract implements OnInit {
+export class BudgetFormGroupComponent extends FormComponentAbstract implements OnInit, OnDestroy {
   public readonly Keys = BudgetFormGroupKeys
   public budget: IBudget | null = null;
   public header: string = ''
+  public loading: boolean = false;
+
+  private destroy$: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(protected fb: FormBuilder, private service: BudgetService, private route: ActivatedRoute) {
     super();
@@ -46,7 +50,17 @@ export class BudgetFormGroupComponent extends FormComponentAbstract implements O
     })
   }
 
-  public onCreate(): void {
-    this.service.create(this.formGroup.getRawValue()).subscribe();
+  public ngOnDestroy(): void {
+    this.destroy$.emit();
+  }
+
+  public onSave(): void {
+    this.loading = true;
+    this.service.create(
+      this.formGroup.getRawValue()
+    ).pipe(
+      takeUntil(this.destroy$),
+      finalize(() => this.loading = false)
+    ).subscribe();
   }
 }
