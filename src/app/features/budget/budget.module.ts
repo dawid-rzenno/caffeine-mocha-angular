@@ -24,23 +24,56 @@ import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budge
 import {MatExpansionModule} from "@angular/material/expansion";
 import {BudgetDetailsComponent} from './budget-details/budget-details.component';
 import {BudgetListComponent} from './budget-list/budget-list.component';
-import {IBudgetFormGroupRawValue} from "./budget-form-group/budget-form-group";
 import {ContributorTileComponent} from './contributor-tile/contributor-tile.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {OutcomeListComponent} from './outcome-list/outcome-list.component';
+
+const fakeBudget: IBudget = {
+  id: '0',
+  details: {
+    name: 'Home budget',
+    owner: 'Dawid'
+  },
+  outcomes: [
+    {name: 'Flat rent', value: 2600},
+    {name: 'Food', value: 1000},
+    {name: 'Shopping', value: 750},
+  ],
+  contributors: [
+    {
+      name: 'Dawid',
+      incomes: [
+        {name: 'Job', value: 5500},
+      ],
+      allowances: [],
+      deductions: [],
+    },
+    {
+      name: 'Piotr',
+      incomes: [
+        {name: 'Job', value: 1600},
+      ],
+      allowances: [],
+      deductions: [],
+    }
+  ]
+};
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget> | null {
     const id: string | null = route.paramMap.get('id')
-    return id ? of({id}) : null;
+    return id ? of(fakeBudget) : null;
   }
 }
 
 @Injectable({providedIn: 'root'})
 export class BudgetsResolver implements Resolve<Observable<IBudget[]> | null> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget[]> | null {
-    return of([]);
+    const fakeBudgets = [fakeBudget, fakeBudget, fakeBudget, fakeBudget, fakeBudget];
+    return of(fakeBudgets.map(
+      (b: IBudget, i: number) => ({...b, id: i.toString()})
+    ));
   }
 }
 
@@ -66,46 +99,17 @@ const routes: Routes = [
         path: 'view/:id',
         component: BudgetDetailsComponent,
         resolve: {
-          // budget: BudgetResolver // navigate to "../new" if it can't be resolved
+          budget: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
         },
         data: {
-          header: Headers.BudgetDetails,
-          budget: {
-            details: {
-              name: 'Home budget',
-              owner: 'Dawid'
-            },
-            outcomes: [
-              {name: 'Flat rent', value: 2600},
-              {name: 'Food', value: 1000},
-              {name: 'Shopping', value: 750},
-            ],
-            contributors: [
-              {
-                name: 'Dawid',
-                incomes: [
-                  {name: 'Job', value: 5500},
-                ],
-                allowances: [],
-                deductions: [],
-              },
-              {
-                name: 'Piotr',
-                incomes: [
-                  {name: 'Job', value: 1800},
-                ],
-                allowances: [],
-                deductions: [],
-              }
-            ]
-          } as IBudgetFormGroupRawValue
+          header: Headers.BudgetDetails
         }
       },
       {
         path: 'edit/:id',
         component: BudgetFormGroupComponent,
         resolve: {
-          budget: BudgetResolver // navigate to "../new" if it can't be resolved
+          budget: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
           // existing outcomes
           // existing contributors
           // existing allowances

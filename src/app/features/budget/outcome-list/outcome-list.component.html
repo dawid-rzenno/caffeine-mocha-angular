@@ -1,13 +1,13 @@
-<table mat-table [dataSource]="outcomes" class="mat-elevation-z0 w-100">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z0 w-100">
 
-  <ng-container [matColumnDef]="OutcomesFormArrayElementKeys.Name">
+  <ng-container [matColumnDef]="Keys.Name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element[OutcomesFormArrayElementKeys.Name]}} </td>
+    <td mat-cell *matCellDef="let element"> {{element[Keys.Name]}} </td>
   </ng-container>
 
-  <ng-container [matColumnDef]="OutcomesFormArrayElementKeys.Value">
+  <ng-container [matColumnDef]="Keys.Value">
     <th mat-header-cell *matHeaderCellDef> Value </th>
-    <td mat-cell *matCellDef="let element"> {{element[OutcomesFormArrayElementKeys.Value] | currency: ' '}} </td>
+    <td mat-cell *matCellDef="let element"> {{element[Keys.Value] | currency: ' '}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>

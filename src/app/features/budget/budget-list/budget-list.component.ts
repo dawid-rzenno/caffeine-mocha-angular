@@ -1,46 +1,57 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {IBudget} from "../budget";
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
-
+import {ListComponentAbstract} from "../../../abstracts/list-component.abstract";
+import {BudgetListKeys, IBudgetListElement} from "./budget-list";
+import {IBudgetFormGroupRawValue} from "../budget-form-group/budget-form-group";
+import {IContributorFormArrayElement} from "../contributors-form-array/contributors-form-array";
+import {IIncomeFormArrayElement} from "../incomes-form-array/incomes-form-array";
+import {IDeductionFormArrayElement} from "../deductions-form-array/deductions-form-array";
+import {IAllowanceFormArrayElement} from "../allowances-form-array/allowances-form-array";
 
 @Component({
   selector: 'mocha-budget-list',
   templateUrl: './budget-list.component.html',
   styleUrls: ['./budget-list.component.scss']
 })
-export class BudgetListComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
+export class BudgetListComponent extends ListComponentAbstract<typeof BudgetListKeys, BudgetListKeys, IBudgetListElement> implements OnInit {
+  public header: string = '';
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-
-  public budgets: IBudget[] = []
-  public header: string = ''
+  constructor(private route: ActivatedRoute) {
+    const displayedColumns: BudgetListKeys[] = [
+      BudgetListKeys.Name,
+      BudgetListKeys.TotalOutcomeValue,
+      BudgetListKeys.TotalIncomeValue,
+      BudgetListKeys.ContributorsCount
+    ];
+    super(BudgetListKeys, displayedColumns, []);
+  }
 
   public ngOnInit() {
     this.route.data.subscribe(data => {
       this.header = data['header'];
-      this.budgets = data['budgets'];
+      this.dataSource = data['budgets'] ? BudgetListComponent.createDataSource(data['budgets']) : [];
     })
+  }
+
+  public static createDataSource(budgets: IBudgetFormGroupRawValue[]): IBudgetListElement[] {
+    return budgets.map((budget: IBudgetFormGroupRawValue) => {
+
+      let totalOutcomeValue = 0;
+      budget.outcomes.forEach(outcome => totalOutcomeValue += outcome.value);
+
+      let totalIncomeValue: number = 0;
+      budget.contributors.forEach((contributor: IContributorFormArrayElement) => {
+        contributor.incomes.forEach((income: IIncomeFormArrayElement) => totalIncomeValue += income.value);
+        contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalIncomeValue += deduction.value);
+        contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalIncomeValue -= allowance.value);
+      });
+
+      return {
+        [BudgetListKeys.Name]: budget.details.name,
+        [BudgetListKeys.TotalOutcomeValue]: totalOutcomeValue,
+        [BudgetListKeys.TotalIncomeValue]: totalIncomeValue,
+        [BudgetListKeys.ContributorsCount]: budget.contributors.length,
+      } as IBudgetListElement;
+    });
   }
 }
