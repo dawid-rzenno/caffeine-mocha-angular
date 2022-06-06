@@ -5,6 +5,7 @@ export enum BudgetListKeys {
   TotalOutcomeValue = 'totalOutcomeValue',
   TotalIncomeValue = 'totalIncomeValue',
   ContributorsCount = 'contributorsCount',
+  Actions = 'actions'
 }
 
 export interface IBudgetListElement extends IListComponentAbstractDataSourceElement {

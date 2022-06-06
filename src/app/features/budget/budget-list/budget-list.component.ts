@@ -21,7 +21,8 @@ export class BudgetListComponent extends ListComponentAbstract<typeof BudgetList
       BudgetListKeys.Name,
       BudgetListKeys.TotalOutcomeValue,
       BudgetListKeys.TotalIncomeValue,
-      BudgetListKeys.ContributorsCount
+      BudgetListKeys.ContributorsCount,
+      BudgetListKeys.Actions
     ];
     super(BudgetListKeys, displayedColumns, []);
   }

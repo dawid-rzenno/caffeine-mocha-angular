@@ -1,28 +1,44 @@
 <h1>{{ header }}</h1>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z0 w-100">
+<mat-card>
+  <mat-card-content>
+    <table [dataSource]="dataSource" class="mat-elevation-z0 w-100" mat-table>
 
-  <ng-container [matColumnDef]="Keys.Name">
-    <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.Name]}} </td>
-  </ng-container>
+      <ng-container [matColumnDef]="Keys.Name">
+        <th *matHeaderCellDef mat-header-cell> Name</th>
+        <td *matCellDef="let element" mat-cell> {{element[Keys.Name]}} </td>
+      </ng-container>
 
-  <ng-container [matColumnDef]="Keys.TotalOutcomeValue">
-    <th mat-header-cell *matHeaderCellDef> Total Outcome Value </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.TotalOutcomeValue] | currency: ' '}} </td>
-  </ng-container>
+      <ng-container [matColumnDef]="Keys.TotalOutcomeValue">
+        <th *matHeaderCellDef mat-header-cell> Total Outcome Value</th>
+        <td *matCellDef="let element" mat-cell> {{element[Keys.TotalOutcomeValue] | currency: ' '}} </td>
+      </ng-container>
 
-  <ng-container [matColumnDef]="Keys.TotalIncomeValue">
-    <th mat-header-cell *matHeaderCellDef> Total Income Value </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.TotalIncomeValue] | currency: ' '}} </td>
-  </ng-container>
+      <ng-container [matColumnDef]="Keys.TotalIncomeValue">
+        <th *matHeaderCellDef mat-header-cell> Total Income Value</th>
+        <td *matCellDef="let element" mat-cell> {{element[Keys.TotalIncomeValue] | currency: ' '}} </td>
+      </ng-container>
 
-  <ng-container [matColumnDef]="Keys.ContributorsCount">
-    <th mat-header-cell *matHeaderCellDef> Contributors Count </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.ContributorsCount]}} </td>
-  </ng-container>
+      <ng-container [matColumnDef]="Keys.ContributorsCount">
+        <th *matHeaderCellDef mat-header-cell> Contributors Count</th>
+        <td *matCellDef="let element" mat-cell> {{element[Keys.ContributorsCount]}} </td>
+      </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: DisplayedColumns;"></tr>
-</table>
+      <ng-container [matColumnDef]="Keys.Actions">
+        <th *matHeaderCellDef mat-header-cell> Actions</th>
+        <td *matCellDef="let element" mat-cell>
+          <button class="mr-2" mat-stroked-button routerLink="/budgets/view/1" color="primary">View</button>
+          <button class="mr-2" mat-stroked-button routerLink="/budgets/edit/1">Edit</button>
+          <button color="warn" mat-stroked-button>Delete</button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="DisplayedColumns" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: DisplayedColumns;" mat-row></tr>
+    </table>
+
+    <button color="primary" mat-button routerLink="/budgets/create" class="create-budget-button mt-3">+ Create a new budget</button>
+
+  </mat-card-content>
+</mat-card>
 

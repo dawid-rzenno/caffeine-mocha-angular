@@ -8,6 +8,6 @@ export class BudgetService {
   constructor(private http: HttpClient) {}
 
   public create(budget: IBudgetFormGroupRawValue) {
-    return this.http.post('http://localhost:8080/api/budgets/new', budget, {observe: "body"});
+    return this.http.post('http://localhost:8080/api/budgets/create', budget, {observe: "body"});
   }
 }

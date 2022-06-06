@@ -83,7 +83,7 @@ const routes: Routes = [
     component: BudgetComponent,
     children: [
       {
-        path: 'new',
+        path: 'create',
         component: BudgetFormGroupComponent,
         resolve: {
           // existing outcomes
@@ -126,7 +126,7 @@ const routes: Routes = [
           budgets: BudgetsResolver
         },
         data: {
-          header: Headers.ListBudgets
+          header: Headers.AllBudgets
         }
       }
     ]

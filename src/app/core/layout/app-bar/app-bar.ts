@@ -9,12 +9,12 @@ export const APP_BAR_ITEMS: IAppBarItem[] = [
     label: 'Budgets',
     items: [
       {
-        label: 'New',
-        routerLink: '/budgets/new'
-      },
-      {
         label: 'All',
         routerLink: '/budgets/all'
+      },
+      {
+        label: 'Create',
+        routerLink: '/budgets/create'
       },
     ]
   },
