@@ -10,6 +10,8 @@ import {UserInterceptor} from "./core/user/user.interceptor";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {UserModule} from "./core/user/user.module";
 import {FontAwesomeConfigModule} from "./libraries/font-awesome-config.module";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from "@angular/material/button";
 
 const routes: Routes = [
   {
@@ -17,7 +19,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'budget',
+    path: 'budgets',
     loadChildren: () => import('./features/budget/budget.module').then(m => m.BudgetModule)
   },
   {
@@ -43,7 +45,9 @@ const routes: Routes = [
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeConfigModule,
-    UserModule
+    UserModule,
+    MatMenuModule,
+    MatButtonModule
   ],
   exports: [RouterModule],
   providers: [

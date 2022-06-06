@@ -22,12 +22,12 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatCardModule} from "@angular/material/card";
 import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
 import {MatExpansionModule} from "@angular/material/expansion";
-import { BudgetDetailsComponent } from './budget-details/budget-details.component';
-import { BudgetListComponent } from './budget-list/budget-list.component';
+import {BudgetDetailsComponent} from './budget-details/budget-details.component';
+import {BudgetListComponent} from './budget-list/budget-list.component';
 import {IBudgetFormGroupRawValue} from "./budget-form-group/budget-form-group";
-import { ContributorTileComponent } from './contributor-tile/contributor-tile.component';
+import {ContributorTileComponent} from './contributor-tile/contributor-tile.component';
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import { OutcomeListComponent } from './outcome-list/outcome-list.component';
+import {OutcomeListComponent} from './outcome-list/outcome-list.component';
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
@@ -50,7 +50,20 @@ const routes: Routes = [
     component: BudgetComponent,
     children: [
       {
-        path: 'details/:id',
+        path: 'new',
+        component: BudgetFormGroupComponent,
+        resolve: {
+          // existing outcomes
+          // existing contributors
+          // existing allowances
+          // existing deductions
+        },
+        data: {
+          header: Headers.CreateBudget
+        }
+      },
+      {
+        path: 'view/:id',
         component: BudgetDetailsComponent,
         resolve: {
           // budget: BudgetResolver // navigate to "../new" if it can't be resolved
@@ -89,16 +102,6 @@ const routes: Routes = [
         }
       },
       {
-        path: 'list',
-        component: BudgetListComponent,
-        resolve: {
-          budgets: BudgetsResolver
-        },
-        data: {
-          header: Headers.ListBudgets
-        }
-      },
-      {
         path: 'edit/:id',
         component: BudgetFormGroupComponent,
         resolve: {
@@ -113,18 +116,15 @@ const routes: Routes = [
         }
       },
       {
-        path: 'new',
-        component: BudgetFormGroupComponent,
+        path: 'all',
+        component: BudgetListComponent,
         resolve: {
-          // existing outcomes
-          // existing contributors
-          // existing allowances
-          // existing deductions
+          budgets: BudgetsResolver
         },
         data: {
-          header: Headers.CreateBudget
+          header: Headers.ListBudgets
         }
-      },
+      }
     ]
   }
 ];

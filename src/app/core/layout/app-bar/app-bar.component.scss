@@ -1,9 +1,7 @@
 nav {
-  background: black;
-  padding: 1rem;
+  background: #f5f5f5;
 }
 
-a {
-  color: white;
-  margin: 1rem;
+button:focus {
+  outline: none;
 }
