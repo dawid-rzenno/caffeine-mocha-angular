@@ -28,36 +28,7 @@ import {ContributorTileComponent} from './contributor-tile/contributor-tile.comp
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {OutcomeListComponent} from './outcome-list/outcome-list.component';
 
-const fakeBudget: IBudget = {
-  id: '0',
-  details: {
-    name: 'Home budget',
-    owner: 'Dawid'
-  },
-  outcomes: [
-    {name: 'Flat rent', value: 2600},
-    {name: 'Food', value: 1000},
-    {name: 'Shopping', value: 750},
-  ],
-  contributors: [
-    {
-      name: 'Dawid',
-      incomes: [
-        {name: 'Job', value: 5500},
-      ],
-      allowances: [],
-      deductions: [],
-    },
-    {
-      name: 'Piotr',
-      incomes: [
-        {name: 'Job', value: 1600},
-      ],
-      allowances: [],
-      deductions: [],
-    }
-  ]
-};
+const fakeBudget: IBudget = {} as IBudget;
 
 @Injectable({providedIn: 'root'})
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
