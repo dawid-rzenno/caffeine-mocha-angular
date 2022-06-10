@@ -1,57 +1,58 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ListComponentAbstract} from "../../../abstracts/list-component.abstract";
-import {BudgetListKeys, IBudgetListElement} from "./budget-list";
-import {IBudgetFormGroupRawValue} from "../budget-form-group/budget-form-group";
-import {IContributorFormArrayElement} from "../contributors-form-array/contributors-form-array";
-import {IIncomeFormArrayElement} from "../incomes-form-array/incomes-form-array";
-import {IDeductionFormArrayElement} from "../deductions-form-array/deductions-form-array";
-import {IAllowanceFormArrayElement} from "../allowances-form-array/allowances-form-array";
+import {BudgetListColumnKeys, IBudgetListElement} from "./budget-list";
+import {IContributor} from "../contributors-form-array/contributors-form-array";
+import {IBudget} from "../budget-form-group/budget-form-group";
+import {ListComponentAbstract} from "../../../shared/abstracts/list-component.abstract";
+import {ISimpleListCompatibleObjectArrayElement} from "../../../shared/components/simple-list/simple-list";
 
 @Component({
   selector: 'mocha-budget-list',
   templateUrl: './budget-list.component.html',
   styleUrls: ['./budget-list.component.scss']
 })
-export class BudgetListComponent extends ListComponentAbstract<typeof BudgetListKeys, BudgetListKeys, IBudgetListElement> implements OnInit {
+export class BudgetListComponent extends ListComponentAbstract<IBudgetListElement, typeof BudgetListColumnKeys, BudgetListColumnKeys> implements OnInit {
+  public readonly DisplayedColumnKeys = BudgetListColumnKeys;
+  public readonly DisplayedColumns = [
+    BudgetListColumnKeys.Name,
+    BudgetListColumnKeys.TotalOutcomeValue,
+    BudgetListColumnKeys.TotalIncomeValue,
+    BudgetListColumnKeys.ContributorsCount,
+    BudgetListColumnKeys.Actions
+  ];
+
   public header: string = '';
 
   constructor(private route: ActivatedRoute) {
-    const displayedColumns: BudgetListKeys[] = [
-      BudgetListKeys.Name,
-      BudgetListKeys.TotalOutcomeValue,
-      BudgetListKeys.TotalIncomeValue,
-      BudgetListKeys.ContributorsCount,
-      BudgetListKeys.Actions
-    ];
-    super(BudgetListKeys, displayedColumns, []);
+    super();
   }
 
   public ngOnInit() {
     this.route.data.subscribe(data => {
-      this.header = data['header'];
+      this.header = data['header'] ? data['header'] : '';
       this.dataSource = data['budgets'] ? BudgetListComponent.createDataSource(data['budgets']) : [];
     })
   }
 
-  public static createDataSource(budgets: IBudgetFormGroupRawValue[]): IBudgetListElement[] {
-    return budgets.map((budget: IBudgetFormGroupRawValue) => {
+  public static createDataSource(budgets: IBudget[]): IBudgetListElement[] {
+    return budgets.map((budget: IBudget) => {
 
       let totalOutcomeValue = 0;
       budget.outcomes.forEach(outcome => totalOutcomeValue += outcome.value);
 
       let totalIncomeValue: number = 0;
-      budget.contributors.forEach((contributor: IContributorFormArrayElement) => {
-        contributor.incomes.forEach((income: IIncomeFormArrayElement) => totalIncomeValue += income.value);
-        contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalIncomeValue += deduction.value);
-        contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalIncomeValue -= allowance.value);
+      budget.contributors.forEach((contributor: IContributor) => {
+        contributor.incomes.forEach((income: ISimpleListCompatibleObjectArrayElement) => totalIncomeValue += income.value);
+        contributor.deductions.forEach((deduction: ISimpleListCompatibleObjectArrayElement) => totalIncomeValue += deduction.value);
+        contributor.allowances.forEach((allowance: ISimpleListCompatibleObjectArrayElement) => totalIncomeValue -= allowance.value);
       });
 
       return {
-        [BudgetListKeys.Name]: budget.details.name,
-        [BudgetListKeys.TotalOutcomeValue]: totalOutcomeValue,
-        [BudgetListKeys.TotalIncomeValue]: totalIncomeValue,
-        [BudgetListKeys.ContributorsCount]: budget.contributors.length,
+        [BudgetListColumnKeys.ID]: budget.id,
+        [BudgetListColumnKeys.Name]: budget.details.name,
+        [BudgetListColumnKeys.TotalOutcomeValue]: totalOutcomeValue,
+        [BudgetListColumnKeys.TotalIncomeValue]: totalIncomeValue,
+        [BudgetListColumnKeys.ContributorsCount]: budget.contributors.length,
       } as IBudgetListElement;
     });
   }

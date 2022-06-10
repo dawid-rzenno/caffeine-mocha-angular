@@ -1,6 +1,7 @@
-import {IListComponentAbstractDataSourceElement} from "../../../abstracts/list-component.abstract";
+import {ISimpleListCompatibleObjectArrayElement} from "../../../shared/components/simple-list/simple-list";
 
-export enum BudgetListKeys {
+export enum BudgetListColumnKeys {
+  ID = 'id',
   Name = 'name',
   TotalOutcomeValue = 'totalOutcomeValue',
   TotalIncomeValue = 'totalIncomeValue',
@@ -8,8 +9,8 @@ export enum BudgetListKeys {
   Actions = 'actions'
 }
 
-export interface IBudgetListElement extends IListComponentAbstractDataSourceElement {
-  [BudgetListKeys.TotalOutcomeValue]: number;
-  [BudgetListKeys.TotalIncomeValue]: number;
-  [BudgetListKeys.ContributorsCount]: number;
+export interface IBudgetListElement extends ISimpleListCompatibleObjectArrayElement {
+  [BudgetListColumnKeys.TotalOutcomeValue]: number;
+  [BudgetListColumnKeys.TotalIncomeValue]: number;
+  [BudgetListColumnKeys.ContributorsCount]: number;
 }

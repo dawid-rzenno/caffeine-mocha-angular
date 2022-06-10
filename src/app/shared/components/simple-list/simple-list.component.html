@@ -1,13 +1,13 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z0 w-100">
 
-  <ng-container [matColumnDef]="Keys.Name">
+  <ng-container [matColumnDef]="DisplayedColumnKeys.Name">
     <th mat-header-cell *matHeaderCellDef> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.Name]}} </td>
+    <td mat-cell *matCellDef="let element"> {{element[DisplayedColumnKeys.Name]}} </td>
   </ng-container>
 
-  <ng-container [matColumnDef]="Keys.Value">
+  <ng-container [matColumnDef]="DisplayedColumnKeys.Value">
     <th mat-header-cell *matHeaderCellDef> Value </th>
-    <td mat-cell *matCellDef="let element"> {{element[Keys.Value] | currency: ' '}} </td>
+    <td mat-cell *matCellDef="let element"> {{element[DisplayedColumnKeys.Value] | currency: ' '}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="DisplayedColumns"></tr>

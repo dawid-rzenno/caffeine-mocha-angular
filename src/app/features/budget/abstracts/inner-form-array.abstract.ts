@@ -1,6 +1,5 @@
 import {Directive, EventEmitter, Input, Output} from "@angular/core";
 import {FormArray, FormGroup} from "@angular/forms";
-import {ContributorFormArrayElementKeys} from "../contributors-form-array/contributors-form-array";
 
 @Directive()
 export abstract class InnerFormArray {
@@ -8,7 +7,7 @@ export abstract class InnerFormArray {
 
   @Input() public formArray!: FormArray;
 
-  @Output() public formArrayElementSubmission: EventEmitter<null> = new EventEmitter<null>();
+  @Output() public formArrayElementSubmission: EventEmitter<any> = new EventEmitter<any>();
 
   public get forms(): FormGroup[] {
     return this.formArray.controls as FormGroup[];
@@ -24,7 +23,7 @@ export abstract class InnerFormArray {
     this.formArray.removeAt(index);
   }
 
-  public getFormArray(formGroup: FormGroup, controlName: ContributorFormArrayElementKeys): FormArray {
+  public getFormArray(formGroup: FormGroup, controlName: string): FormArray {
     return formGroup.get(controlName) as FormArray;
   }
 }

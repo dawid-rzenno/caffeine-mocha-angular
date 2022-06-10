@@ -4,7 +4,7 @@ import {NgModule} from "@angular/core";
 import {faUserAstronaut} from "@fortawesome/free-solid-svg-icons";
 
 @NgModule()
-export class FontAwesomeConfigModule {
+export class FontAwesomeIconLibraryModule {
   constructor(library: FaIconLibrary) {
     library.addIcons(
       faUserAstronaut

@@ -7,3 +7,8 @@ export interface IBudgetDetailsFormGroup {
   [BudgetDetailsFormKeys.Name]: string,
   [BudgetDetailsFormKeys.Owner]: string,
 }
+
+export interface IBudgetDetails {
+  name: string;
+  owner: string;
+}

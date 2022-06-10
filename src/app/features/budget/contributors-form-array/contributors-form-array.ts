@@ -1,8 +1,10 @@
-import {IIncomeFormArrayElement} from "../incomes-form-array/incomes-form-array";
-import {IAllowanceFormArrayElement} from "../allowances-form-array/allowances-form-array";
-import {IDeductionFormArrayElement} from "../deductions-form-array/deductions-form-array";
+import {
+  ISimpleListCompatibleFormArrayElement as FormArrayElement,
+  ISimpleListCompatibleObjectArrayElement as ObjectArrayElement
+} from "../../../shared/components/simple-list/simple-list";
 
 export enum ContributorFormArrayElementKeys {
+  ID = 'id',
   Name = 'name',
   Incomes = 'incomes',
   Allowances = 'allowances',
@@ -10,8 +12,17 @@ export enum ContributorFormArrayElementKeys {
 }
 
 export interface IContributorFormArrayElement {
+  [ContributorFormArrayElementKeys.ID]: string;
   [ContributorFormArrayElementKeys.Name]: string;
-  [ContributorFormArrayElementKeys.Incomes]: IIncomeFormArrayElement[];
-  [ContributorFormArrayElementKeys.Allowances]: IAllowanceFormArrayElement[];
-  [ContributorFormArrayElementKeys.Deductions]: IDeductionFormArrayElement[];
+  [ContributorFormArrayElementKeys.Incomes]: FormArrayElement[];
+  [ContributorFormArrayElementKeys.Allowances]: FormArrayElement[];
+  [ContributorFormArrayElementKeys.Deductions]: FormArrayElement[];
+}
+
+export interface IContributor {
+  id: string;
+  name: string;
+  incomes: ObjectArrayElement[];
+  allowances: ObjectArrayElement[];
+  deductions: ObjectArrayElement[];
 }

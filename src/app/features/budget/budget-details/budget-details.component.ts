@@ -1,12 +1,9 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {IBudgetFormGroupRawValue} from "../budget-form-group/budget-form-group";
 import {IContributorFormArrayElement} from "../contributors-form-array/contributors-form-array";
-import {IIncomeFormArrayElement} from "../incomes-form-array/incomes-form-array";
-import {IDeductionFormArrayElement} from "../deductions-form-array/deductions-form-array";
-import {IAllowanceFormArrayElement} from "../allowances-form-array/allowances-form-array";
-import {IOutcomesFormArrayElement} from "../outcomes-form-array/outcomes-form-array";
 import {ActivatedRoute} from "@angular/router";
 import {IContributorTile} from "../contributor-tile/contributor-tile";
+import {ISimpleListCompatibleFormArrayElement} from "../../../shared/components/simple-list/simple-list";
 
 @Component({
   selector: 'mocha-budget-details',
@@ -20,7 +17,7 @@ export class BudgetDetailsComponent {
   public contributorTiles: IContributorTile[] = [];
   public totalBudgetOutcome: number = 0;
   public totalContributorsIncome: number = 0;
-  public outcomes: IOutcomesFormArrayElement[] = [];
+  public outcomes: ISimpleListCompatibleFormArrayElement[] = [];
 
   @Input() hideHeader: boolean = false;
 
@@ -55,7 +52,7 @@ export class BudgetDetailsComponent {
   private static calculateTotalBudgetOutcome(budget: IBudgetFormGroupRawValue): number {
     let total = 0;
 
-    budget.outcomes.forEach((outcome: IOutcomesFormArrayElement) => total += outcome.value)
+    budget.outcomes.forEach((outcome: ISimpleListCompatibleFormArrayElement) => total += outcome.value)
 
     return total;
   }
@@ -64,7 +61,7 @@ export class BudgetDetailsComponent {
     let total = 0;
 
     budget.contributors.forEach((contributor: IContributorFormArrayElement) => {
-      contributor.incomes.forEach((income: IIncomeFormArrayElement) => total += income.value)
+      contributor.incomes.forEach((income: ISimpleListCompatibleFormArrayElement) => total += income.value)
     })
 
     return total;
@@ -79,9 +76,9 @@ export class BudgetDetailsComponent {
 
       let totalContributorIncome: number = 0;
 
-      contributor.incomes.forEach((income: IIncomeFormArrayElement) => totalContributorIncome += income.value);
-      contributor.deductions.forEach((deduction: IDeductionFormArrayElement) => totalContributorIncome += deduction.value);
-      contributor.allowances.forEach((allowance: IAllowanceFormArrayElement) => totalContributorIncome -= allowance.value);
+      contributor.incomes.forEach((income: ISimpleListCompatibleFormArrayElement) => totalContributorIncome += income.value);
+      contributor.deductions.forEach((deduction: ISimpleListCompatibleFormArrayElement) => totalContributorIncome += deduction.value);
+      contributor.allowances.forEach((allowance: ISimpleListCompatibleFormArrayElement) => totalContributorIncome -= allowance.value);
 
       let percentage: number = 0;
 

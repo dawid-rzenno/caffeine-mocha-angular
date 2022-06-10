@@ -8,7 +8,9 @@ export enum LoginFormKeys {
 }
 
 @Component({
-  selector: 'mocha-log-in', templateUrl: './log-in.component.html', styleUrls: ['./log-in.component.scss']
+  selector: 'mocha-log-in',
+  templateUrl: './log-in.component.html',
+  styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent {
   public readonly Keys: typeof LoginFormKeys = LoginFormKeys

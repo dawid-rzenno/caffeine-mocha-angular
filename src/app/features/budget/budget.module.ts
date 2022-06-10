@@ -1,50 +1,40 @@
 import {Injectable, NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
 import {BudgetFormGroupComponent} from "./budget-form-group/budget-form-group.component";
-import {OutcomesFormArrayComponent} from "./outcomes-form-array/outcomes-form-array.component";
 import {ContributorsFormArrayComponent} from "./contributors-form-array/contributors-form-array.component";
-import {IncomesFormArrayComponent} from "./incomes-form-array/incomes-form-array.component";
-import {AllowancesFormArrayComponent} from "./allowances-form-array/allowances-form-array.component";
-import {DeductionsFormArrayComponent} from "./deductions-form-array/deductions-form-array.component";
-import {ReactiveFormsModule} from "@angular/forms";
 import {BudgetComponent} from './budget.component';
 import {ActivatedRouteSnapshot, Resolve, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
 import {BudgetService} from "./budget.service";
-import {HttpClientModule} from "@angular/common/http";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
-import {Observable, of} from "rxjs";
-import {IBudget} from "./budget";
-import {Headers} from "../../models/headers.enum";
-import {MatTableModule} from "@angular/material/table";
-import {MatStepperModule} from "@angular/material/stepper";
-import {MatCardModule} from "@angular/material/card";
+import {Observable} from "rxjs";
+import {Headers} from "../../shared/models/headers.enum";
 import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
-import {MatExpansionModule} from "@angular/material/expansion";
 import {BudgetDetailsComponent} from './budget-details/budget-details.component';
 import {BudgetListComponent} from './budget-list/budget-list.component';
 import {ContributorTileComponent} from './contributor-tile/contributor-tile.component';
+import {IBudget} from "./budget-form-group/budget-form-group";
+import {MatInputModule} from "@angular/material/input";
+import {MatButtonModule} from "@angular/material/button";
+import {MatExpansionModule} from "@angular/material/expansion";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {OutcomeListComponent} from './outcome-list/outcome-list.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatStepperModule} from "@angular/material/stepper";
+import {SharedComponentsModule} from "../../shared/components/shared-components.module";
 
-const fakeBudget: IBudget = {} as IBudget;
-
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
+  constructor(private service: BudgetService) {}
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget> | null {
     const id: string | null = route.paramMap.get('id')
-    return id ? of(fakeBudget) : null;
+    return id ? this.service.get(id) : null;
   }
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class BudgetsResolver implements Resolve<Observable<IBudget[]> | null> {
+  constructor(private service: BudgetService) {}
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget[]> | null {
-    const fakeBudgets = [fakeBudget, fakeBudget, fakeBudget, fakeBudget, fakeBudget];
-    return of(fakeBudgets.map(
-      (b: IBudget, i: number) => ({...b, id: i.toString()})
-    ));
+    return this.service.getAll();
   }
 }
 
@@ -104,42 +94,37 @@ const routes: Routes = [
   }
 ];
 
+const MATERIAL_IMPORTS = [
+  MatCardModule,
+  MatStepperModule,
+  MatInputModule,
+  MatButtonModule,
+  MatExpansionModule,
+];
+
 @NgModule({
   declarations: [
     BudgetComponent,
     BudgetFormGroupComponent,
     BudgetDetailsFormGroupComponent,
-    OutcomesFormArrayComponent,
     ContributorsFormArrayComponent,
-    IncomesFormArrayComponent,
-    AllowancesFormArrayComponent,
-    DeductionsFormArrayComponent,
     BudgetDetailsComponent,
     BudgetListComponent,
     ContributorTileComponent,
-    OutcomeListComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
-    CommonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatTableModule,
-    MatStepperModule,
-    MatCardModule,
-    MatExpansionModule,
-    FontAwesomeModule
+    SharedComponentsModule,
+    FontAwesomeModule,
+    ...MATERIAL_IMPORTS
   ],
   exports: [
-    RouterModule,
-    BudgetFormGroupComponent
+    RouterModule
   ],
   providers: [
-    BudgetService
+    BudgetService,
+    BudgetResolver,
+    BudgetsResolver
   ]
 })
-export class BudgetModule {
-}
+export class BudgetModule {}

@@ -1,10 +1,9 @@
 import {Component, EventEmitter, OnDestroy, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from "@angular/forms";
-import {FormComponentAbstract} from "../../../models/form-component.abstract";
-import {BudgetFormGroupKeys} from "./budget-form-group";
+import {FormComponentAbstract} from "../../../shared/models/form-component.abstract";
+import {BudgetFormGroupKeys, IBudget} from "./budget-form-group";
 import {BudgetService} from "../budget.service";
 import {ActivatedRoute} from "@angular/router";
-import {IBudget} from "../budget";
 import {BudgetDetailsFormGroupComponent} from "../budget-details-form-group/budget-details-form-group.component";
 import {finalize, takeUntil} from "rxjs";
 

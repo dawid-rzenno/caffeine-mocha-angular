@@ -12,7 +12,7 @@ $form-gap: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   gap: $form-gap;
-  align-items: start;
+  align-items: flex-start;
   width: 100%;
 }
 
