@@ -1,0 +1,87 @@
+<div class="flex-container">
+  <form
+    *ngFor="let form of forms; index as i"
+    (ngSubmit)="onSubmit(form, incomesPanel)"
+    [formGroup]="form"
+    class="form"
+  >
+    <mat-form-field appearance="fill" class="name-input">
+      <mat-label>Contributor name</mat-label>
+      <input
+        #contributorNameInput
+        (focus)="onFocus(incomesPanel, contributorNameInput)"
+        formControlName="{{ControlKey.Name}}"
+        id="{{ControlKey.Name}}"
+        type="text"
+        matInput
+      />
+    </mat-form-field>
+
+    <button
+      (click)="removeFormGroup(i)"
+      [disabled]="forms.length < 2"
+      class="remove-button"
+      color="warn"
+      type="button"
+      mat-raised-button
+    >
+      Remove
+    </button>
+
+    <button class="invisible" type="submit"></button>
+
+    <mat-accordion class="contributors-accordion" multi>
+
+      <mat-expansion-panel #incomesPanel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Incomes</mat-panel-title>
+        </mat-expansion-panel-header>
+        <!-- Shouldn't be lazy-rendered as it causes ExpressionChangedAfterItWasCheckedError when validation changes its state -->
+        <mocha-simple-input-table
+          (newElementInFormArray)="newElementInFormArray.emit()"
+          addButtonLabel="+ Add a new income"
+          [formArray]="getFormArray(form, ControlKey.Incomes)"
+        ></mocha-simple-input-table>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Allowances</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <mocha-simple-input-table
+            (newElementInFormArray)="newElementInFormArray.emit()"
+            addButtonLabel="+ Add a new allowance"
+            [formArray]="getFormArray(form, ControlKey.Allowances)"
+          ></mocha-simple-input-table>
+        </ng-template>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Deductions</mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <mocha-simple-input-table
+            (newElementInFormArray)="newElementInFormArray.emit()"
+            addButtonLabel="+ Add a new deduction"
+            [formArray]="getFormArray(form, ControlKey.Deductions)"
+          ></mocha-simple-input-table>
+        </ng-template>
+      </mat-expansion-panel>
+
+    </mat-accordion>
+
+  </form>
+
+  <button
+    (click)="addFormGroup()"
+    class="add-button"
+    color="primary"
+    mat-button
+    type="submit"
+  >
+    + Add a new contributor
+  </button>
+
+</div>

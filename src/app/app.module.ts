@@ -1,44 +1,41 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {UserInterceptor} from "./core/user/user.interceptor";
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FontAwesomeIconLibraryModule} from "./libraries/font-awesome-icon-library.module";
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
-import {ReactiveFormsModule} from "@angular/forms";
+import {CoreModule, ERROR_ROUTES, CORE_ROUTES} from "./core/core.module";
+import {AppPathElement} from "./shared/constants/app-path.enum";
 import {CommonModule} from "@angular/common";
-import {CoreModule} from "./core/core.module";
+import {BrowserModule} from "@angular/platform-browser";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {ReactiveFormsModule} from "@angular/forms";
 
-const ROUTES: Routes = [
+const FEATURE_ROUTES: Routes = [
   {
-    path: 'budgets',
+    path: AppPathElement.Budget,
     loadChildren: () => import('./features/budget/budget.module').then(m => m.BudgetModule)
-  }
+  },
 ];
-
-const FONTAWESOME_IMPORTS = [
-  FontAwesomeModule,
-  FontAwesomeIconLibraryModule,
-]
 
 @NgModule({
   declarations: [AppComponent],
-    imports: [
-        CommonModule,
-        BrowserModule,
-        BrowserAnimationsModule,
-        RouterModule.forRoot(ROUTES),
-        ReactiveFormsModule,
-        HttpClientModule,
-        CoreModule,
-        ...FONTAWESOME_IMPORTS
-    ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    RouterModule.forRoot([
+      ...CORE_ROUTES,
+      ...FEATURE_ROUTES,
+      ...ERROR_ROUTES
+    ]),
+    CoreModule,
+  ],
   exports: [RouterModule],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: UserInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}

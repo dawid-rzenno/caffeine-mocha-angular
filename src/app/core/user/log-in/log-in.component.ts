@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
+import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
 
 export enum LoginFormKeys {
   Email = 'email',
@@ -14,6 +15,7 @@ export enum LoginFormKeys {
 })
 export class LogInComponent {
   public readonly Keys: typeof LoginFormKeys = LoginFormKeys
+  public readonly DirectPaths = DirectAppPath;
 
   public formGroup: FormGroup = new FormGroup({
     [LoginFormKeys.Email]: new FormControl('', {validators: [Validators.required]}),
@@ -24,10 +26,7 @@ export class LogInComponent {
   }
 
   public onSubmit(): void {
-    this.userService.logIn().subscribe({
-      next: value => {
-      }
-    })
+    this.userService.logIn().subscribe()
   }
 
 }

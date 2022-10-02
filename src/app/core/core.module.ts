@@ -7,11 +7,13 @@ import {AppBarComponent} from "./layout/app-bar/app-bar.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
+import {StatusComponent} from './status/status.component';
+import {FontAwesomeIconLibraryModule} from "../libraries/font-awesome-icon-library.module";
 
 const HOME_PATH = 'home';
 
 // Used in AppModule
-export const ROUTES: Routes = [
+export const CORE_ROUTES: Routes = [
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
@@ -25,32 +27,46 @@ export const ROUTES: Routes = [
     pathMatch: 'full',
     redirectTo: `/${HOME_PATH}`
   },
+];
+
+// Used in AppModule
+export const ERROR_ROUTES: Routes = [
   {
     path: '**',
     component: NotFoundComponent
-  }
+  },
+]
+
+const DECLARATIONS = [
+  AppBarComponent,
 ];
 
-const MATERIAL_IMPORTS = [
+const IMPORTS = [
+  // ANGULAR CORE
+  CommonModule,
+  // MATERIAL
   MatProgressSpinnerModule,
   MatMenuModule,
   MatButtonModule,
-];
+  // FONTAWESOME
+  FontAwesomeIconLibraryModule,
+]
 
 @NgModule({
   declarations: [
-    AppBarComponent,
     HomeComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    StatusComponent,
+    ...DECLARATIONS
   ],
   imports: [
-    CommonModule,
-    RouterModule.forRoot(ROUTES),
-    ...MATERIAL_IMPORTS
+    ...IMPORTS,
+    RouterModule,
   ],
   exports: [
+    ...IMPORTS,
     RouterModule,
-    AppBarComponent
+    ...DECLARATIONS
   ]
 })
 export class CoreModule {}

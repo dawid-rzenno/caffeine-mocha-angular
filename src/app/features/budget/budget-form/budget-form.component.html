@@ -1,0 +1,78 @@
+<h1>{{ header }}</h1>
+
+<form *ngIf="formGroup" [formGroup]="formGroup" class="budget-form">
+
+  <mat-stepper #MatStepperComponent [linear]="true">
+
+    <mat-step [stepControl]="detailsFormGroup" label="Budget details">
+      <mat-card class="mat-card">
+        <mat-card-title>Budget's details</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        <mat-card-content>
+          <mocha-budget-details-control
+            (formSubmission)="MatStepperComponent.next()"
+            [formGroup]="detailsFormGroup"
+          ></mocha-budget-details-control>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button color="warn" type="button" back-button mat-button>
+            Cancel
+          </button>
+          <button [disabled]="detailsFormGroup.invalid" mat-button matStepperNext>Next</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+
+    <mat-step [stepControl]="outcomesFormArray" label="Outcomes">
+      <mat-card class="mat-card">
+        <mat-card-title>Outcomes</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        <mat-card-content class="form-fields-container">
+          <mocha-simple-input-table
+            (newElementInFormArray)="MatStepperComponent.next()"
+            [addButtonLabel]="'+ Add a new outcome'"
+            [formArray]="outcomesFormArray"
+          ></mocha-simple-input-table>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button mat-button matStepperPrevious>Back</button>
+          <button [disabled]="outcomesFormArray.invalid" mat-button matStepperNext>Next</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+
+    <mat-step [stepControl]="contributorsFormArray" label="Contributors">
+      <mat-card class="mat-card">
+        <mat-card-title>Contributors</mat-card-title>
+        <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+        <mat-card-content class="form-fields-container">
+          <mocha-contributors-control
+            (newElementInFormArray)="MatStepperComponent.next()"
+            [formArray]="contributorsFormArray"
+          ></mocha-contributors-control>
+        </mat-card-content>
+        <mat-card-actions class="mat-card-actions">
+          <button mat-button matStepperPrevious>Back</button>
+          <button [disabled]="contributorsFormArray.invalid" mat-button matStepperNext>Next</button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-step>
+
+    <mat-step label="Summary">
+      <ng-template matStepContent>
+        <mat-card class="mat-card">
+          <mat-card-title>Summary</mat-card-title>
+          <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+          <mat-card-content class="form-fields-container">
+            <mocha-budget-inspection [budget]="formGroup.getRawValue()" [hideHeader]="true"></mocha-budget-inspection>
+          </mat-card-content>
+          <mat-card-actions class="mat-card-actions">
+            <button (click)="MatStepperComponent.reset()" color="warn" mat-button>Reset</button>
+            <button (click)="onSave()" [disabled]="statusService.isProcessed$(StatusMapKey.BudgetForm) | async" color="primary" mat-button>Save</button>
+          </mat-card-actions>
+        </mat-card>
+      </ng-template>
+    </mat-step>
+  </mat-stepper>
+
+</form>

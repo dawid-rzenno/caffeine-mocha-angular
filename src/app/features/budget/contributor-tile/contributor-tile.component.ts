@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {IContributorTile} from "./contributor-tile";
+import {ContributorTileInterface} from "./common/contributor-tile.interface";
 
 @Component({
   selector: 'mocha-contributor-tile',
@@ -8,5 +8,5 @@ import {IContributorTile} from "./contributor-tile";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ContributorTileComponent {
-  @Input() data!: IContributorTile;
+  @Input() data!: ContributorTileInterface;
 }

@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
+import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
 
 export enum SignUpFormKeys {
   Email = 'email',
@@ -22,7 +23,9 @@ export function controlValueMatches(controlA: FormControl): ValidatorFn {
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  public readonly Keys: typeof SignUpFormKeys = SignUpFormKeys
+  public readonly Keys: typeof SignUpFormKeys = SignUpFormKeys;
+  public readonly DirectPaths = DirectAppPath;
+
   public formGroup: FormGroup = SignUpComponent.getFormGroup();
 
   constructor(private userService: UserService) {}
@@ -47,8 +50,6 @@ export class SignUpComponent {
   }
 
   public onSubmit(): void {
-    this.userService.signUp().subscribe({
-      next: value => {}
-    })
+    this.userService.signUp().subscribe()
   }
 }

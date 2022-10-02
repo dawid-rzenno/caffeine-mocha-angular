@@ -1,130 +1,66 @@
-import {Injectable, NgModule} from '@angular/core';
-import {BudgetFormGroupComponent} from "./budget-form-group/budget-form-group.component";
-import {ContributorsFormArrayComponent} from "./contributors-form-array/contributors-form-array.component";
+import {NgModule} from '@angular/core';
+import {BudgetFormComponent} from "./budget-form/budget-form.component";
+import {ContributorsControlComponent} from "./contributors-control/contributors-control.component";
 import {BudgetComponent} from './budget.component';
-import {ActivatedRouteSnapshot, Resolve, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
+import {RouterModule} from "@angular/router";
 import {BudgetService} from "./budget.service";
-import {Observable} from "rxjs";
-import {Headers} from "../../shared/models/headers.enum";
-import {BudgetDetailsFormGroupComponent} from './budget-details-form-group/budget-details-form-group.component';
-import {BudgetDetailsComponent} from './budget-details/budget-details.component';
-import {BudgetListComponent} from './budget-list/budget-list.component';
+import {BudgetDetailsControlComponent} from './budget-details-control/budget-details-control.component';
+import {BudgetInspectionComponent} from './budget-inspection/budget-inspection.component';
+import {BudgetTableComponent} from './budget-table/budget-table.component';
 import {ContributorTileComponent} from './contributor-tile/contributor-tile.component';
-import {IBudget} from "./budget-form-group/budget-form-group";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule} from "@angular/material/stepper";
-import {SharedComponentsModule} from "../../shared/components/shared-components.module";
+import {BudgetFormResolver} from "./budget-form.resolver";
+import {BudgetsResolver} from "./budgets.resolver";
+import {BUDGET_ROUTES} from "./budget-routes.const";
+import {SimpleTableModule} from "../../shared/components/simple-table/simple-table.module";
+import {SimpleInputTableModule} from "../../shared/components/simple-input-table/simple-input-table.module";
+import {FontAwesomeIconLibraryModule} from "../../libraries/font-awesome-icon-library.module";
+import {BudgetFormService} from "./budget-form/budget-form.service";
+import {BackButtonModule} from "../../shared/directives/back-button/back-button.module";
 
-@Injectable()
-export class BudgetResolver implements Resolve<Observable<IBudget> | null> {
-  constructor(private service: BudgetService) {}
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget> | null {
-    const id: string | null = route.paramMap.get('id')
-    return id ? this.service.get(id) : null;
-  }
-}
-
-@Injectable()
-export class BudgetsResolver implements Resolve<Observable<IBudget[]> | null> {
-  constructor(private service: BudgetService) {}
-
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IBudget[]> | null {
-    return this.service.getAll();
-  }
-}
-
-const routes: Routes = [
-  {
-    path: '',
-    component: BudgetComponent,
-    children: [
-      {
-        path: 'create',
-        component: BudgetFormGroupComponent,
-        resolve: {
-          // existing outcomes
-          // existing contributors
-          // existing allowances
-          // existing deductions
-        },
-        data: {
-          header: Headers.CreateBudget
-        }
-      },
-      {
-        path: 'view/:id',
-        component: BudgetDetailsComponent,
-        resolve: {
-          budget: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
-        },
-        data: {
-          header: Headers.BudgetDetails
-        }
-      },
-      {
-        path: 'edit/:id',
-        component: BudgetFormGroupComponent,
-        resolve: {
-          budget: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
-          // existing outcomes
-          // existing contributors
-          // existing allowances
-          // existing deductions
-        },
-        data: {
-          header: Headers.EditBudget
-        }
-      },
-      {
-        path: 'all',
-        component: BudgetListComponent,
-        resolve: {
-          budgets: BudgetsResolver
-        },
-        data: {
-          header: Headers.AllBudgets
-        }
-      }
-    ]
-  }
-];
-
-const MATERIAL_IMPORTS = [
+const IMPORTS = [
+  // SHARED
+  SimpleTableModule,
+  SimpleInputTableModule,
+  BackButtonModule,
+  // MATERIAL
   MatCardModule,
   MatStepperModule,
   MatInputModule,
   MatButtonModule,
   MatExpansionModule,
+  // FONTAWESOME
+  FontAwesomeIconLibraryModule
 ];
 
 @NgModule({
   declarations: [
     BudgetComponent,
-    BudgetFormGroupComponent,
-    BudgetDetailsFormGroupComponent,
-    ContributorsFormArrayComponent,
-    BudgetDetailsComponent,
-    BudgetListComponent,
+    BudgetFormComponent,
+    BudgetDetailsControlComponent,
+    ContributorsControlComponent,
+    BudgetInspectionComponent,
+    BudgetTableComponent,
     ContributorTileComponent,
   ],
   imports: [
-    RouterModule.forChild(routes),
-    SharedComponentsModule,
-    FontAwesomeModule,
-    ...MATERIAL_IMPORTS
+    ...IMPORTS,
+    RouterModule.forChild(BUDGET_ROUTES),
   ],
   exports: [
-    RouterModule
+    ...IMPORTS,
+    RouterModule,
   ],
   providers: [
     BudgetService,
-    BudgetResolver,
-    BudgetsResolver
+    BudgetFormService,
+    BudgetsResolver,
+    BudgetFormResolver,
   ]
 })
-export class BudgetModule {}
+export class BudgetModule {
+}

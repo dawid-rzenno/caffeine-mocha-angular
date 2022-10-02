@@ -1,0 +1,61 @@
+<h1>{{ header }}</h1>
+
+<mat-card>
+  <mat-card-content>
+    <table [dataSource]="dataSource" class="mat-elevation-z0 w-100" mat-table>
+
+      <ng-container [matColumnDef]="ColumnKeys.Name">
+        <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.Name}} </th>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.Name]}} </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="ColumnKeys.TotalOutcomeValue">
+        <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.TotalOutcomeValue}} </th>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.TotalOutcomeValue] | currency: ' '}} </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="ColumnKeys.TotalIncomeValue">
+        <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.TotalIncomeValue}} </th>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.TotalIncomeValue] | currency: ' '}} </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="ColumnKeys.ContributorsCount">
+        <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.ContributorsCount}} </th>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.ContributorsCount]}} </td>
+      </ng-container>
+
+      <ng-container [matColumnDef]="ColumnKeys.Actions">
+        <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.Actions}}</th>
+        <td *matCellDef="let element" mat-cell>
+          <button
+            [routerLink]="DirectPaths.InspectBudget(element[ColumnKeys.ID])"
+            class="mr-2"
+            color="primary"
+            mat-stroked-button
+          >
+            {{ActionLabels.Inspect}}
+          </button>
+          <button
+            [routerLink]="DirectPaths.EditBudget(element[ColumnKeys.ID])"
+            class="mr-2"
+            mat-stroked-button
+          >
+            {{ActionLabels.Edit}}
+          </button>
+          <button color="warn" mat-stroked-button>
+            {{ActionLabels.Delete}}
+          </button>
+        </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="DisplayedColumnKeys" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: DisplayedColumnKeys;" mat-row></tr>
+    </table>
+
+    <button class="create-budget-button mt-3" color="primary" mat-button [routerLink]="DirectPaths.CreateBudget">
+      + {{ActionLabels.CreateBudget}}
+    </button>
+
+  </mat-card-content>
+</mat-card>
+

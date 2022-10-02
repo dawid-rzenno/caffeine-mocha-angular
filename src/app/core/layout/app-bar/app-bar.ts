@@ -1,6 +1,8 @@
+import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
+
 export interface IAppBarItem {
   label: string;
-  routerLink?: string;
+  routerLink?: string[];
   items?: IAppBarItem[];
 }
 
@@ -10,11 +12,11 @@ export const APP_BAR_ITEMS: IAppBarItem[] = [
     items: [
       {
         label: 'All',
-        routerLink: '/budgets/all'
+        routerLink: DirectAppPath.AllBudgets
       },
       {
         label: 'Create',
-        routerLink: '/budgets/create'
+        routerLink: DirectAppPath.CreateBudget
       },
     ]
   },
@@ -23,15 +25,15 @@ export const APP_BAR_ITEMS: IAppBarItem[] = [
     items: [
       {
         label: 'Log In',
-        routerLink: '/user/log-in'
+        routerLink: DirectAppPath.UserLogIn
       },
       {
         label: 'Log Out',
-        routerLink: '/user/log-out'
+        routerLink: DirectAppPath.UserLogOut
       },
       {
         label: 'Sign Up',
-        routerLink: '/user/sign-up'
+        routerLink: DirectAppPath.UserSignUp
       },
     ]
   },
