@@ -1,7 +1,7 @@
 export enum RouteDataHeader {
-  CreateBudget = 'Create a new budget',
-  EditBudget = 'Edit a budget',
-  DeleteBudget = 'Delete a budget',
+  CreateBudget = 'Create budget',
+  EditBudget = 'Edit budget',
+  DeleteBudget = 'Delete budget',
   AllBudgets = 'All budgets',
-  BudgetDetails = `Budget's details`
+  InspectBudget = `Inspect budget`
 }

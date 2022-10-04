@@ -14,10 +14,9 @@ import {BudgetContributorsControlService} from "../budget-contributors-control/b
 export class BudgetFormService {
   constructor(private service: BudgetService, private loadingService: StatusService) {}
 
-  getFormGroup$(budgetId: string, takeUntil$: EventEmitter<void>): Observable<FormGroup> {
+  getFormGroup$(budgetId: string): Observable<FormGroup> {
     this.loadingService.toggleStatus(StatusMapKey.BudgetForm, true);
     return this.service.get(budgetId).pipe(
-      takeUntil(takeUntil$),
       map((budget: BudgetInterface) => this.getFormGroup(budget)),
       finalize(() => this.loadingService.toggleStatus(StatusMapKey.BudgetForm, false))
     )

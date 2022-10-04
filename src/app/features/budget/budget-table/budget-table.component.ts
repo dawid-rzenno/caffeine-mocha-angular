@@ -7,9 +7,8 @@ import {BudgetActionLabel, BudgetColumnLabel} from "../budget-form/common/budget
 import {BudgetInterface} from "../budget-form/common/budget.interface";
 import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 import {BudgetContributorInterface} from "../budget-contributors-control/common/budget-contributor.interface";
-import {
-  SimpleTableRowInterface
-} from "../../../common/components/simple-table/common/simple-table-row.interface";
+import {SimpleTableRowInterface} from "../../../common/components/simple-table/common/simple-table-row.interface";
+import {BudgetRouteDataKey} from "../common/budget-route-data-key.const";
 
 @Component({
   selector: 'mocha-budget-table',
@@ -22,6 +21,7 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
   public readonly DirectPaths = DirectAppPath;
   public readonly ColumnKeys = BudgetTableRowKey;
   public readonly DisplayedColumnKeys = [
+    BudgetTableRowKey.ID,
     BudgetTableRowKey.Name,
     BudgetTableRowKey.TotalOutcomeValue,
     BudgetTableRowKey.TotalIncomeValue,
@@ -35,33 +35,35 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
     super();
   }
 
-  public ngOnInit() {
-    this.route.data.subscribe(data => {
-      this.header = data['header'] ? data['header'] : '';
-      this.dataSource = data['budgets'] ? BudgetTableComponent.createDataSource(data['budgets']) : [];
-    })
+  public static createDataSource(budgets: BudgetInterface[]): IBudgetTableRowInterface[] {
+    return budgets
+      .filter((budget: BudgetInterface) => budget.outcomes && budget.contributors)
+      .map((budget: BudgetInterface) => {
+
+        let totalOutcomeValue = 0;
+        budget.outcomes.forEach(outcome => totalOutcomeValue += outcome.value);
+
+        let totalIncomeValue: number = 0;
+        budget.contributors.forEach((contributor: BudgetContributorInterface) => {
+          contributor.incomes.forEach((income: SimpleTableRowInterface) => totalIncomeValue += income.value);
+          contributor.deductions.forEach((deduction: SimpleTableRowInterface) => totalIncomeValue += deduction.value);
+          contributor.allowances.forEach((allowance: SimpleTableRowInterface) => totalIncomeValue -= allowance.value);
+        });
+
+        return {
+          [BudgetTableRowKey.ID]: budget.id,
+          [BudgetTableRowKey.Name]: budget.details.name,
+          [BudgetTableRowKey.TotalOutcomeValue]: totalOutcomeValue,
+          [BudgetTableRowKey.TotalIncomeValue]: totalIncomeValue,
+          [BudgetTableRowKey.ContributorsCount]: budget.contributors.length,
+        } as IBudgetTableRowInterface;
+      });
   }
 
-  public static createDataSource(budgets: BudgetInterface[]): IBudgetTableRowInterface[] {
-    return budgets.map((budget: BudgetInterface) => {
-
-      let totalOutcomeValue = 0;
-      budget.outcomes.forEach(outcome => totalOutcomeValue += outcome.value);
-
-      let totalIncomeValue: number = 0;
-      budget.contributors.forEach((contributor: BudgetContributorInterface) => {
-        contributor.incomes.forEach((income: SimpleTableRowInterface) => totalIncomeValue += income.value);
-        contributor.deductions.forEach((deduction: SimpleTableRowInterface) => totalIncomeValue += deduction.value);
-        contributor.allowances.forEach((allowance: SimpleTableRowInterface) => totalIncomeValue -= allowance.value);
-      });
-
-      return {
-        [BudgetTableRowKey.ID]: budget.id,
-        [BudgetTableRowKey.Name]: budget.details.name,
-        [BudgetTableRowKey.TotalOutcomeValue]: totalOutcomeValue,
-        [BudgetTableRowKey.TotalIncomeValue]: totalIncomeValue,
-        [BudgetTableRowKey.ContributorsCount]: budget.contributors.length,
-      } as IBudgetTableRowInterface;
-    });
+  public ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.header = data[BudgetRouteDataKey.Header] ? data[BudgetRouteDataKey.Header] : '';
+      this.dataSource = data[BudgetRouteDataKey.Budgets] ? BudgetTableComponent.createDataSource(data[BudgetRouteDataKey.Budgets]) : [];
+    })
   }
 }

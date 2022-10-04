@@ -17,7 +17,7 @@ import {SimpleInputTableModule} from "../../common/components/simple-input-table
 import {FontAwesomeIconLibraryModule} from "../../libraries/font-awesome-icon-library.module";
 import {BudgetFormService} from "./budget-form/budget-form.service";
 import {BackButtonModule} from "../../common/directives/back-button/back-button.module";
-import {BudgetFormResolver, BudgetRoutingModule, BudgetsResolver} from "./budget-routing.module";
+import {BudgetRoutingModule} from "./budget-routing.module";
 
 const IMPORTS = [
   // SHARED
@@ -50,8 +50,6 @@ const IMPORTS = [
   providers: [
     BudgetService,
     BudgetFormService,
-    BudgetsResolver,
-    BudgetFormResolver,
   ]
 })
 export class BudgetModule {

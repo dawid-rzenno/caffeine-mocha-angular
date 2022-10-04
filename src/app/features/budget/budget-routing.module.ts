@@ -1,9 +1,8 @@
-import {EventEmitter, Injectable, NgModule} from '@angular/core';
+import {Injectable, NgModule} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterModule, RouterStateSnapshot, Routes} from "@angular/router";
 import {Observable} from "rxjs";
 import {BudgetInterface} from "./budget-form/common/budget.interface";
 import {BudgetService} from "./budget.service";
-import {RoutedFormRouteDataKey} from "./common/routed-form-component.abstract";
 import {BudgetComponent} from "./budget.component";
 import {AppPathElement, AppPathParams} from "../../common/constants/app-path.enum";
 import {BudgetFormComponent} from "./budget-form/budget-form.component";
@@ -12,6 +11,18 @@ import {BudgetSummaryComponent} from "./budget-summary/budget-summary.component"
 import {BudgetTableComponent} from "./budget-table/budget-table.component";
 import {FormGroup} from "@angular/forms";
 import {BudgetFormService} from "./budget-form/budget-form.service";
+import {BudgetRouteDataKey} from "./common/budget-route-data-key.const";
+
+@Injectable()
+export class BudgetResolver implements Resolve<Observable<BudgetInterface> | null> {
+  constructor(private service: BudgetService) {
+  }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BudgetInterface> | null {
+    const id: string | null = route.paramMap.get(AppPathParams.ID);
+    return id ? this.service.get(id) : null;
+  }
+}
 
 @Injectable()
 export class BudgetsResolver implements Resolve<Observable<BudgetInterface[]> | null> {
@@ -23,11 +34,6 @@ export class BudgetsResolver implements Resolve<Observable<BudgetInterface[]> | 
   }
 }
 
-export const BudgetRouteDataKey = {
-  ...RoutedFormRouteDataKey,
-  Budgets: 'budgets',
-}
-
 @Injectable()
 export class BudgetFormResolver implements Resolve<Observable<FormGroup> | FormGroup> {
   constructor(private service: BudgetFormService) {
@@ -35,7 +41,7 @@ export class BudgetFormResolver implements Resolve<Observable<FormGroup> | FormG
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> | FormGroup {
     const id: string | null = route.paramMap.get(AppPathParams.ID);
-    return id ? this.service.getFormGroup$(id, new EventEmitter()) : this.service.getFormGroup();
+    return id ? this.service.getFormGroup$(id) : this.service.getFormGroup();
   }
 }
 
@@ -55,16 +61,6 @@ export const BUDGET_ROUTES: Routes = [
         }
       },
       {
-        path: `${AppPathElement.Inspect}/:${AppPathParams.ID}`,
-        component: BudgetSummaryComponent,
-        resolve: {
-          [BudgetRouteDataKey.FormGroup]: BudgetFormResolver // ToDo: navigate to "../new" if it can't be resolved
-        },
-        data: {
-          [BudgetRouteDataKey.Header]: RouteDataHeader.BudgetDetails
-        }
-      },
-      {
         path: `${AppPathElement.Edit}/:${AppPathParams.ID}`,
         component: BudgetFormComponent,
         resolve: {
@@ -72,6 +68,16 @@ export const BUDGET_ROUTES: Routes = [
         },
         data: {
           [BudgetRouteDataKey.Header]: RouteDataHeader.EditBudget
+        }
+      },
+      {
+        path: `${AppPathElement.Inspect}/:${AppPathParams.ID}`,
+        component: BudgetSummaryComponent,
+        resolve: {
+          [BudgetRouteDataKey.Budget]: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
+        },
+        data: {
+          [BudgetRouteDataKey.Header]: RouteDataHeader.InspectBudget
         }
       },
       {
@@ -90,6 +96,11 @@ export const BUDGET_ROUTES: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(BUDGET_ROUTES)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    BudgetResolver,
+    BudgetsResolver,
+    BudgetFormResolver,
+  ]
 })
 export class BudgetRoutingModule { }

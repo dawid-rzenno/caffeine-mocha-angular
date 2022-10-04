@@ -1,6 +1,8 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {BudgetControlInterface} from "../budget-form/common/budget-control.interface";
-import {BudgetContributorControlInterface} from "../budget-contributors-control/common/budget-contributor-control.interface";
+import {
+  BudgetContributorControlInterface
+} from "../budget-contributors-control/common/budget-contributor-control.interface";
 import {ActivatedRoute} from "@angular/router";
 import {BudgetContributorTileInterface} from "../budget-contributor-tile/common/budget-contributor-tile.interface";
 import {RouteDataHeader} from "../../../common/constants/route-data-header.enum";
@@ -15,7 +17,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BudgetSummaryComponent {
-  public header: string = RouteDataHeader.BudgetDetails
+  public header: string = RouteDataHeader.InspectBudget
   public budgetName: string = ''
   public contributorTiles: BudgetContributorTileInterface[] = [];
   public totalBudgetOutcome: number = 0;

@@ -3,6 +3,7 @@ export enum BudgetActionLabel {
 }
 
 export enum BudgetColumnLabel {
+  ID = 'ID',
   Name = 'Name',
   TotalOutcomeValue = 'Total Outcome Value',
   TotalIncomeValue = 'Total Income Value',
