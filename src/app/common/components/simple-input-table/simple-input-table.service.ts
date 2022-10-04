@@ -7,7 +7,7 @@ import {SimpleTableRowInterface} from "../simple-table/common/simple-table-row.i
   providedIn: 'root'
 })
 export class SimpleInputTableService {
-  public static attachControlsToFormArrays(
+  public static attachControlsToFormArray(
     formArray: FormArray,
     elements: SimpleTableRowInterface[],
   ): FormArray {

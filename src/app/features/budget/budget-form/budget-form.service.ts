@@ -2,7 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {finalize, map, Observable, takeUntil} from "rxjs";
 import {BudgetInterface} from "./common/budget.interface";
 import {FormArray, FormControl, FormGroup} from "@angular/forms";
-import {BudgetControlKey, BudgetControlInterface} from "./common/budget-control.interface";
+import {BudgetControlInterface, BudgetControlKey} from "./common/budget-control.interface";
 import {BudgetService} from "../budget.service";
 import {StatusService} from "../../../core/status/status.service";
 import {StatusMapKey} from "../../../core/status/common/status-map-key.enum";
@@ -29,12 +29,12 @@ export class BudgetFormService {
       budget?.details
     );
 
-    const outcomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArrays(
+    const outcomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
       new FormArray([]),
       budget?.outcomes ?? []
     );
 
-    const contributorsFormArray: FormArray = BudgetContributorsControlService.attachControlsToFormArrays(
+    const contributorsFormArray: FormArray = BudgetContributorsControlService.attachControlsToFormArray(
       new FormArray([]),
       budget?.contributors ?? []
     );

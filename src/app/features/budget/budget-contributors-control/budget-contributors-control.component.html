@@ -8,10 +8,8 @@
     <mat-form-field appearance="fill" class="name-input">
       <mat-label>Contributor name</mat-label>
       <input
-        #contributorNameInput
-        (focus)="onFocus(incomesPanel, contributorNameInput)"
+        (focus)="onContributorNameInputFocus(incomesPanel, form.get(ControlKey.Name))"
         formControlName="{{ControlKey.Name}}"
-        id="{{ControlKey.Name}}"
         type="text"
         matInput
       />

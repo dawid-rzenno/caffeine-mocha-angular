@@ -1,5 +1,5 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
 import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
 import {MatAccordion, MatExpansionPanel} from "@angular/material/expansion";
 import {NestedFormArrayAbstract} from "../common/nested-form-array.abstract";
@@ -14,10 +14,6 @@ export class BudgetContributorsControlComponent extends NestedFormArrayAbstract 
 
   @ViewChildren(MatAccordion) accordions!:  QueryList<MatAccordion>;
 
-  public ngOnInit() {
-    this.addFormGroup();
-  }
-
   protected get newFormGroup(): FormGroup {
     return new FormGroup({
       [BudgetContributorControlKey.ID]: new FormControl(''),
@@ -28,14 +24,19 @@ export class BudgetContributorsControlComponent extends NestedFormArrayAbstract 
     })
   }
 
-  public onFocus(incomesPanel: MatExpansionPanel, contributorNameInput: HTMLInputElement): void {
-    if(!contributorNameInput.value) {
-      incomesPanel.open();
+  override ngOnInit() {
+    super.ngOnInit();
+  }
+
+  public onContributorNameInputFocus(panel: MatExpansionPanel, abstractControl: AbstractControl | null): void {
+    const formControl = abstractControl as FormControl;
+    if (!formControl.touched) {
+      panel.open();
     }
   }
 
   public onSubmit(form: FormGroup, incomesPanel: MatExpansionPanel): void {
-    if(form.invalid) {
+    if (form.invalid) {
       incomesPanel.open();
     } else {
       this.newElementInFormArray.emit();

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import {map, Observable, tap} from "rxjs";
+import {map, Observable} from "rxjs";
 import {BudgetInterface} from "./budget-form/common/budget.interface";
 
 const apiUrl = '/api/budget';
@@ -41,9 +41,7 @@ export class BudgetService {
 
   private static handleError<T>(response: Observable<HttpResponse<T>>): Observable<T> {
     return response.pipe(
-      tap(r => console.log(r)),
       map((response: HttpResponse<T>) => response.body as T), // ToDo: error handling
-      tap(r => console.log(r))
     )
   }
 }

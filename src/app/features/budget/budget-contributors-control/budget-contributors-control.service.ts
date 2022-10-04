@@ -4,29 +4,29 @@ import {BudgetContributorControlKey} from "./common/budget-contributor-control.i
 import {BudgetContributorInterface} from "./common/budget-contributor.interface";
 import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
 import {
-    SimpleTableRowControlKey
+  SimpleTableRowControlKey
 } from "../../../common/components/simple-table/common/simple-table-row-control.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class BudgetContributorsControlService {
-  public static attachControlsToFormArrays(
+  public static attachControlsToFormArray(
     formArray: FormArray,
     contributors: BudgetContributorInterface[],
   ): FormArray {
     contributors.forEach((contributor: BudgetContributorInterface) => {
-      const incomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArrays(
+      const incomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
         new FormArray([]),
         contributor.incomes
       );
 
-      const allowancesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArrays(
+      const allowancesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
         new FormArray([]),
         contributor.allowances
       );
 
-      const deductionsFormArray: FormArray = SimpleInputTableService.attachControlsToFormArrays(
+      const deductionsFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
         new FormArray([]),
         contributor.deductions
       );

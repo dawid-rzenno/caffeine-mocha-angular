@@ -1,10 +1,10 @@
-import {Directive, EventEmitter, Input, Output} from "@angular/core";
+import {Directive, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {FormArray, FormGroup} from "@angular/forms";
 
 @Directive()
-export abstract class NestedFormArrayAbstract {
+export abstract class NestedFormArrayAbstract implements OnInit {
   /** FormArray element control's keys. */
-  public abstract readonly ControlKey: {[k: string]: any};
+  abstract readonly ControlKey: { [k: string]: any };
 
   @Input() formArray!: FormArray;
   @Input() allowEmptyFormArray: boolean = false;
@@ -22,6 +22,12 @@ export abstract class NestedFormArrayAbstract {
 
   protected abstract get newFormGroup(): FormGroup;
 
+  ngOnInit() {
+    if (!this.formArray.length && !this.allowEmptyFormArray) {
+      this.addFormGroup();
+    }
+  }
+
   addFormGroup(): void {
     this.formArray.push(this.newFormGroup);
   }
@@ -33,4 +39,5 @@ export abstract class NestedFormArrayAbstract {
   getFormArray(formGroup: FormGroup, controlName: string): FormArray {
     return formGroup.get(controlName) as FormArray;
   }
+
 }
