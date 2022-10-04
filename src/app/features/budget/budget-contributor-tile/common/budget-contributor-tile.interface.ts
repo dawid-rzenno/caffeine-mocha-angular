@@ -1,4 +1,4 @@
-export interface ContributorTileInterface {
+export interface BudgetContributorTileInterface {
   name: string;
   totalIncome: number;
   contributionAmount: number;

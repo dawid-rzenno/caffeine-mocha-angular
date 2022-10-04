@@ -1,8 +1,8 @@
-import {ContributorControlInterface} from "../../contributors-control/common/contributor-control.interface";
-import {BudgetDetailsControlInterface} from "../../budget-details-control/common/budget-details-control.interface";
+import {BudgetContributorControlInterface} from "../../budget-contributors-control/common/budget-contributor-control.interface";
+import {BudgetGeneralControlInterface} from "../../budget-general-control/common/budget-general-control.interface";
 import {
   SimpleTableRowControlInterface as FormArrayElement
-} from "../../../../shared/components/simple-table/common/simple-table-row-control.interface";
+} from "../../../../common/components/simple-table/common/simple-table-row-control.interface";
 
 export enum BudgetControlKey {
   ID = 'id',
@@ -13,8 +13,8 @@ export enum BudgetControlKey {
 
 export interface BudgetControlInterface {
   [BudgetControlKey.ID]: string,
-  [BudgetControlKey.Details]: BudgetDetailsControlInterface,
+  [BudgetControlKey.Details]: BudgetGeneralControlInterface,
   [BudgetControlKey.Outcomes]: FormArrayElement[],
-  [BudgetControlKey.Contributors]: ContributorControlInterface[]
+  [BudgetControlKey.Contributors]: BudgetContributorControlInterface[]
 }
 

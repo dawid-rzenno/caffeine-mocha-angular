@@ -7,11 +7,11 @@
       <mat-card-subtitle>Total contributors' income — {{totalContributorsIncome | currency: ' '}}</mat-card-subtitle>
       <mat-card-content>
         <div class="row">
-          <mocha-contributor-tile
+          <mocha-budget-contributor-tile
             *ngFor="let contributorTile of contributorTiles"
-            [data]="contributorTile"
+            [budgetContributorTile]="contributorTile"
             class="col-6"
-          ></mocha-contributor-tile>
+          ></mocha-budget-contributor-tile>
         </div>
       </mat-card-content>
     </mat-card>

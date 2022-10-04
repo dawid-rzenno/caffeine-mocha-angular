@@ -1,4 +1,4 @@
-import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
+import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 
 export interface IAppBarItem {
   label: string;

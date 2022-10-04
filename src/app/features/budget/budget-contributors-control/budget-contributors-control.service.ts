@@ -1,21 +1,21 @@
 import {Injectable} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ContributorControlKey} from "./common/contributor-control.interface";
-import {ContributorInterface} from "./common/contributor.interface";
-import {SimpleInputTableService} from "../../../shared/components/simple-input-table/simple-input-table.service";
+import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
+import {BudgetContributorInterface} from "./common/budget-contributor.interface";
+import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
 import {
     SimpleTableRowControlKey
-} from "../../../shared/components/simple-table/common/simple-table-row-control.interface";
+} from "../../../common/components/simple-table/common/simple-table-row-control.interface";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContributorsControlService {
+export class BudgetContributorsControlService {
   public static attachControlsToFormArrays(
     formArray: FormArray,
-    contributors: ContributorInterface[],
+    contributors: BudgetContributorInterface[],
   ): FormArray {
-    contributors.forEach((contributor: ContributorInterface) => {
+    contributors.forEach((contributor: BudgetContributorInterface) => {
       const incomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArrays(
         new FormArray([]),
         contributor.incomes
@@ -38,9 +38,9 @@ export class ContributorsControlService {
             contributor.name ?? '',
             {validators: [Validators.required]}
           ),
-          [ContributorControlKey.Incomes]: incomesFormArray,
-          [ContributorControlKey.Allowances]: allowancesFormArray,
-          [ContributorControlKey.Deductions]: deductionsFormArray
+          [BudgetContributorControlKey.Incomes]: incomesFormArray,
+          [BudgetContributorControlKey.Allowances]: allowancesFormArray,
+          [BudgetContributorControlKey.Deductions]: deductionsFormArray
         })
       );
     })

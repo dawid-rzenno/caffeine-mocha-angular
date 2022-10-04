@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {APP_BAR_ITEMS} from "./app-bar";
-import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
+import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 
 @Component({
   selector: 'mocha-app-bar',

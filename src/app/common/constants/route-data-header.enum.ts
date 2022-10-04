@@ -1,4 +1,4 @@
-export enum Header {
+export enum RouteDataHeader {
   CreateBudget = 'Create a new budget',
   EditBudget = 'Edit a budget',
   DeleteBudget = 'Delete a budget',

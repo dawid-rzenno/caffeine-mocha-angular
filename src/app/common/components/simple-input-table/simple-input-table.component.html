@@ -16,7 +16,7 @@
 
   <button
     (click)="removeFormGroup(i)"
-    [disabled]="forms.length < 2"
+    [disabled]="isRemoveButtonDisabled"
     class="remove-button"
     color="warn"
     mat-raised-button

@@ -1,23 +1,23 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
 import {BudgetControlInterface} from "../budget-form/common/budget-control.interface";
-import {ContributorControlInterface} from "../contributors-control/common/contributor-control.interface";
+import {BudgetContributorControlInterface} from "../budget-contributors-control/common/budget-contributor-control.interface";
 import {ActivatedRoute} from "@angular/router";
-import {ContributorTileInterface} from "../contributor-tile/common/contributor-tile.interface";
-import {Header} from "../../../shared/constants/header.enum";
+import {BudgetContributorTileInterface} from "../budget-contributor-tile/common/budget-contributor-tile.interface";
+import {RouteDataHeader} from "../../../common/constants/route-data-header.enum";
 import {
   SimpleTableRowControlInterface
-} from "../../../shared/components/simple-table/common/simple-table-row-control.interface";
+} from "../../../common/components/simple-table/common/simple-table-row-control.interface";
 
 @Component({
-  selector: 'mocha-budget-inspection',
-  templateUrl: './budget-inspection.component.html',
-  styleUrls: ['./budget-inspection.component.scss'],
+  selector: 'mocha-budget-summary',
+  templateUrl: './budget-summary.component.html',
+  styleUrls: ['./budget-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BudgetInspectionComponent {
-  public header: string = Header.BudgetDetails
+export class BudgetSummaryComponent {
+  public header: string = RouteDataHeader.BudgetDetails
   public budgetName: string = ''
-  public contributorTiles: ContributorTileInterface[] = [];
+  public contributorTiles: BudgetContributorTileInterface[] = [];
   public totalBudgetOutcome: number = 0;
   public totalContributorsIncome: number = 0;
   public outcomes: SimpleTableRowControlInterface[] = [];
@@ -27,9 +27,9 @@ export class BudgetInspectionComponent {
   @Input() set budget(budgetFormGroupRawValue: BudgetControlInterface) {
     if (budgetFormGroupRawValue) {
       this.budgetName = budgetFormGroupRawValue.details.name;
-      this.totalBudgetOutcome = BudgetInspectionComponent.calculateTotalBudgetOutcome(budgetFormGroupRawValue);
-      this.totalContributorsIncome = BudgetInspectionComponent.calculateTotalContributorsIncome(budgetFormGroupRawValue);
-      this.contributorTiles = BudgetInspectionComponent.createDataForContributorTiles(
+      this.totalBudgetOutcome = BudgetSummaryComponent.calculateTotalBudgetOutcome(budgetFormGroupRawValue);
+      this.totalContributorsIncome = BudgetSummaryComponent.calculateTotalContributorsIncome(budgetFormGroupRawValue);
+      this.contributorTiles = BudgetSummaryComponent.createDataForContributorTiles(
         budgetFormGroupRawValue,
         this.totalContributorsIncome,
         this.totalBudgetOutcome
@@ -63,7 +63,7 @@ export class BudgetInspectionComponent {
   private static calculateTotalContributorsIncome(budget: BudgetControlInterface): number {
     let total = 0;
 
-    budget.contributors.forEach((contributor: ContributorControlInterface) => {
+    budget.contributors.forEach((contributor: BudgetContributorControlInterface) => {
       contributor.incomes.forEach((income: SimpleTableRowControlInterface) => total += income.value)
     })
 
@@ -74,8 +74,8 @@ export class BudgetInspectionComponent {
     budget: BudgetControlInterface,
     totalBudgetIncome: number,
     totalBudgetOutcome: number
-  ): ContributorTileInterface[] {
-    return budget.contributors.map((contributor: ContributorControlInterface) => {
+  ): BudgetContributorTileInterface[] {
+    return budget.contributors.map((contributor: BudgetContributorControlInterface) => {
 
       let totalContributorIncome: number = 0;
 

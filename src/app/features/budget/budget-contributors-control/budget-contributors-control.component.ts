@@ -1,16 +1,16 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ContributorControlKey} from "./common/contributor-control.interface";
+import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
 import {MatAccordion, MatExpansionPanel} from "@angular/material/expansion";
 import {NestedFormArrayAbstract} from "../common/nested-form-array.abstract";
 
 @Component({
-  selector: 'mocha-contributors-control',
-  templateUrl: './contributors-control.component.html',
-  styleUrls: ['./contributors-control.component.scss']
+  selector: 'mocha-budget-contributors-control',
+  templateUrl: './budget-contributors-control.component.html',
+  styleUrls: ['./budget-contributors-control.component.scss']
 })
-export class ContributorsControlComponent extends NestedFormArrayAbstract implements OnInit {
-  public readonly ControlKey = ContributorControlKey;
+export class BudgetContributorsControlComponent extends NestedFormArrayAbstract implements OnInit {
+  public readonly ControlKey = BudgetContributorControlKey;
 
   @ViewChildren(MatAccordion) accordions!:  QueryList<MatAccordion>;
 
@@ -20,11 +20,11 @@ export class ContributorsControlComponent extends NestedFormArrayAbstract implem
 
   protected get newFormGroup(): FormGroup {
     return new FormGroup({
-      [ContributorControlKey.ID]: new FormControl(''),
-      [ContributorControlKey.Name]: new FormControl('', {validators: [Validators.required]}),
-      [ContributorControlKey.Incomes]: new FormArray([]),
-      [ContributorControlKey.Allowances]: new FormArray([]),
-      [ContributorControlKey.Deductions]: new FormArray([]),
+      [BudgetContributorControlKey.ID]: new FormControl(''),
+      [BudgetContributorControlKey.Name]: new FormControl('', {validators: [Validators.required]}),
+      [BudgetContributorControlKey.Incomes]: new FormArray([]),
+      [BudgetContributorControlKey.Allowances]: new FormArray([]),
+      [BudgetContributorControlKey.Deductions]: new FormArray([]),
     })
   }
 

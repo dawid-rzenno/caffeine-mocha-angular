@@ -9,10 +9,10 @@
         <mat-card-title>Budget's details</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
-          <mocha-budget-details-control
+          <mocha-budget-general-control
             (formSubmission)="MatStepperComponent.next()"
             [formGroup]="detailsFormGroup"
-          ></mocha-budget-details-control>
+          ></mocha-budget-general-control>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button color="warn" type="button" back-button mat-button>
@@ -46,10 +46,10 @@
         <mat-card-title>Contributors</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
-          <mocha-contributors-control
+          <mocha-budget-contributors-control
             (newElementInFormArray)="MatStepperComponent.next()"
             [formArray]="contributorsFormArray"
-          ></mocha-contributors-control>
+          ></mocha-budget-contributors-control>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button mat-button matStepperPrevious>Back</button>
@@ -64,7 +64,7 @@
           <mat-card-title>Summary</mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
           <mat-card-content class="form-fields-container">
-            <mocha-budget-inspection [budget]="formGroup.getRawValue()" [hideHeader]="true"></mocha-budget-inspection>
+            <mocha-budget-summary [budget]="formGroup.getRawValue()" [hideHeader]="true"></mocha-budget-summary>
           </mat-card-content>
           <mat-card-actions class="mat-card-actions">
             <button (click)="MatStepperComponent.reset()" color="warn" mat-button>Reset</button>

@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
-import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
+import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 
 export enum LoginFormKeys {
   Email = 'email',

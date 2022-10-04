@@ -1,26 +1,23 @@
 import {NgModule} from '@angular/core';
 import {BudgetFormComponent} from "./budget-form/budget-form.component";
-import {ContributorsControlComponent} from "./contributors-control/contributors-control.component";
+import {BudgetContributorsControlComponent} from "./budget-contributors-control/budget-contributors-control.component";
 import {BudgetComponent} from './budget.component';
-import {RouterModule} from "@angular/router";
 import {BudgetService} from "./budget.service";
-import {BudgetDetailsControlComponent} from './budget-details-control/budget-details-control.component';
-import {BudgetInspectionComponent} from './budget-inspection/budget-inspection.component';
+import {BudgetGeneralControlComponent} from './budget-general-control/budget-general-control.component';
+import {BudgetSummaryComponent} from './budget-summary/budget-summary.component';
 import {BudgetTableComponent} from './budget-table/budget-table.component';
-import {ContributorTileComponent} from './contributor-tile/contributor-tile.component';
+import {BudgetContributorTileComponent} from './budget-contributor-tile/budget-contributor-tile.component';
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule} from "@angular/material/stepper";
-import {BudgetFormResolver} from "./budget-form.resolver";
-import {BudgetsResolver} from "./budgets.resolver";
-import {BUDGET_ROUTES} from "./budget-routes.const";
-import {SimpleTableModule} from "../../shared/components/simple-table/simple-table.module";
-import {SimpleInputTableModule} from "../../shared/components/simple-input-table/simple-input-table.module";
+import {SimpleTableModule} from "../../common/components/simple-table/simple-table.module";
+import {SimpleInputTableModule} from "../../common/components/simple-input-table/simple-input-table.module";
 import {FontAwesomeIconLibraryModule} from "../../libraries/font-awesome-icon-library.module";
 import {BudgetFormService} from "./budget-form/budget-form.service";
-import {BackButtonModule} from "../../shared/directives/back-button/back-button.module";
+import {BackButtonModule} from "../../common/directives/back-button/back-button.module";
+import {BudgetFormResolver, BudgetRoutingModule, BudgetsResolver} from "./budget-routing.module";
 
 const IMPORTS = [
   // SHARED
@@ -34,27 +31,22 @@ const IMPORTS = [
   MatButtonModule,
   MatExpansionModule,
   // FONTAWESOME
-  FontAwesomeIconLibraryModule
+  FontAwesomeIconLibraryModule,
+  BudgetRoutingModule
 ];
 
 @NgModule({
   declarations: [
     BudgetComponent,
     BudgetFormComponent,
-    BudgetDetailsControlComponent,
-    ContributorsControlComponent,
-    BudgetInspectionComponent,
+    BudgetGeneralControlComponent,
+    BudgetContributorsControlComponent,
+    BudgetSummaryComponent,
     BudgetTableComponent,
-    ContributorTileComponent,
+    BudgetContributorTileComponent,
   ],
-  imports: [
-    ...IMPORTS,
-    RouterModule.forChild(BUDGET_ROUTES),
-  ],
-  exports: [
-    ...IMPORTS,
-    RouterModule,
-  ],
+  imports: IMPORTS,
+  exports: IMPORTS,
   providers: [
     BudgetService,
     BudgetFormService,

@@ -6,25 +6,31 @@ export abstract class NestedFormArrayAbstract {
   /** FormArray element control's keys. */
   public abstract readonly ControlKey: {[k: string]: any};
 
-  @Input() public formArray!: FormArray;
+  @Input() formArray!: FormArray;
+  @Input() allowEmptyFormArray: boolean = false;
 
-  @Output() public newElementInFormArray: EventEmitter<void> = new EventEmitter<void>();
+  @Output() newElementInFormArray: EventEmitter<void> = new EventEmitter<void>();
 
-  public get forms(): FormGroup[] {
+  get forms(): FormGroup[] {
     return this.formArray.controls as FormGroup[];
+  }
+
+  get isRemoveButtonDisabled() {
+    const wouldLastElementBeRemoved = this.forms.length < 2;
+    return this.allowEmptyFormArray ? false : wouldLastElementBeRemoved;
   }
 
   protected abstract get newFormGroup(): FormGroup;
 
-  public addFormGroup(): void {
+  addFormGroup(): void {
     this.formArray.push(this.newFormGroup);
   }
 
-  public removeFormGroup(index: number): void {
+  removeFormGroup(index: number): void {
     this.formArray.removeAt(index);
   }
 
-  public getFormArray(formGroup: FormGroup, controlName: string): FormArray {
+  getFormArray(formGroup: FormGroup, controlName: string): FormArray {
     return formGroup.get(controlName) as FormArray;
   }
 }

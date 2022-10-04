@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
-import {DirectAppPath} from "../../../shared/constants/direct-app-path.const";
+import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 
 export enum SignUpFormKeys {
   Email = 'email',

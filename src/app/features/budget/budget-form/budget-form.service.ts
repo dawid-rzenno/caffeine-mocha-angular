@@ -6,9 +6,9 @@ import {BudgetControlKey, BudgetControlInterface} from "./common/budget-control.
 import {BudgetService} from "../budget.service";
 import {StatusService} from "../../../core/status/status.service";
 import {StatusMapKey} from "../../../core/status/common/status-map-key.enum";
-import {BudgetDetailsControlService} from "../budget-details-control/budget-details-control.service";
-import {SimpleInputTableService} from "../../../shared/components/simple-input-table/simple-input-table.service";
-import {ContributorsControlService} from "../contributors-control/contributors-control.service";
+import {BudgetGeneralControlService} from "../budget-general-control/budget-general-control.service";
+import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
+import {BudgetContributorsControlService} from "../budget-contributors-control/budget-contributors-control.service";
 
 @Injectable()
 export class BudgetFormService {
@@ -24,7 +24,7 @@ export class BudgetFormService {
   }
 
   getFormGroup(budget?: BudgetInterface): FormGroup {
-    const budgetDetailsFormGroup: FormGroup = BudgetDetailsControlService.attachControlsToFormGroup(
+    const budgetDetailsFormGroup: FormGroup = BudgetGeneralControlService.attachControlsToFormGroup(
       new FormGroup({}),
       budget?.details
     );
@@ -34,7 +34,7 @@ export class BudgetFormService {
       budget?.outcomes ?? []
     );
 
-    const contributorsFormArray: FormArray = ContributorsControlService.attachControlsToFormArrays(
+    const contributorsFormArray: FormArray = BudgetContributorsControlService.attachControlsToFormArrays(
       new FormArray([]),
       budget?.contributors ?? []
     );

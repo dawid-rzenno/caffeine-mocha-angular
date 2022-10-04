@@ -19,7 +19,7 @@
 
     <button
       (click)="removeFormGroup(i)"
-      [disabled]="forms.length < 2"
+      [disabled]="isRemoveButtonDisabled"
       class="remove-button"
       color="warn"
       type="button"
@@ -51,8 +51,9 @@
         <ng-template matExpansionPanelContent>
           <mocha-simple-input-table
             (newElementInFormArray)="newElementInFormArray.emit()"
-            addButtonLabel="+ Add a new allowance"
             [formArray]="getFormArray(form, ControlKey.Allowances)"
+            [allowEmptyFormArray]="true"
+            addButtonLabel="+ Add a new allowance"
           ></mocha-simple-input-table>
         </ng-template>
       </mat-expansion-panel>
@@ -64,8 +65,9 @@
         <ng-template matExpansionPanelContent>
           <mocha-simple-input-table
             (newElementInFormArray)="newElementInFormArray.emit()"
-            addButtonLabel="+ Add a new deduction"
             [formArray]="getFormArray(form, ControlKey.Deductions)"
+            [allowEmptyFormArray]="true"
+            addButtonLabel="+ Add a new deduction"
           ></mocha-simple-input-table>
         </ng-template>
       </mat-expansion-panel>

@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {BudgetDetailsControlKey} from "./common/budget-details-control.interface";
-import {BudgetDetailsInterface} from "./common/budget-details.interface";
+import {BudgetGeneralControlKey} from "./common/budget-general-control.interface";
+import {BudgetGeneralInterface} from "./common/budget-general.interface";
 
 @Injectable()
-export class BudgetDetailsControlService {
+export class BudgetGeneralControlService {
   public static attachControlsToFormGroup(
     formGroup: FormGroup,
-    budgetDetails?: BudgetDetailsInterface,
+    budgetDetails?: BudgetGeneralInterface,
     reattach: boolean = false
   ): FormGroup {
 
     if (reattach) {
-      formGroup.removeControl(BudgetDetailsControlKey.Name);
-      formGroup.removeControl(BudgetDetailsControlKey.Owner);
+      formGroup.removeControl(BudgetGeneralControlKey.Name);
+      formGroup.removeControl(BudgetGeneralControlKey.Owner);
     }
 
     formGroup.addControl(
-      BudgetDetailsControlKey.Name,
+      BudgetGeneralControlKey.Name,
       new FormControl(budgetDetails?.name ?? '', {validators: [Validators.required]})
     );
 
     formGroup.addControl(
-      BudgetDetailsControlKey.Owner,
+      BudgetGeneralControlKey.Owner,
       new FormControl(budgetDetails?.owner ?? '', {validators: [Validators.required]})
     );
 
