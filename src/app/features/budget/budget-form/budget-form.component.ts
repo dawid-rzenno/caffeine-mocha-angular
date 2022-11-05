@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormArray, FormGroup} from "@angular/forms";
+import {UntypedFormArray, UntypedFormGroup} from "@angular/forms";
 import {BudgetControlKey} from "./common/budget-control.interface";
 import {BudgetFormService} from "./budget-form.service";
 import {RoutedFormComponentAbstract} from "../common/routed-form-component.abstract";
@@ -23,16 +23,16 @@ export class BudgetFormComponent extends RoutedFormComponentAbstract {
     super(activatedRoute, statusService);
   }
 
-  public get detailsFormGroup(): FormGroup {
-    return this.formGroup.get(BudgetControlKey.Details) as FormGroup;
+  public get detailsFormGroup(): UntypedFormGroup {
+    return this.formGroup.get(BudgetControlKey.Details) as UntypedFormGroup;
   }
 
-  public get outcomesFormArray(): FormArray {
-    return this.formGroup.get(BudgetControlKey.Outcomes) as FormArray;
+  public get outcomesFormArray(): UntypedFormArray {
+    return this.formGroup.get(BudgetControlKey.Outcomes) as UntypedFormArray;
   }
 
-  public get contributorsFormArray(): FormArray {
-    return this.formGroup.get(BudgetControlKey.Contributors) as FormArray;
+  public get contributorsFormArray(): UntypedFormArray {
+    return this.formGroup.get(BudgetControlKey.Contributors) as UntypedFormArray;
   }
 
   public onSave(): void {

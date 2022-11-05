@@ -10,7 +10,7 @@ import {BudgetFormComponent} from "./budget-form/budget-form.component";
 import {RouteDataHeader} from "../../common/constants/route-data-header.enum";
 import {BudgetSummaryComponent} from "./budget-summary/budget-summary.component";
 import {BudgetTableComponent} from "./budget-table/budget-table.component";
-import {FormGroup} from "@angular/forms";
+import {UntypedFormGroup} from "@angular/forms";
 import {BudgetFormService} from "./budget-form/budget-form.service";
 
 @Injectable()
@@ -35,11 +35,11 @@ export class BudgetsResolver implements Resolve<Observable<BudgetInterface[]> | 
 }
 
 @Injectable()
-export class BudgetFormResolver implements Resolve<Observable<FormGroup> | FormGroup> {
+export class BudgetFormResolver implements Resolve<Observable<UntypedFormGroup> | UntypedFormGroup> {
   constructor(private service: BudgetFormService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> | FormGroup {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UntypedFormGroup> | UntypedFormGroup {
     const id: string | null = route.paramMap.get(AppPathParams.ID);
     return id ? this.service.getFormGroup$(id) : this.service.getFormGroup();
   }

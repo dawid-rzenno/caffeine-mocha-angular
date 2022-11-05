@@ -1,18 +1,18 @@
 import {Directive, EventEmitter, Input, OnInit, Output} from "@angular/core";
-import {FormArray, FormGroup} from "@angular/forms";
+import {UntypedFormArray, UntypedFormGroup} from "@angular/forms";
 
 @Directive()
 export abstract class NestedFormArrayAbstract implements OnInit {
   /** FormArray element control's keys. */
   abstract readonly ControlKey: { [k: string]: any };
 
-  @Input() formArray!: FormArray;
+  @Input() formArray!: UntypedFormArray;
   @Input() allowEmptyFormArray: boolean = false;
 
   @Output() newElementInFormArray: EventEmitter<void> = new EventEmitter<void>();
 
-  get forms(): FormGroup[] {
-    return this.formArray.controls as FormGroup[];
+  get forms(): UntypedFormGroup[] {
+    return this.formArray.controls as UntypedFormGroup[];
   }
 
   get isRemoveButtonDisabled() {
@@ -20,7 +20,7 @@ export abstract class NestedFormArrayAbstract implements OnInit {
     return this.allowEmptyFormArray ? false : wouldLastElementBeRemoved;
   }
 
-  protected abstract get newFormGroup(): FormGroup;
+  protected abstract get newFormGroup(): UntypedFormGroup;
 
   ngOnInit() {
     if (!this.formArray.length && !this.allowEmptyFormArray) {
@@ -36,8 +36,8 @@ export abstract class NestedFormArrayAbstract implements OnInit {
     this.formArray.removeAt(index);
   }
 
-  getFormArray(formGroup: FormGroup, controlName: string): FormArray {
-    return formGroup.get(controlName) as FormArray;
+  getFormArray(formGroup: UntypedFormGroup, controlName: string): UntypedFormArray {
+    return formGroup.get(controlName) as UntypedFormArray;
   }
 
 }
