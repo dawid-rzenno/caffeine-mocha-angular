@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
 import {BudgetControlInterface} from "../budget-form/common/budget-control.interface";
 import {
   BudgetContributorControlInterface
@@ -16,7 +16,7 @@ import {
   styleUrls: ['./budget-summary.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BudgetSummaryComponent {
+export class BudgetSummaryComponent implements OnInit {
   public header: string = RouteDataHeader.InspectBudget
   public budgetName: string = ''
   public contributorTiles: BudgetContributorTileInterface[] = [];
