@@ -6,8 +6,13 @@
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "server": "nodemon server2/app.js"
+    "test": "ng test --browsers=Chrome",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "ci:clean": "rimraf ./dist",
+    "ci:lint": "ng lint",
+    "ci:test": "ng test --watch=false --browsers=ChromeHeadlessCI --code-coverage",
+    "ci:build": "ng build --prod"
   },
   "private": true,
   "dependencies": {
