@@ -1,12 +1,14 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { BudgetGeneralControlService } from './budget-general-control.service';
+import {BudgetGeneralControlService} from './budget-general-control.service';
 
 describe('BudgetGeneralControlService', () => {
   let service: BudgetGeneralControlService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [BudgetGeneralControlService]
+    });
     service = TestBed.inject(BudgetGeneralControlService);
   });
 
