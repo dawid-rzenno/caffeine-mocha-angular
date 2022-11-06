@@ -4,12 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "npm run --configuration development",
-    "ci:build": "ng build --configuration production",
+    "lint": "ng lint",
+    "ci:lint": "ng lint",
     "test": "ng test --configuration development",
     "ci:test": "ng test --configuration production",
-    "lint": "ng lint",
-    "ci:lint": "ng lint"
+    "build": "npm run --configuration development",
+    "ci:build": "ng build --configuration production"
   },
   "private": true,
   "dependencies": {

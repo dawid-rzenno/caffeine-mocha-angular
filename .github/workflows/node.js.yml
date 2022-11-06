@@ -29,5 +29,4 @@ jobs:
       - run: npm ci
       - run: npm run ci:lint
       - run: npm run ci:test
-      - run: npm run ci:clean
       - run: npm run ci:build
