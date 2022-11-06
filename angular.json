@@ -72,6 +72,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "proxyConfig": "proxy.conf.json",
+            "open": true
+          },
           "configurations": {
             "production": {
               "browserTarget": "caffeine-mocha:build:production"
@@ -105,7 +109,19 @@
               "src/assets/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "codeCoverage": true
+          },
+          "configurations": {
+            "production": {
+              "browsers": "ChromeHeadlessCI",
+              "watch": false,
+              "sourceMap": false
+            },
+            "development": {
+              "browsers": "Chrome",
+              "watch": true
+            }
           }
         },
         "lint": {
@@ -120,8 +136,9 @@
       }
     }
   },
-  "defaultProject": "caffeine-mocha",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

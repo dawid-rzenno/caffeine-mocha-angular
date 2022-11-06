@@ -1,5 +1,5 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
-import {AbstractControl, FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
 import {MatAccordion, MatExpansionPanel} from "@angular/material/expansion";
 import {NestedFormArrayAbstract} from "../common/nested-form-array.abstract";
@@ -12,15 +12,15 @@ import {NestedFormArrayAbstract} from "../common/nested-form-array.abstract";
 export class BudgetContributorsControlComponent extends NestedFormArrayAbstract implements OnInit {
   public readonly ControlKey = BudgetContributorControlKey;
 
-  @ViewChildren(MatAccordion) accordions!:  QueryList<MatAccordion>;
+  @ViewChildren(MatAccordion) accordions!: QueryList<MatAccordion>;
 
-  protected get newFormGroup(): FormGroup {
-    return new FormGroup({
-      [BudgetContributorControlKey.ID]: new FormControl(''),
-      [BudgetContributorControlKey.Name]: new FormControl('', {validators: [Validators.required]}),
-      [BudgetContributorControlKey.Incomes]: new FormArray([]),
-      [BudgetContributorControlKey.Allowances]: new FormArray([]),
-      [BudgetContributorControlKey.Deductions]: new FormArray([]),
+  protected get newFormGroup(): UntypedFormGroup {
+    return new UntypedFormGroup({
+      [BudgetContributorControlKey.ID]: new UntypedFormControl(''),
+      [BudgetContributorControlKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
+      [BudgetContributorControlKey.Incomes]: new UntypedFormArray([]),
+      [BudgetContributorControlKey.Allowances]: new UntypedFormArray([]),
+      [BudgetContributorControlKey.Deductions]: new UntypedFormArray([]),
     })
   }
 
@@ -29,13 +29,13 @@ export class BudgetContributorsControlComponent extends NestedFormArrayAbstract 
   }
 
   public onContributorNameInputFocus(panel: MatExpansionPanel, abstractControl: AbstractControl | null): void {
-    const formControl = abstractControl as FormControl;
+    const formControl = abstractControl as UntypedFormControl;
     if (!formControl.touched) {
       panel.open();
     }
   }
 
-  public onSubmit(form: FormGroup, incomesPanel: MatExpansionPanel): void {
+  public onSubmit(form: UntypedFormGroup, incomesPanel: MatExpansionPanel): void {
     if (form.invalid) {
       incomesPanel.open();
     } else {

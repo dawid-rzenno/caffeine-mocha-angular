@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {finalize, map, Observable, takeUntil} from "rxjs";
 import {BudgetInterface} from "./common/budget.interface";
-import {FormArray, FormControl, FormGroup} from "@angular/forms";
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {BudgetControlInterface, BudgetControlKey} from "./common/budget-control.interface";
 import {BudgetService} from "../budget.service";
 import {StatusService} from "../../../core/status/status.service";
@@ -12,9 +12,10 @@ import {BudgetContributorsControlService} from "../budget-contributors-control/b
 
 @Injectable()
 export class BudgetFormService {
-  constructor(private service: BudgetService, private loadingService: StatusService) {}
+  constructor(private service: BudgetService, private loadingService: StatusService) {
+  }
 
-  getFormGroup$(budgetId: string): Observable<FormGroup> {
+  getFormGroup$(budgetId: string): Observable<UntypedFormGroup> {
     this.loadingService.toggleStatus(StatusMapKey.BudgetForm, true);
     return this.service.get(budgetId).pipe(
       map((budget: BudgetInterface) => this.getFormGroup(budget)),
@@ -22,24 +23,24 @@ export class BudgetFormService {
     )
   }
 
-  getFormGroup(budget?: BudgetInterface): FormGroup {
-    const budgetDetailsFormGroup: FormGroup = BudgetGeneralControlService.attachControlsToFormGroup(
-      new FormGroup({}),
+  getFormGroup(budget?: BudgetInterface): UntypedFormGroup {
+    const budgetDetailsFormGroup: UntypedFormGroup = BudgetGeneralControlService.attachControlsToFormGroup(
+      new UntypedFormGroup({}),
       budget?.details
     );
 
-    const outcomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
-      new FormArray([]),
+    const outcomesFormArray: UntypedFormArray = SimpleInputTableService.attachControlsToFormArray(
+      new UntypedFormArray([]),
       budget?.outcomes ?? []
     );
 
-    const contributorsFormArray: FormArray = BudgetContributorsControlService.attachControlsToFormArray(
-      new FormArray([]),
+    const contributorsFormArray: UntypedFormArray = BudgetContributorsControlService.attachControlsToFormArray(
+      new UntypedFormArray([]),
       budget?.contributors ?? []
     );
 
-    return new FormGroup({
-      [BudgetControlKey.ID]: new FormControl(budget?.id),
+    return new UntypedFormGroup({
+      [BudgetControlKey.ID]: new UntypedFormControl(budget?.id),
       [BudgetControlKey.Details]: budgetDetailsFormGroup,
       [BudgetControlKey.Outcomes]: outcomesFormArray,
       [BudgetControlKey.Contributors]: contributorsFormArray
@@ -47,7 +48,7 @@ export class BudgetFormService {
 
   }
 
-  submitFormGroup$(formGroup: FormGroup, takeUntil$: EventEmitter<void>): Observable<BudgetControlInterface> {
+  submitFormGroup$(formGroup: UntypedFormGroup, takeUntil$: EventEmitter<void>): Observable<BudgetControlInterface> {
     this.loadingService.toggleStatus(StatusMapKey.BudgetForm, true);
     return this.service.create(formGroup.getRawValue() as BudgetControlInterface).pipe(
       takeUntil(takeUntil$),

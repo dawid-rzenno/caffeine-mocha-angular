@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {FormArray, FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
 import {BudgetContributorInterface} from "./common/budget-contributor.interface";
 import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
@@ -12,29 +12,29 @@ import {
 })
 export class BudgetContributorsControlService {
   public static attachControlsToFormArray(
-    formArray: FormArray,
+    formArray: UntypedFormArray,
     contributors: BudgetContributorInterface[],
-  ): FormArray {
+  ): UntypedFormArray {
     contributors.forEach((contributor: BudgetContributorInterface) => {
-      const incomesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
-        new FormArray([]),
+      const incomesFormArray: UntypedFormArray = SimpleInputTableService.attachControlsToFormArray(
+        new UntypedFormArray([]),
         contributor.incomes
       );
 
-      const allowancesFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
-        new FormArray([]),
+      const allowancesFormArray: UntypedFormArray = SimpleInputTableService.attachControlsToFormArray(
+        new UntypedFormArray([]),
         contributor.allowances
       );
 
-      const deductionsFormArray: FormArray = SimpleInputTableService.attachControlsToFormArray(
-        new FormArray([]),
+      const deductionsFormArray: UntypedFormArray = SimpleInputTableService.attachControlsToFormArray(
+        new UntypedFormArray([]),
         contributor.deductions
       );
 
       formArray.push(
-        new FormGroup({
-          [SimpleTableRowControlKey.ID]: new FormControl(contributor.id ?? null),
-          [SimpleTableRowControlKey.Name]: new FormControl(
+        new UntypedFormGroup({
+          [SimpleTableRowControlKey.ID]: new UntypedFormControl(contributor.id ?? null),
+          [SimpleTableRowControlKey.Name]: new UntypedFormControl(
             contributor.name ?? '',
             {validators: [Validators.required]}
           ),

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
 import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 
@@ -17,9 +17,9 @@ export class LogInComponent {
   public readonly Keys: typeof LoginFormKeys = LoginFormKeys
   public readonly DirectPaths = DirectAppPath;
 
-  public formGroup: FormGroup = new FormGroup({
-    [LoginFormKeys.Email]: new FormControl('', {validators: [Validators.required]}),
-    [LoginFormKeys.Password]: new FormControl('', {validators: [Validators.required]})
+  public formGroup: UntypedFormGroup = new UntypedFormGroup({
+    [LoginFormKeys.Email]: new UntypedFormControl('', {validators: [Validators.required]}),
+    [LoginFormKeys.Password]: new UntypedFormControl('', {validators: [Validators.required]})
   })
 
   constructor(private userService: UserService) {

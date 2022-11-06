@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {NestedFormArrayAbstract} from "../../../features/budget/common/nested-form-array.abstract";
 import {SimpleTableRowControlKey} from "../simple-table/common/simple-table-row-control.interface";
 import {SimpleInputTableLabel as DefaultLabels} from "./common/simple-input-table-label.enum";
@@ -17,11 +17,11 @@ export class SimpleInputTableComponent extends NestedFormArrayAbstract {
   @Input() nameColumnLabel: string = DefaultLabels.NameColumn;
   @Input() valueColumnLabel: string = DefaultLabels.ValueColumn;
 
-  protected get newFormGroup(): FormGroup {
-    return new FormGroup({
-      [SimpleTableRowControlKey.ID]: new FormControl(null),
-      [SimpleTableRowControlKey.Name]: new FormControl('', {validators: [Validators.required]}),
-      [SimpleTableRowControlKey.Value]: new FormControl(0, {validators: [Validators.required]})
+  protected get newFormGroup(): UntypedFormGroup {
+    return new UntypedFormGroup({
+      [SimpleTableRowControlKey.ID]: new UntypedFormControl(null),
+      [SimpleTableRowControlKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
+      [SimpleTableRowControlKey.Value]: new UntypedFormControl(0, {validators: [Validators.required]})
     })
   }
 }
