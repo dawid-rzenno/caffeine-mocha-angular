@@ -14,15 +14,13 @@ module.exports = function (config) {
     ],
     client: {
       jasmine: {
-        // you can add configuration options for Jasmine here
-        // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
-        // for example, you can disable the random execution with `random: false`
-        // or set a specific seed with `seed: 4321`
+        // See link for more information
+        // https://jasmine.github.io/api/edge/Configuration.html
       },
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false
     },
     jasmineHtmlReporter: {
-      suppressAll: true // removes the duplicated traces
+      suppressAll: true
     },
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/caffeine-mocha'),
@@ -33,10 +31,10 @@ module.exports = function (config) {
       ]
     },
     reporters: ['progress', 'kjhtml'],
+    reportSlowerThan: 250,
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    autoWatch: true,
     browsers: ['Chrome', 'ChromeHeadlessCI'],
     customLaunchers: {
       ChromeHeadlessCI: {
@@ -44,7 +42,5 @@ module.exports = function (config) {
         flags: ['--no-sandbox', '--disable-gpu']
       }
     },
-    singleRun: false,
-    restartOnFileChange: true
   });
 };
