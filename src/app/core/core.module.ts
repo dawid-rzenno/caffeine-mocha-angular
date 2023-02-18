@@ -4,9 +4,9 @@ import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
 import {AppBarComponent} from "./layout/app-bar/app-bar.component";
-import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
-import {MatMenuModule} from "@angular/material/menu";
-import {MatButtonModule} from "@angular/material/button";
+import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from "@angular/material/legacy-progress-spinner";
+import {MatLegacyMenuModule as MatMenuModule} from "@angular/material/legacy-menu";
+import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
 import {StatusComponent} from './status/status.component';
 import {FontAwesomeIconLibraryModule} from "../libraries/font-awesome-icon-library.module";
 

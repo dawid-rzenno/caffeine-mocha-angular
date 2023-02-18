@@ -7,10 +7,10 @@ import {BudgetGeneralControlComponent} from './budget-general-control/budget-gen
 import {BudgetSummaryComponent} from './budget-summary/budget-summary.component';
 import {BudgetTableComponent} from './budget-table/budget-table.component';
 import {BudgetContributorTileComponent} from './budget-contributor-tile/budget-contributor-tile.component';
-import {MatInputModule} from "@angular/material/input";
-import {MatButtonModule} from "@angular/material/button";
+import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
+import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
 import {MatExpansionModule} from "@angular/material/expansion";
-import {MatCardModule} from "@angular/material/card";
+import {MatLegacyCardModule as MatCardModule} from "@angular/material/legacy-card";
 import {MatStepperModule} from "@angular/material/stepper";
 import {SimpleTableModule} from "../../common/components/simple-table/simple-table.module";
 import {SimpleInputTableModule} from "../../common/components/simple-input-table/simple-input-table.module";
