@@ -4,13 +4,13 @@ import {LogInComponent} from './log-in/log-in.component';
 import {LogOutComponent} from './log-out/log-out.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SignUpComponent} from './sign-up/sign-up.component';
-import {MatLegacyFormFieldModule as MatFormFieldModule} from "@angular/material/legacy-form-field";
+import {MatFormFieldModule} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
-import {MatLegacyInputModule as MatInputModule} from "@angular/material/legacy-input";
-import {MatLegacyCardModule as MatCardModule} from "@angular/material/legacy-card";
-import {MatLegacyButtonModule as MatButtonModule} from "@angular/material/legacy-button";
+import {MatInputModule} from "@angular/material/input";
+import {MatCardModule} from "@angular/material/card";
+import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
-import {MatLegacyProgressSpinnerModule as MatProgressSpinnerModule} from "@angular/material/legacy-progress-spinner";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 const routes: Routes = [
   {

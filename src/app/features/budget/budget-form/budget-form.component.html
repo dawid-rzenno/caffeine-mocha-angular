@@ -5,7 +5,7 @@
   <mat-stepper #MatStepperComponent [linear]="true">
 
     <mat-step [stepControl]="detailsFormGroup" label="Budget details">
-      <mat-card class="mat-card">
+      <mat-card appearance="outlined" class="mat-card">
         <mat-card-title>Budget's details</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
@@ -24,7 +24,7 @@
     </mat-step>
 
     <mat-step [stepControl]="outcomesFormArray" label="Outcomes">
-      <mat-card class="mat-card">
+      <mat-card appearance="outlined" class="mat-card">
         <mat-card-title>Outcomes</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
@@ -42,7 +42,7 @@
     </mat-step>
 
     <mat-step [stepControl]="contributorsFormArray" label="Contributors">
-      <mat-card class="mat-card">
+      <mat-card appearance="outlined" class="mat-card">
         <mat-card-title>Contributors</mat-card-title>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
@@ -60,7 +60,7 @@
 
     <mat-step label="Summary">
       <ng-template matStepContent>
-        <mat-card class="mat-card">
+        <mat-card appearance="outlined" class="mat-card">
           <mat-card-title>Summary</mat-card-title>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
           <mat-card-content class="form-fields-container">
@@ -68,7 +68,9 @@
           </mat-card-content>
           <mat-card-actions class="mat-card-actions">
             <button (click)="MatStepperComponent.reset()" color="warn" mat-button>Reset</button>
-            <button (click)="onSave()" [disabled]="statusService.isProcessed$(StatusMapKey.BudgetForm) | async" color="primary" mat-button>Save</button>
+            <button (click)="onSave()" [disabled]="statusService.isProcessed$(StatusMapKey.BudgetForm) | async"
+                    color="primary" mat-button>Save
+            </button>
           </mat-card-actions>
         </mat-card>
       </ng-template>
