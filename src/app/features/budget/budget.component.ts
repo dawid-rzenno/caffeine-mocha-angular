@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'mocha-budget',
-  templateUrl: './budget.component.html',
-  styleUrls: ['./budget.component.scss']
+  templateUrl: './budget.component.html'
 })
 export class BudgetComponent {}
