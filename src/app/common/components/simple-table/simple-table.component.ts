@@ -9,11 +9,11 @@ import {SimpleTableRowControlKey} from "./common/simple-table-row-control.interf
   styleUrls: ['./simple-table.component.scss']
 })
 export class SimpleTableComponent extends TableComponentAbstract<SimpleTableRowInterface, typeof SimpleTableRowControlKey, SimpleTableRowControlKey> {
-  public readonly ColumnKeys = SimpleTableRowControlKey;
+  public readonly ColumnKey = SimpleTableRowControlKey;
   public readonly DisplayedColumnKeys = [
-    this.ColumnKeys.ID,
-    this.ColumnKeys.Name,
-    this.ColumnKeys.Value
+    this.ColumnKey.ID,
+    this.ColumnKey.Name,
+    this.ColumnKey.Value
   ];
 
   @Input() public override dataSource: SimpleTableRowInterface[] = [];

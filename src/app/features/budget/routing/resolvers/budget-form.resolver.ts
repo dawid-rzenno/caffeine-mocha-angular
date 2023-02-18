@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs';
 import {UntypedFormGroup} from "@angular/forms";
 import {BudgetFormService} from "../../budget-form/budget-form.service";
-import {AppPathParams} from "../../../../common/constants/app-path.enum";
+import {PathParam} from "../../../../common/constants/path-param.enum";
 
 @Injectable()
 export class BudgetFormResolver implements Resolve<Observable<UntypedFormGroup> | UntypedFormGroup> {
@@ -11,7 +11,7 @@ export class BudgetFormResolver implements Resolve<Observable<UntypedFormGroup> 
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UntypedFormGroup> | UntypedFormGroup {
-    const id: string | null = route.paramMap.get(AppPathParams.ID);
+    const id: string | null = route.paramMap.get(PathParam.ID);
     return id ? this.service.getFormGroup$(id) : this.service.getFormGroup();
   }
 }

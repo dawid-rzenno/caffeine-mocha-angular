@@ -1,28 +1,9 @@
 import {Component} from '@angular/core';
-import {
-  AbstractControl,
-  UntypedFormControl,
-  UntypedFormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators
-} from "@angular/forms";
+import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
-import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
-
-export enum SignUpFormKeys {
-  Email = 'email',
-  Password = 'password',
-  PasswordConfirmation = 'passwordConfirmation'
-}
-
-export function controlValueMatches(controlA: UntypedFormControl): ValidatorFn {
-  return (controlB: AbstractControl): ValidationErrors | null => {
-    const valueA = JSON.stringify(controlA.value)
-    const valueB = JSON.stringify(controlB.value)
-    return valueA === valueB ? null : {valuesDifferent: true};
-  }
-}
+import {USER_DIRECT_ROUTE} from "../../../common/constants/direct-route.const";
+import {controlValueMatches} from "./control-value-matches.function";
+import {SignUpFormKey} from "./sign-up-form-key.enum";
 
 @Component({
   selector: 'mocha-sign-up',
@@ -30,8 +11,8 @@ export function controlValueMatches(controlA: UntypedFormControl): ValidatorFn {
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  public readonly Keys: typeof SignUpFormKeys = SignUpFormKeys;
-  public readonly DirectPaths = DirectAppPath;
+  public readonly Key: typeof SignUpFormKey = SignUpFormKey;
+  public readonly UserDirectRoute = USER_DIRECT_ROUTE;
 
   public formGroup: UntypedFormGroup = SignUpComponent.getFormGroup();
 
@@ -40,13 +21,13 @@ export class SignUpComponent {
 
   private static getFormGroup(): UntypedFormGroup {
     const formGroup: UntypedFormGroup = new UntypedFormGroup({
-      [SignUpFormKeys.Email]: new UntypedFormControl('', {validators: [Validators.required, Validators.email]}),
-      [SignUpFormKeys.Password]: new UntypedFormControl('', {validators: [Validators.required]}),
-      [SignUpFormKeys.PasswordConfirmation]: new UntypedFormControl('', {validators: [Validators.required]})
+      [SignUpFormKey.Email]: new UntypedFormControl('', {validators: [Validators.required, Validators.email]}),
+      [SignUpFormKey.Password]: new UntypedFormControl('', {validators: [Validators.required]}),
+      [SignUpFormKey.PasswordConfirmation]: new UntypedFormControl('', {validators: [Validators.required]})
     });
 
-    const passwordControl: UntypedFormControl = formGroup.get(SignUpFormKeys.Password) as UntypedFormControl;
-    const passwordConfirmationControl: UntypedFormControl = formGroup.get(SignUpFormKeys.PasswordConfirmation) as UntypedFormControl;
+    const passwordControl: UntypedFormControl = formGroup.get(SignUpFormKey.Password) as UntypedFormControl;
+    const passwordConfirmationControl: UntypedFormControl = formGroup.get(SignUpFormKey.PasswordConfirmation) as UntypedFormControl;
 
     if (passwordControl && passwordConfirmationControl) {
       passwordConfirmationControl.addValidators(

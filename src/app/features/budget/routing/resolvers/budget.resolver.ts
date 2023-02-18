@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs';
 import {BudgetInterface} from "../../budget-form/common/budget.interface";
 import {BudgetService} from "../../budget.service";
-import {AppPathParams} from "../../../../common/constants/app-path.enum";
+import {PathParam} from "../../../../common/constants/path-param.enum";
 
 @Injectable()
 export class BudgetResolver implements Resolve<Observable<BudgetInterface> | null> {
@@ -11,7 +11,7 @@ export class BudgetResolver implements Resolve<Observable<BudgetInterface> | nul
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BudgetInterface> | null {
-    const id: string | null = route.paramMap.get(AppPathParams.ID);
+    const id: string | null = route.paramMap.get(PathParam.ID);
     return id ? this.service.get(id) : null;
   }
 }

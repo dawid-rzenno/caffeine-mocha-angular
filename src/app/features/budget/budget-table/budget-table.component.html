@@ -1,34 +1,34 @@
-<h1>{{ header }}</h1>
+<h1>{{ RouteDataHeader.All }}</h1>
 
 <mat-card>
   <mat-card-content>
     <table [dataSource]="dataSource" class="mat-elevation-z0 w-100" mat-table>
 
-      <ng-container [matColumnDef]="ColumnKeys.Name">
+      <ng-container [matColumnDef]="ColumnKey.Name">
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.Name}} </th>
-        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.Name]}} </td>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKey.Name]}} </td>
       </ng-container>
 
-      <ng-container [matColumnDef]="ColumnKeys.TotalOutcomeValue">
+      <ng-container [matColumnDef]="ColumnKey.TotalOutcomeValue">
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.TotalOutcomeValue}} </th>
-        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.TotalOutcomeValue] | currency: ' '}} </td>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKey.TotalOutcomeValue] | currency: ' '}} </td>
       </ng-container>
 
-      <ng-container [matColumnDef]="ColumnKeys.TotalIncomeValue">
+      <ng-container [matColumnDef]="ColumnKey.TotalIncomeValue">
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.TotalIncomeValue}} </th>
-        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.TotalIncomeValue] | currency: ' '}} </td>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKey.TotalIncomeValue] | currency: ' '}} </td>
       </ng-container>
 
-      <ng-container [matColumnDef]="ColumnKeys.ContributorsCount">
+      <ng-container [matColumnDef]="ColumnKey.ContributorsCount">
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.ContributorsCount}} </th>
-        <td *matCellDef="let element" mat-cell> {{element[ColumnKeys.ContributorsCount]}} </td>
+        <td *matCellDef="let element" mat-cell> {{element[ColumnKey.ContributorsCount]}} </td>
       </ng-container>
 
-      <ng-container [matColumnDef]="ColumnKeys.Actions">
+      <ng-container [matColumnDef]="ColumnKey.Actions">
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.Actions}}</th>
         <td *matCellDef="let element" mat-cell>
           <button
-            [routerLink]="DirectPaths.InspectBudget(element[ColumnKeys.ID])"
+            [routerLink]="DirectPath.InspectBudget(element[ColumnKey.ID])"
             class="mr-2"
             color="primary"
             mat-stroked-button
@@ -36,7 +36,7 @@
             {{ActionLabels.Inspect}}
           </button>
           <button
-            [routerLink]="DirectPaths.EditBudget(element[ColumnKeys.ID])"
+            [routerLink]="DirectPath.EditBudget(element[ColumnKey.ID])"
             class="mr-2"
             mat-stroked-button
           >
@@ -52,7 +52,7 @@
       <tr *matRowDef="let row; columns: DisplayedColumnKeys;" mat-row></tr>
     </table>
 
-    <button class="create-budget-button mt-3" color="primary" mat-button [routerLink]="DirectPaths.CreateBudget">
+    <button [routerLink]="DirectPath.CreateBudget" class="create-budget-button mt-3" color="primary" mat-button>
       + {{ActionLabels.CreateBudget}}
     </button>
 

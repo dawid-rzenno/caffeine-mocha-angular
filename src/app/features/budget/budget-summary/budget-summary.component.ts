@@ -5,7 +5,7 @@ import {
 } from "../budget-contributors-control/common/budget-contributor-control.interface";
 import {ActivatedRoute} from "@angular/router";
 import {BudgetContributorTileInterface} from "../budget-contributor-tile/common/budget-contributor-tile.interface";
-import {RouteDataHeader} from "../../../common/constants/route-data-header.enum";
+import {BudgetHeader} from "../common/route-data-header.enum";
 import {
   SimpleTableRowControlInterface
 } from "../../../common/components/simple-table/common/simple-table-row-control.interface";
@@ -17,7 +17,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BudgetSummaryComponent implements OnInit {
-  public header: string = RouteDataHeader.InspectBudget
+  public readonly BudgetHeader = BudgetHeader;
   public budgetName: string = ''
   public contributorTiles: BudgetContributorTileInterface[] = [];
   public totalBudgetOutcome: number = 0;
@@ -49,7 +49,6 @@ export class BudgetSummaryComponent implements OnInit {
 
   public ngOnInit() {
     this.route.data.subscribe(data => {
-      this.header = data['header'];
       this.budget = data['budget'];
     })
   }

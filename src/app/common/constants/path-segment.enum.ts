@@ -1,4 +1,4 @@
-export enum AppPathElement {
+export enum PathSegment {
   Home = 'home',
   Budget = 'budget',
   User = 'user',
@@ -9,8 +9,4 @@ export enum AppPathElement {
   Inspect = 'inspect',
   Edit = 'edit',
   All = 'all',
-}
-
-export enum AppPathParams {
-  ID = 'id'
 }

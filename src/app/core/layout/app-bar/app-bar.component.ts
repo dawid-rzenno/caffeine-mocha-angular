@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import {APP_BAR_ITEMS} from "./app-bar";
-import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
+import {Component} from '@angular/core';
+import {APP_BAR_ITEMS} from "./app-bar-items.const";
+import {DIRECT_ROUTE} from "../../../common/constants/direct-route.const";
 
 @Component({
   selector: 'mocha-app-bar',
@@ -9,5 +9,5 @@ import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
 })
 export class AppBarComponent {
   public readonly AppBarItems = APP_BAR_ITEMS;
-  public readonly DirectPaths = DirectAppPath;
+  public readonly DirectPath = DIRECT_ROUTE;
 }

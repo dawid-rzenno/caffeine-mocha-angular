@@ -9,7 +9,7 @@
       <mat-label>Contributor name</mat-label>
       <input
         (focus)="onContributorNameInputFocus(incomesPanel, form.get(ControlKey.Name))"
-        formControlName="{{ControlKey.Name}}"
+        [formControlName]="ControlKey.Name"
         type="text"
         matInput
       />

@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
-import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
+import {USER_DIRECT_ROUTE} from "../../../common/constants/direct-route.const";
 
-export enum LoginFormKeys {
+export enum LoginFormKey {
   Email = 'email',
   Password = 'password'
 }
@@ -14,12 +14,12 @@ export enum LoginFormKeys {
   styleUrls: ['./log-in.component.scss']
 })
 export class LogInComponent {
-  public readonly Keys: typeof LoginFormKeys = LoginFormKeys
-  public readonly DirectPaths = DirectAppPath;
+  public readonly Key: typeof LoginFormKey = LoginFormKey
+  public readonly DirectPath = USER_DIRECT_ROUTE;
 
   public formGroup: UntypedFormGroup = new UntypedFormGroup({
-    [LoginFormKeys.Email]: new UntypedFormControl('', {validators: [Validators.required]}),
-    [LoginFormKeys.Password]: new UntypedFormControl('', {validators: [Validators.required]})
+    [LoginFormKey.Email]: new UntypedFormControl('', {validators: [Validators.required]}),
+    [LoginFormKey.Password]: new UntypedFormControl('', {validators: [Validators.required]})
   })
 
   constructor(private userService: UserService) {

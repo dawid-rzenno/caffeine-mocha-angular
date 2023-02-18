@@ -5,11 +5,10 @@ import {TableComponentAbstract} from "../../../common/abstracts/table-component.
 import {ActionLabel} from 'src/app/common/constants/action-label.enum';
 import {BudgetActionLabel, BudgetColumnLabel} from "../budget-form/common/budget-label.enum";
 import {BudgetInterface} from "../budget-form/common/budget.interface";
-import {DirectAppPath} from "../../../common/constants/direct-app-path.const";
+import {BUDGET_DIRECT_ROUTE} from "../../../common/constants/direct-route.const";
 import {BudgetContributorInterface} from "../budget-contributors-control/common/budget-contributor.interface";
-import {
-  SimpleTableRowInterface
-} from "../../../common/components/simple-table/common/simple-table-row.interface";
+import {SimpleTableRowInterface} from "../../../common/components/simple-table/common/simple-table-row.interface";
+import {BudgetHeader} from "../common/route-data-header.enum";
 
 @Component({
   selector: 'mocha-budget-table',
@@ -18,9 +17,10 @@ import {
 })
 export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRowInterface, typeof BudgetTableRowKey, BudgetTableRowKey> implements OnInit {
   public readonly ActionLabels = {...ActionLabel, ...BudgetActionLabel};
+  public readonly RouteDataHeader = BudgetHeader;
   public readonly ColumnLabels = BudgetColumnLabel;
-  public readonly DirectPaths = DirectAppPath;
-  public readonly ColumnKeys = BudgetTableRowKey;
+  public readonly DirectPath = BUDGET_DIRECT_ROUTE;
+  public readonly ColumnKey = BudgetTableRowKey;
   public readonly DisplayedColumnKeys = [
     BudgetTableRowKey.Name,
     BudgetTableRowKey.TotalOutcomeValue,
@@ -37,7 +37,6 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
 
   public ngOnInit() {
     this.route.data.subscribe(data => {
-      this.header = data['header'] ? data['header'] : '';
       this.dataSource = data['budgets'] ? BudgetTableComponent.createDataSource(data['budgets']) : [];
     })
   }
