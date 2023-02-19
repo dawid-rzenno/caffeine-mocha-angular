@@ -1,6 +1,6 @@
 import {FaIconLibrary, FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {NgModule} from "@angular/core";
-import {faUserAstronaut} from "@fortawesome/free-solid-svg-icons";
+import {faCaretDown, faMugHot, faUserAstronaut} from "@fortawesome/free-solid-svg-icons";
 
 @NgModule({
   imports: [FontAwesomeModule],
@@ -9,7 +9,9 @@ import {faUserAstronaut} from "@fortawesome/free-solid-svg-icons";
 export class FontAwesomeIconLibraryModule {
   constructor(library: FaIconLibrary) {
     library.addIcons(
-      faUserAstronaut
+      faUserAstronaut,
+      faCaretDown,
+      faMugHot
     );
   }
 }

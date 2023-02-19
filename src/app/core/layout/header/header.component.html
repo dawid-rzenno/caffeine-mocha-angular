@@ -1,23 +1,28 @@
-<nav class="p-1">
-  <button [routerLink]="DirectRoute[DirectRouteKey.Home]" mat-button>Mocha</button>
+<nav class="nav">
+  <a [routerLink]="DirectRoute[DirectRouteKey.Home]" class="link">
+    <fa-icon [icon]="['fas', 'mug-hot']"></fa-icon>
+    &nbsp; Mocha v1.0
+  </a>
 
-  <ng-container *ngFor="let appBarItem of Items">
-    <ng-container *ngIf="appBarItem.routerLink; then element; else container"></ng-container>
+  <ng-container *ngFor="let item of Items">
+    <a *ngIf="item.routerLink; else routerLinkMenu" [routerLink]="item.routerLink" class="link">
+      {{item.label}}
+    </a>
 
-    <ng-template #element>
-      <button [routerLink]="appBarItem.routerLink" mat-button>{{appBarItem.label}}</button>
-    </ng-template>
-
-    <ng-template #container>
-      <button [matMenuTriggerFor]="menu" mat-button>{{appBarItem.label}}</button>
+    <ng-template #routerLinkMenu>
+      <a [matMenuTriggerFor]="menu" class="link">
+        <fa-icon [icon]="['fas', 'caret-down']"></fa-icon> &nbsp;
+        {{item.label}}
+      </a>
       <mat-menu #menu="matMenu">
-        <button
-          *ngFor="let innerAppBarItem of appBarItem.items"
+        <a
+          *ngFor="let innerAppBarItem of item.links"
           [routerLink]="innerAppBarItem.routerLink"
+          class="menu-link"
           mat-menu-item
         >
           {{innerAppBarItem.label}}
-        </button>
+        </a>
       </mat-menu>
     </ng-template>
 
