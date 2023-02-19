@@ -1,7 +1,7 @@
 <nav class="p-1">
-  <button [routerLink]="DirectPath.Home" mat-button>Mocha</button>
+  <button [routerLink]="DirectRoute[DirectRouteKey.Home]" mat-button>Mocha</button>
 
-  <ng-container *ngFor="let appBarItem of AppBarItems">
+  <ng-container *ngFor="let appBarItem of Items">
     <ng-container *ngIf="appBarItem.routerLink; then element; else container"></ng-container>
 
     <ng-template #element>

@@ -3,12 +3,14 @@ import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {HomeComponent} from "./home/home.component";
 import {NotFoundComponent} from "./not-found/not-found.component";
-import {AppBarComponent} from "./layout/app-bar/app-bar.component";
+import {HeaderComponent} from "./layout/header/header.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
 import {StatusComponent} from './status/status.component';
-import {FontAwesomeIconLibraryModule} from "../libraries/font-awesome-icon-library.module";
+import {FontAwesomeIconLibraryModule} from "./libraries/font-awesome-icon-library.module";
+import {FooterComponent} from './layout/footer/footer.component';
+import {MainComponent} from './layout/main/main.component';
 
 const HOME_PATH = 'home';
 
@@ -38,7 +40,7 @@ export const ERROR_ROUTES: Routes = [
 ]
 
 const DECLARATIONS = [
-  AppBarComponent,
+  HeaderComponent,
 ];
 
 const IMPORTS = [
@@ -57,7 +59,9 @@ const IMPORTS = [
     HomeComponent,
     NotFoundComponent,
     StatusComponent,
-    ...DECLARATIONS
+    ...DECLARATIONS,
+    FooterComponent,
+    MainComponent
   ],
   imports: [
     ...IMPORTS,
@@ -66,7 +70,10 @@ const IMPORTS = [
   exports: [
     ...IMPORTS,
     RouterModule,
-    ...DECLARATIONS
+    ...DECLARATIONS,
+    FooterComponent,
+    MainComponent
   ]
 })
-export class CoreModule {}
+export class CoreModule {
+}

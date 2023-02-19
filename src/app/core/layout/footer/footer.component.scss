@@ -1,0 +1,15 @@
+@import 'src/assets/theme';
+
+.text-content {
+  height: 100%;
+  padding-left: 0.75rem;
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  background: $primary;
+  color: $text-on-primary;
+}
+
+.text-content__link {
+  color: $link-on-primary;
+}

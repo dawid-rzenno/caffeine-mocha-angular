@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {UserService} from "../user.service";
-import {USER_DIRECT_ROUTE} from "../../../common/constants/direct-route.const";
+import {USER_DIRECT_ROUTE, UserDirectRouteKey} from "../../common/constants/user-direct-route.const";
 import {controlValueMatches} from "./control-value-matches.function";
 import {SignUpFormKey} from "./sign-up-form-key.enum";
 
@@ -11,8 +11,9 @@ import {SignUpFormKey} from "./sign-up-form-key.enum";
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  public readonly Key: typeof SignUpFormKey = SignUpFormKey;
+  public readonly FormKey: typeof SignUpFormKey = SignUpFormKey;
   public readonly UserDirectRoute = USER_DIRECT_ROUTE;
+  public readonly UserDirectRouteKey = UserDirectRouteKey;
 
   public formGroup: UntypedFormGroup = SignUpComponent.getFormGroup();
 

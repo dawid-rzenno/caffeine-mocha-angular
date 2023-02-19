@@ -1,8 +1,21 @@
-.router-outlet-container {
-  height: calc(100% - 52px);
-  padding: 2rem;
+@import "core/layout/layout-variables";
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
-.app-bar-container {
-  height: 52px;
+.header {
+  height: $header-height;
+}
+
+.main {
+  height: $main-height;
+  overflow-y: auto;
+}
+
+.footer {
+  height: $footer-height;
 }

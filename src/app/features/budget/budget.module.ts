@@ -14,7 +14,7 @@ import {MatCardModule} from "@angular/material/card";
 import {MatStepperModule} from "@angular/material/stepper";
 import {SimpleTableModule} from "../../common/components/simple-table/simple-table.module";
 import {SimpleInputTableModule} from "../../common/components/simple-input-table/simple-input-table.module";
-import {FontAwesomeIconLibraryModule} from "../../libraries/font-awesome-icon-library.module";
+import {FontAwesomeIconLibraryModule} from "../../core/libraries/font-awesome-icon-library.module";
 import {BudgetFormService} from "./budget-form/budget-form.service";
 import {BackButtonModule} from "../../common/directives/back-button/back-button.module";
 import {BudgetRoutingModule} from "./routing/budget-routing.module";

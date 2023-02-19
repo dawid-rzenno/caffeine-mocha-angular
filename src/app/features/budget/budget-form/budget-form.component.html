@@ -5,8 +5,8 @@
   <mat-stepper #MatStepperComponent [linear]="true">
 
     <mat-step [stepControl]="detailsFormGroup" label="Budget details">
-      <mat-card appearance="outlined" class="mat-card">
-        <mat-card-title>Budget's details</mat-card-title>
+      <mat-card class="mat-card">
+        <mat-card-header class="step-card-header">Enter budget details</mat-card-header>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
           <mocha-budget-general-control
@@ -24,8 +24,8 @@
     </mat-step>
 
     <mat-step [stepControl]="outcomesFormArray" label="Outcomes">
-      <mat-card appearance="outlined" class="mat-card">
-        <mat-card-title>Outcomes</mat-card-title>
+      <mat-card class="mat-card">
+        <mat-card-header class="step-card-header">Enter budget outcomes</mat-card-header>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
           <mocha-simple-input-table
@@ -42,8 +42,8 @@
     </mat-step>
 
     <mat-step [stepControl]="contributorsFormArray" label="Contributors">
-      <mat-card appearance="outlined" class="mat-card">
-        <mat-card-title>Contributors</mat-card-title>
+      <mat-card class="mat-card">
+        <mat-card-header class="step-card-header">Add budget contributors</mat-card-header>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content class="form-fields-container">
           <mocha-budget-contributors-control
@@ -60,8 +60,8 @@
 
     <mat-step label="Summary">
       <ng-template matStepContent>
-        <mat-card appearance="outlined" class="mat-card">
-          <mat-card-title>Summary</mat-card-title>
+        <mat-card class="mat-card">
+          <mat-card-header class="step-card-header">Summary</mat-card-header>
           <mat-card-subtitle>&nbsp;</mat-card-subtitle>
           <mat-card-content class="form-fields-container">
             <mocha-budget-summary [budget]="formGroup.getRawValue()" [hideHeader]="true"></mocha-budget-summary>

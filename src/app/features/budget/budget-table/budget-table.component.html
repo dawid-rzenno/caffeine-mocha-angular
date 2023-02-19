@@ -1,6 +1,6 @@
-<h1>{{ RouteDataHeader.All }}</h1>
+<h1>{{ BudgetHeader.All }}</h1>
 
-<mat-card appearance="outlined">
+<mat-card>
   <mat-card-content>
     <table [dataSource]="dataSource" class="mat-elevation-z0 w-100" mat-table>
 
@@ -28,7 +28,7 @@
         <th *matHeaderCellDef mat-header-cell> {{ColumnLabels.Actions}}</th>
         <td *matCellDef="let element" mat-cell>
           <button
-            [routerLink]="DirectPath.InspectBudget(element[ColumnKey.ID])"
+            [routerLink]="BudgetDirectRoute[BudgetDirectRouteKey.InspectBudget](element[ColumnKey.ID])"
             class="mr-2"
             color="primary"
             mat-stroked-button
@@ -36,7 +36,7 @@
             {{ActionLabels.Inspect}}
           </button>
           <button
-            [routerLink]="DirectPath.EditBudget(element[ColumnKey.ID])"
+            [routerLink]="BudgetDirectRoute[BudgetDirectRouteKey.EditBudget](element[ColumnKey.ID])"
             class="mr-2"
             mat-stroked-button
           >
@@ -52,7 +52,8 @@
       <tr *matRowDef="let row; columns: DisplayedColumnKeys;" mat-row></tr>
     </table>
 
-    <button [routerLink]="DirectPath.CreateBudget" class="create-budget-button mt-3" color="primary" mat-button>
+    <button [routerLink]="BudgetDirectRoute[BudgetDirectRouteKey.CreateBudget]" class="create-budget-button mt-3"
+            color="primary" mat-button>
       + {{ActionLabels.CreateBudget}}
     </button>
 
