@@ -1,23 +1,14 @@
-<div>
-  <h1>Welcome to Mocha!</h1>
-  <hr>
-  <h2>I want to know how much do I have to pay</h2>
-
-  <h4>I. Create Budget by defining:</h4>
-  <ol>
-    <li>Name</li>
-    <li>Outcomes</li>
-  </ol>
-
-  <h4>II. Add existing Contributors or create a new one by defining their:</h4>
-
-  <ol>
-    <li>Name</li>
-    <li>Incomes</li>
-    <li>Allowances</li>
-    <li>Deductions</li>
-  </ol>
-
-  <h4>III. View Contributions.</h4>
-
+<div class="welcome-message">
+  <div class="welcome-message__content">
+    <div class="content__icon">
+      <fa-icon [icon]="['fas', 'hand-holding-dollar']"></fa-icon>
+    </div>
+    <h1 class="content__header">Welcome!</h1>
+    <p class="content__description">Mocha is a budget manager app for people living together.</p>
+    <button [routerLink]="BudgetDirectRoute[BudgetDirectRouteKey.CreateBudget]" color="primary" mat-raised-button
+            type="button">
+      <fa-icon [icon]="['fas', 'plus']" size="xs"></fa-icon>
+      Create a new budget
+    </button>
+  </div>
 </div>
