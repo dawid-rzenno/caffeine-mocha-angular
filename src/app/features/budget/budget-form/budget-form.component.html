@@ -68,9 +68,7 @@
           </mat-card-content>
           <mat-card-actions class="mat-card-actions">
             <button (click)="MatStepperComponent.reset()" color="warn" mat-button>Reset</button>
-            <button (click)="onSave()" [disabled]="statusService.isProcessed$(StatusMapKey.BudgetForm) | async"
-                    color="primary" mat-button>Save
-            </button>
+            <button (click)="onSave()" color="primary" mat-button>Save</button>
           </mat-card-actions>
         </mat-card>
       </ng-template>

@@ -1,5 +1,19 @@
-.router-outlet-container {
+.content {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.content__router-outlet {
   height: 100%;
   width: 100%;
   padding: 1rem;
+  background: whitesmoke;
+}
+
+.content__status {
+  z-index: 1000;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
 }

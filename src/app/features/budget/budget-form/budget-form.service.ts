@@ -1,25 +1,21 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {finalize, map, Observable, takeUntil} from "rxjs";
+import {map, Observable, takeUntil} from "rxjs";
 import {BudgetInterface} from "./common/budget.interface";
 import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
 import {BudgetControlInterface, BudgetControlKey} from "./common/budget-control.interface";
 import {BudgetService} from "../budget.service";
-import {StatusService} from "../../../core/status/status.service";
-import {StatusMapKey} from "../../../core/status/common/status-map-key.enum";
 import {BudgetGeneralControlService} from "../budget-general-control/budget-general-control.service";
 import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
 import {BudgetContributorsControlService} from "../budget-contributors-control/budget-contributors-control.service";
 
 @Injectable()
 export class BudgetFormService {
-  constructor(private service: BudgetService, private loadingService: StatusService) {
+  constructor(private service: BudgetService) {
   }
 
   getFormGroup$(budgetId: string): Observable<UntypedFormGroup> {
-    this.loadingService.toggleStatus(StatusMapKey.BudgetForm, true);
     return this.service.get(budgetId).pipe(
-      map((budget: BudgetInterface) => this.getFormGroup(budget)),
-      finalize(() => this.loadingService.toggleStatus(StatusMapKey.BudgetForm, false))
+      map((budget: BudgetInterface) => this.getFormGroup(budget))
     )
   }
 
@@ -49,10 +45,8 @@ export class BudgetFormService {
   }
 
   submitFormGroup$(formGroup: UntypedFormGroup, takeUntil$: EventEmitter<void>): Observable<BudgetControlInterface> {
-    this.loadingService.toggleStatus(StatusMapKey.BudgetForm, true);
     return this.service.create(formGroup.getRawValue() as BudgetControlInterface).pipe(
       takeUntil(takeUntil$),
-      finalize(() => this.loadingService.toggleStatus(StatusMapKey.BudgetForm, false))
     );
   }
 }

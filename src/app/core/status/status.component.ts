@@ -1,4 +1,6 @@
 import {Component} from '@angular/core';
+import {StatusService, StatusWithId} from "./status.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'mocha-status',
@@ -6,4 +8,12 @@ import {Component} from '@angular/core';
   styleUrls: ['./status.component.scss']
 })
 export class StatusComponent {
+  readonly statuses$: Observable<StatusWithId[]> = this.statusService.statuses$;
+
+  constructor(private statusService: StatusService) {
+  }
+
+  close(statusId: number): void {
+    this.statusService.closeStatusWithId(statusId);
+  }
 }
