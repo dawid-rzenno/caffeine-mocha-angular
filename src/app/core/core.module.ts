@@ -7,73 +7,60 @@ import {HeaderComponent} from "./layout/header/header.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from "@angular/material/button";
-import {StatusComponent} from './status/status.component';
 import {FontAwesomeIconLibraryModule} from "./libraries/font-awesome-icon-library.module";
 import {FooterComponent} from './layout/footer/footer.component';
 import {MainComponent} from './layout/main/main.component';
+import {AuthModule} from "./auth/auth.module";
+import {PathSegment} from "../common/constants/path-segment.enum";
+import {StatusModule} from "./status/status.module";
 
-const HOME_PATH = 'home';
-
-// Used in AppModule
-export const CORE_ROUTES: Routes = [
-  {
-    path: 'user',
-    loadChildren: () => import('./user/user.module').then(m => m.UserModule)
-  },
-  {
-    path: HOME_PATH,
-    component: HomeComponent
-  },
-  {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: `/${HOME_PATH}`
-  },
+const EXPORTED_DECLARATIONS = [
+  HeaderComponent,
+  FooterComponent,
+  MainComponent
 ];
 
-// Used in AppModule
-export const ERROR_ROUTES: Routes = [
-  {
-    path: '**',
-    component: NotFoundComponent
-  },
-]
-
 const DECLARATIONS = [
-  HeaderComponent,
+  ...EXPORTED_DECLARATIONS,
+  HomeComponent,
+  NotFoundComponent,
 ];
 
 const IMPORTS = [
-  // ANGULAR CORE
+  // ANGULAR
   CommonModule,
+  RouterModule,
   // MATERIAL
   MatProgressSpinnerModule,
   MatMenuModule,
   MatButtonModule,
   // FONTAWESOME
   FontAwesomeIconLibraryModule,
-]
+  // CORE
+  AuthModule,
+  StatusModule
+];
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    NotFoundComponent,
-    StatusComponent,
-    ...DECLARATIONS,
-    FooterComponent,
-    MainComponent
-  ],
-  imports: [
-    ...IMPORTS,
-    RouterModule,
-  ],
-  exports: [
-    ...IMPORTS,
-    RouterModule,
-    ...DECLARATIONS,
-    FooterComponent,
-    MainComponent
-  ]
+  declarations: DECLARATIONS,
+  imports: IMPORTS,
+  exports: EXPORTED_DECLARATIONS
 })
 export class CoreModule {
+  static readonly routes: Routes = [
+    {
+      path: PathSegment.Home,
+      component: HomeComponent
+    },
+    ...AuthModule.routes,
+    {
+      path: '',
+      pathMatch: 'full',
+      redirectTo: `/${PathSegment.Home}`
+    },
+    {
+      path: '**',
+      component: NotFoundComponent
+    },
+  ];
 }

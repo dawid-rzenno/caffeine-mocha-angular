@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {UserService} from "../user.service";
+import {AuthService} from "../auth.service";
 import {USER_DIRECT_ROUTE, UserDirectRouteKey} from "../../common/constants/user-direct-route.const";
-import {controlValueMatches} from "./control-value-matches.function";
-import {SignUpFormKey} from "./sign-up-form-key.enum";
+import {controlValueMatches} from "./common/control-value-matches.function";
+import {SignUpFormKey} from "./common/sign-up-form-key.enum";
 
 @Component({
   selector: 'mocha-sign-up',
@@ -17,7 +17,7 @@ export class SignUpComponent {
 
   public formGroup: UntypedFormGroup = SignUpComponent.getFormGroup();
 
-  constructor(private userService: UserService) {
+  constructor(private userService: AuthService) {
   }
 
   private static getFormGroup(): UntypedFormGroup {

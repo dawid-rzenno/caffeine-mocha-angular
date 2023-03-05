@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {UserService} from "../user.service";
+import {AuthService} from "../auth.service";
 import {USER_DIRECT_ROUTE, UserDirectRouteKey} from "../../common/constants/user-direct-route.const";
 
 export enum LoginFormKey {
@@ -23,11 +23,11 @@ export class LogInComponent {
     [LoginFormKey.Password]: new UntypedFormControl('', {validators: [Validators.required]})
   })
 
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthService) {
   }
 
   public onSubmit(): void {
-    this.userService.logIn().subscribe()
+    this.authService.logIn().subscribe()
   }
 
 }
