@@ -8,15 +8,15 @@ export class AuthService {
   constructor(private httpClient: HttpClient) {
   }
 
-  logIn(): Observable<any> {
+  signIn$(): Observable<any> {
     return this.httpClient.post('null', null);
   }
 
-  logOut(): Observable<any> {
+  signOut$(): Observable<any> {
     return this.httpClient.post('null', null);
   }
 
-  signUp(): Observable<any> {
+  signUp$(): Observable<any> {
     return this.httpClient.post('null', null);
   }
 

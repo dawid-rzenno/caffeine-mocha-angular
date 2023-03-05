@@ -1,7 +1,6 @@
 <div class="d-flex justify-content-center">
   <mat-card>
-    <mat-card-header>Sign Up</mat-card-header>
-    <mat-card-subtitle>&nbsp;</mat-card-subtitle>
+    <mat-card-title class="p-3">Sign Up</mat-card-title>
     <mat-card-content>
       <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="d-flex flex-column sign-up-form">
         <mat-form-field appearance="fill" class="form-field">
@@ -20,12 +19,21 @@
                  type="password">
         </mat-form-field>
 
-        <button [disabled]="formGroup.invalid" class="sign-up-button" color="primary" type="submit" mat-raised-button>Sign Up</button>
+        <p>
+          <mat-checkbox [formControlName]="FormKey.TosAccepted" [id]="FormKey.TosAccepted"></mat-checkbox>
+          <small class="tos-text"><b>Agree to Terms and Conditions</b></small>
+        </p>
+
+        <button [disabled]="formGroup.invalid" class="sign-up-button" color="primary" type="submit" mat-raised-button>
+          Sign Up
+        </button>
       </form>
     </mat-card-content>
 
-    <mat-card-actions class="text-center">
-      Already have an account? <a [routerLink]="UserDirectRoute[UserDirectRouteKey.UserLogIn]">Log in!</a>
+    <mat-card-actions class="text-center p-3">
+      <span>
+        Already have an account?&nbsp;<a [routerLink]="AuthDirectRoute[AuthDirectRouteKey.AuthSignIn]">Sign in!</a>
+      </span>
     </mat-card-actions>
   </mat-card>
 </div>

@@ -19,6 +19,16 @@ import {BudgetFormService} from "./budget-form/budget-form.service";
 import {BackButtonModule} from "../../common/directives/back-button/back-button.module";
 import {BudgetRoutingModule} from "./routing/budget-routing.module";
 
+const DECLARATIONS = [
+  BudgetComponent,
+  BudgetFormComponent,
+  BudgetGeneralControlComponent,
+  BudgetContributorsControlComponent,
+  BudgetSummaryComponent,
+  BudgetTableComponent,
+  BudgetContributorTileComponent,
+];
+
 const IMPORTS = [
   // SHARED
   SimpleTableModule,
@@ -32,21 +42,13 @@ const IMPORTS = [
   MatExpansionModule,
   // FONTAWESOME
   FontAwesomeIconLibraryModule,
+  // BUDGET
   BudgetRoutingModule
 ];
 
 @NgModule({
-  declarations: [
-    BudgetComponent,
-    BudgetFormComponent,
-    BudgetGeneralControlComponent,
-    BudgetContributorsControlComponent,
-    BudgetSummaryComponent,
-    BudgetTableComponent,
-    BudgetContributorTileComponent,
-  ],
+  declarations: DECLARATIONS,
   imports: IMPORTS,
-  exports: IMPORTS,
   providers: [
     BudgetService,
     BudgetFormService,

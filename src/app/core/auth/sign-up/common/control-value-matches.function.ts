@@ -1,6 +1,6 @@
-import {AbstractControl, UntypedFormControl, ValidationErrors, ValidatorFn} from "@angular/forms";
+import {AbstractControl, FormControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 
-export function controlValueMatches(controlA: UntypedFormControl): ValidatorFn {
+export function controlValueMatches(controlA: FormControl<string | null>): ValidatorFn {
   return (controlB: AbstractControl): ValidationErrors | null => {
     const valueA = JSON.stringify(controlA.value)
     const valueB = JSON.stringify(controlB.value)

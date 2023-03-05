@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LogInComponent} from './log-in/log-in.component';
-import {LogOutComponent} from './log-out/log-out.component';
+import {SignInComponent} from './sign-in/sign-in.component';
+import {SignOutComponent} from './sign-out/sign-out.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -14,10 +14,11 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {AuthService} from "./auth.service";
 import {AuthInterceptor} from "./auth.interceptor";
 import {PathSegment} from "../../common/constants/path-segment.enum";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const DECLARATIONS = [
-  LogInComponent,
-  LogOutComponent,
+  SignInComponent,
+  SignOutComponent,
   SignUpComponent
 ];
 
@@ -37,7 +38,10 @@ const IMPORTS = [
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: IMPORTS,
+  imports: [
+    IMPORTS,
+    MatCheckboxModule
+  ],
   providers: [
     AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
@@ -48,12 +52,12 @@ export class AuthModule {
     path: PathSegment.Auth,
     children: [
       {
-        path: PathSegment.LogIn,
-        component: LogInComponent
+        path: PathSegment.SignIn,
+        component: SignInComponent
       },
       {
-        path: PathSegment.LogOut,
-        component: LogOutComponent
+        path: PathSegment.SignOut,
+        component: SignOutComponent
       },
       {
         path: PathSegment.SignUp,
