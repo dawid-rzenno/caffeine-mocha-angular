@@ -10,6 +10,7 @@
       <fa-icon [icon]="['fas', status.icon]"></fa-icon>
     </div>
     <span class="message__text">{{status.message}}</span>
+    <span>{{status.timer | async}}</span>
   </div>
   <button (click)="close(status.id)" class="content__close-button" type="button">
     <fa-icon [icon]="['fas', 'close']" class="close-button__icon"></fa-icon>

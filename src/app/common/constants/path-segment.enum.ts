@@ -1,7 +1,7 @@
 export enum PathSegment {
   Home = 'home',
   Budget = 'budget',
-  User = 'user',
+  Auth = 'auth',
   LogIn = 'log-in',
   SignUp = 'sign-up',
   LogOut = 'log-out',

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {UserService} from "../user.service";
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from "../auth.service";
 
 @Component({
   selector: 'mocha-log-out',
@@ -8,11 +8,11 @@ import {UserService} from "../user.service";
 })
 export class LogOutComponent implements OnInit {
 
-  constructor(private userService: UserService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.userService.logOut().subscribe({
+    this.authService.logOut().subscribe({
       next: value => {
       }
     })

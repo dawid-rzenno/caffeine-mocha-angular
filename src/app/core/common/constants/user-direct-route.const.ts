@@ -8,7 +8,7 @@ export enum UserDirectRouteKey {
 }
 
 export const USER_DIRECT_ROUTE: DirectRoute = {
-  [UserDirectRouteKey.UserLogIn]: ['/', PathSegment.User, PathSegment.LogIn],
-  [UserDirectRouteKey.UserLogOut]: ['/', PathSegment.User, PathSegment.LogOut],
-  [UserDirectRouteKey.UserSignUp]: ['/', PathSegment.User, PathSegment.SignUp]
+  [UserDirectRouteKey.UserLogIn]: ['/', PathSegment.Auth, PathSegment.LogIn],
+  [UserDirectRouteKey.UserLogOut]: ['/', PathSegment.Auth, PathSegment.LogOut],
+  [UserDirectRouteKey.UserSignUp]: ['/', PathSegment.Auth, PathSegment.SignUp]
 }
