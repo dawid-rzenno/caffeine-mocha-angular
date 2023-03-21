@@ -1,20 +1,19 @@
 import {Component, Input} from '@angular/core';
-import {SimpleTableRowInterface} from "./common/simple-table-row.interface";
 import {TableComponentAbstract} from "../../abstracts/table-component.abstract";
-import {SimpleTableRowControlKey} from "./common/simple-table-row-control.interface";
+import {SimpleTableRow, SimpleTableRowFormGroupKey} from "./common/simple-table-row-form-group.model";
 
 @Component({
   selector: 'mocha-simple-table',
   templateUrl: './simple-table.component.html',
   styleUrls: ['./simple-table.component.scss']
 })
-export class SimpleTableComponent extends TableComponentAbstract<SimpleTableRowInterface, typeof SimpleTableRowControlKey, SimpleTableRowControlKey> {
-  public readonly ColumnKey = SimpleTableRowControlKey;
+export class SimpleTableComponent extends TableComponentAbstract<SimpleTableRow, typeof SimpleTableRowFormGroupKey, SimpleTableRowFormGroupKey> {
+  public readonly ColumnKey = SimpleTableRowFormGroupKey;
   public readonly DisplayedColumnKeys = [
     this.ColumnKey.ID,
     this.ColumnKey.Name,
     this.ColumnKey.Value
   ];
 
-  @Input() public override dataSource: SimpleTableRowInterface[] = [];
+  @Input() public override dataSource: SimpleTableRow[] = [];
 }

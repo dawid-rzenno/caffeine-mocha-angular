@@ -12,6 +12,6 @@ export class BudgetFormResolver implements Resolve<Observable<UntypedFormGroup> 
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<UntypedFormGroup> | UntypedFormGroup {
     const id: string | null = route.paramMap.get(PathParam.ID);
-    return id ? this.service.getFormGroup$(id) : this.service.getFormGroup();
+    return id ? this.service.getFormGroup$(id) : BudgetFormService.createFormGroup();
   }
 }

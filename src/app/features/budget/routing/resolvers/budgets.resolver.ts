@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
-import {BudgetInterface} from "../../budget-form/common/budget.interface";
 import {BudgetService} from "../../budget.service";
+import {Budget} from "../../budget-form/common/budget-form-group.model";
 
 @Injectable()
-export class BudgetsResolver implements Resolve<Observable<BudgetInterface[]> | null> {
+export class BudgetsResolver implements Resolve<Observable<Budget[]> | null> {
   constructor(private service: BudgetService) {
   }
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BudgetInterface[]> | null {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Budget[]> | null {
     return this.service.getAll();
   }
 }

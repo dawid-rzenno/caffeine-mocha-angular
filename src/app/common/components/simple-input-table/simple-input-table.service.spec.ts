@@ -1,13 +1,13 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SimpleInputTableService } from './simple-input-table.service';
+import {SimpleInputTableFormService} from './simple-input-table-form.service';
 
 describe('SimpleInputTableService', () => {
-  let service: SimpleInputTableService;
+  let service: SimpleInputTableFormService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(SimpleInputTableService);
+    service = TestBed.inject(SimpleInputTableFormService);
   });
 
   it('should be created', () => {

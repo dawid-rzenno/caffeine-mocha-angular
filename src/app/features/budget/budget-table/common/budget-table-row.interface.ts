@@ -1,6 +1,4 @@
-import {
-    SimpleTableRowInterface
-} from "../../../../common/components/simple-table/common/simple-table-row.interface";
+import {SimpleTableRow} from "../../../../common/components/simple-table/common/simple-table-row-form-group.model";
 
 export enum BudgetTableRowKey {
   ID = 'id',
@@ -11,7 +9,7 @@ export enum BudgetTableRowKey {
   Actions = 'actions'
 }
 
-export interface IBudgetTableRowInterface extends SimpleTableRowInterface {
+export interface IBudgetTableRowInterface extends SimpleTableRow {
   [BudgetTableRowKey.TotalOutcomeValue]: number;
   [BudgetTableRowKey.TotalIncomeValue]: number;
   [BudgetTableRowKey.ContributorsCount]: number;

@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
 import {NestedFormArrayAbstract} from "../../../features/budget/common/nested-form-array.abstract";
-import {SimpleTableRowControlKey} from "../simple-table/common/simple-table-row-control.interface";
+import {SimpleTableRowFormGroupKey} from "../simple-table/common/simple-table-row-form-group.model";
 import {SimpleInputTableLabel as DefaultLabels} from "./common/simple-input-table-label.enum";
 
 @Component({
@@ -10,7 +10,7 @@ import {SimpleInputTableLabel as DefaultLabels} from "./common/simple-input-tabl
   styleUrls: ['./simple-input-table.component.scss']
 })
 export class SimpleInputTableComponent extends NestedFormArrayAbstract {
-  public readonly ControlKey = SimpleTableRowControlKey;
+  public readonly ControlKey = SimpleTableRowFormGroupKey;
 
   @Input() addButtonLabel: string = DefaultLabels.AddButton;
   @Input() removeButtonLabel: string = DefaultLabels.RemoveButton;
@@ -19,9 +19,9 @@ export class SimpleInputTableComponent extends NestedFormArrayAbstract {
 
   protected get newFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      [SimpleTableRowControlKey.ID]: new UntypedFormControl(null),
-      [SimpleTableRowControlKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
-      [SimpleTableRowControlKey.Value]: new UntypedFormControl(0, {validators: [Validators.required]})
+      [SimpleTableRowFormGroupKey.ID]: new UntypedFormControl(null),
+      [SimpleTableRowFormGroupKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
+      [SimpleTableRowFormGroupKey.Value]: new UntypedFormControl(0, {validators: [Validators.required]})
     })
   }
 }

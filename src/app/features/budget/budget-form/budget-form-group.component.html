@@ -9,10 +9,10 @@
         <mat-card-header class="step-card-header">Enter budget details</mat-card-header>
         <mat-card-subtitle>&nbsp;</mat-card-subtitle>
         <mat-card-content>
-          <mocha-budget-general-control
+          <mocha-budget-details-form-group
             (formSubmission)="MatStepperComponent.next()"
             [formGroup]="detailsFormGroup"
-          ></mocha-budget-general-control>
+          ></mocha-budget-details-form-group>
         </mat-card-content>
         <mat-card-actions class="mat-card-actions">
           <button color="warn" mat-button mocha-back-button type="button">

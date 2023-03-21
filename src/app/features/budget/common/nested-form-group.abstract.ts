@@ -4,7 +4,7 @@ import {UntypedFormGroup} from "@angular/forms";
 @Directive()
 export abstract class NestedFormGroupAbstract {
   /** FormGroup control's keys. */
-  public abstract readonly ControlKey: {[k: string]: any};
+  public abstract readonly FormGroupKey: { [k: string]: any };
 
   @Input() public formGroup!: UntypedFormGroup;
 
