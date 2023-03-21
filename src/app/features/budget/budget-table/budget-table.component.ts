@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {BudgetTableRowKey, IBudgetTableRowInterface} from "./common/budget-table-row.interface";
+import {BudgetTableRow, BudgetTableRowKey} from "./budget-table-row.model";
 import {TableComponentAbstract} from "../../../common/abstracts/table-component.abstract";
 import {ActionLabel} from 'src/app/common/constants/action-label.enum';
-import {BudgetActionLabel} from "../budget-form/common/budget-action-label.enum";
+import {BudgetActionLabel} from "../budget-form-group/common/budget-action-label.enum";
 import {BudgetHeader} from "../common/route-data-header.enum";
 import {BUDGET_DIRECT_ROUTE, BudgetDirectRouteKey} from "../../../common/constants/budget-direct-route-key.const";
-import {BudgetColumnLabel} from "../budget-form/common/budget-column-label.enum";
-import {Budget} from "../budget-form/common/budget-form-group.model";
+import {BudgetColumnLabel} from "../budget-form-group/common/budget-column-label.enum";
+import {Budget} from "../budget-form-group/common/budget-form-group.model";
 import {SimpleTableRow} from "../../../common/components/simple-table/common/simple-table-row-form-group.model";
 import {BudgetContributor} from "../budget-contributors-form-array/common/budget-contributor-form-group-value.model";
 
@@ -16,7 +16,7 @@ import {BudgetContributor} from "../budget-contributors-form-array/common/budget
   templateUrl: './budget-table.component.html',
   styleUrls: ['./budget-table.component.scss']
 })
-export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRowInterface, typeof BudgetTableRowKey, BudgetTableRowKey> implements OnInit {
+export class BudgetTableComponent extends TableComponentAbstract<BudgetTableRow, typeof BudgetTableRowKey, BudgetTableRowKey> implements OnInit {
   public readonly ActionLabels = {...ActionLabel, ...BudgetActionLabel};
   public readonly BudgetHeader = BudgetHeader;
   public readonly ColumnLabels = BudgetColumnLabel;
@@ -43,7 +43,7 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
     })
   }
 
-  public static createDataSource(budgets: Budget[]): IBudgetTableRowInterface[] {
+  public static createDataSource(budgets: Budget[]): BudgetTableRow[] {
     return budgets.map((budget: Budget) => {
 
       let totalOutcomeValue = 0;
@@ -62,7 +62,7 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
         [BudgetTableRowKey.TotalOutcomeValue]: totalOutcomeValue,
         [BudgetTableRowKey.TotalIncomeValue]: totalIncomeValue,
         [BudgetTableRowKey.ContributorsCount]: budget.contributors.length,
-      } as IBudgetTableRowInterface;
+      } as BudgetTableRow;
     });
   }
 }

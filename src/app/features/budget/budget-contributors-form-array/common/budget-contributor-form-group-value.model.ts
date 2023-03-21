@@ -1,10 +1,12 @@
 import {FormControl, FormGroup} from "@angular/forms";
 import {
-  SimpleTableRowFormArray,
-  SimpleTableRowFormArrayValues
+  SimpleTableRowFormArray
 } from "../../../../common/components/simple-table/common/simple-table-row-form-array.model";
-import {SimpleTableRow} from "../../../../common/components/simple-table/common/simple-table-row-form-group.model";
 import {FormControlValue, ID} from "../../../../common/types/id.type";
+import {
+  SimpleTableRow,
+  SimpleTableRowFormGroupValue
+} from "../../../../common/components/simple-table/common/simple-table-row-form-group.model";
 
 export enum BudgetContributorControlKey {
   ID = 'id',
@@ -28,9 +30,9 @@ export class BudgetContributorFormGroup extends FormGroup<BudgetContributorFormG
 export type BudgetContributorFormGroupValue = {
   [BudgetContributorControlKey.ID]: FormControlValue<string>;
   [BudgetContributorControlKey.Name]: FormControlValue<string>;
-  [BudgetContributorControlKey.Incomes]: SimpleTableRowFormArrayValues;
-  [BudgetContributorControlKey.Allowances]: SimpleTableRowFormArrayValues;
-  [BudgetContributorControlKey.Deductions]: SimpleTableRowFormArrayValues;
+  [BudgetContributorControlKey.Incomes]: SimpleTableRowFormGroupValue[];
+  [BudgetContributorControlKey.Allowances]: SimpleTableRowFormGroupValue[];
+  [BudgetContributorControlKey.Deductions]: SimpleTableRowFormGroupValue[];
 }
 
 export interface BudgetContributor {

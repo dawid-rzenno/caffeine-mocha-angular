@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {map, Observable, takeUntil} from "rxjs";
-import {FormControl, UntypedFormGroup} from "@angular/forms";
-import {Budget, BudgetFormGroup, BudgetFormGroupKey, BudgetFormGroupValue} from "./common/budget-form-group.model";
+import {FormControl} from "@angular/forms";
+import {Budget, BudgetFormGroup, BudgetFormGroupKey} from "./common/budget-form-group.model";
 import {BudgetService} from "../budget.service";
 import {BudgetDetailsFormService} from "../budget-details-form-group/budget-details-form.service";
 import {
@@ -45,9 +45,11 @@ export class BudgetFormService {
     )
   }
 
-  submitFormGroup$(formGroup: UntypedFormGroup, takeUntil$: EventEmitter<void>): Observable<Budget> {
-    return this.service.create(formGroup.getRawValue() as BudgetFormGroupValue).pipe(
+  submitFormGroup$(formGroup: BudgetFormGroup, takeUntil$: EventEmitter<void>): Observable<Budget> {
+    return this.service.create(formGroup.getRawValue() as Budget).pipe(
       takeUntil(takeUntil$),
     );
   }
+
+
 }

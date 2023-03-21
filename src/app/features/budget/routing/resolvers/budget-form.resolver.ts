@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {UntypedFormGroup} from "@angular/forms";
-import {BudgetFormService} from "../../budget-form/budget-form.service";
+import {BudgetFormService} from "../../budget-form-group/budget-form.service";
 import {PathParam} from "../../../../common/constants/path-param.enum";
 
 @Injectable()

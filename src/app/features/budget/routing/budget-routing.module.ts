@@ -3,7 +3,7 @@ import {RouterModule, Routes} from "@angular/router";
 import {RoutedFormGroupRouteDataKey} from "../common/routed-form-group-component.abstract";
 import {BudgetComponent} from "../budget.component";
 import {PathSegment} from "../../../common/constants/path-segment.enum";
-import {BudgetFormGroupComponent} from "../budget-form/budget-form-group.component";
+import {BudgetFormGroupComponent} from "../budget-form-group/budget-form-group.component";
 import {BudgetHeader} from "../common/route-data-header.enum";
 import {BudgetSummaryComponent} from "../budget-summary/budget-summary.component";
 import {BudgetTableComponent} from "../budget-table/budget-table.component";

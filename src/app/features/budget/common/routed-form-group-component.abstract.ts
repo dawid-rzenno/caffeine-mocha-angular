@@ -1,5 +1,5 @@
 import {ActivatedRoute} from "@angular/router";
-import {AsyncComponentAbstract} from "./async-component.abstract";
+import {AsyncComponentAbstract} from "../../../common/abstracts/async-component.abstract";
 import {Observable} from "rxjs";
 import {StatusService} from "../../../core/status/status.service";
 

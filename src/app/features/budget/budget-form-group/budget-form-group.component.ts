@@ -11,7 +11,7 @@ import {
 import {BudgetContributorFormArray} from "../budget-contributors-form-array/common/budget-contributor-form-array.model";
 
 @Component({
-  selector: 'mocha-budget-form',
+  selector: 'mocha-budget-form-group-group',
   templateUrl: './budget-form-group.component.html',
   styleUrls: ['./budget-form-group.component.scss'],
   providers: [BudgetFormService]

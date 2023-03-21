@@ -14,7 +14,7 @@ export class BudgetContributorsFormArrayComponent extends NestedFormArrayAbstrac
 
   @ViewChildren(MatAccordion) accordions!: QueryList<MatAccordion>;
 
-  protected get newFormGroup(): UntypedFormGroup {
+  protected get createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
       [BudgetContributorControlKey.ID]: new UntypedFormControl(''),
       [BudgetContributorControlKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/router';
 import {Observable} from 'rxjs';
 import {BudgetService} from "../../budget.service";
-import {Budget} from "../../budget-form/common/budget-form-group.model";
+import {Budget} from "../../budget-form-group/common/budget-form-group.model";
 
 @Injectable()
 export class BudgetsResolver implements Resolve<Observable<Budget[]> | null> {

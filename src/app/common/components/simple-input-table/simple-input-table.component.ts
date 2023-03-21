@@ -17,7 +17,7 @@ export class SimpleInputTableComponent extends NestedFormArrayAbstract {
   @Input() nameColumnLabel: string = DefaultLabels.NameColumn;
   @Input() valueColumnLabel: string = DefaultLabels.ValueColumn;
 
-  protected get newFormGroup(): UntypedFormGroup {
+  protected get createFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
       [SimpleTableRowFormGroupKey.ID]: new UntypedFormControl(null),
       [SimpleTableRowFormGroupKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),

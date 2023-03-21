@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot} from '@angular/rou
 import {Observable} from 'rxjs';
 import {BudgetService} from "../../budget.service";
 import {PathParam} from "../../../../common/constants/path-param.enum";
-import {Budget} from "../../budget-form/common/budget-form-group.model";
+import {Budget} from "../../budget-form-group/common/budget-form-group.model";
 
 @Injectable()
 export class BudgetResolver implements Resolve<Observable<Budget> | null> {
