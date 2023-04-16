@@ -1,13 +1,11 @@
-<form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="formSubmission.emit()" class="budget-details-form">
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Budget name</mat-label>
-    <input [formControlName]="FormGroupKey.Name" [id]="FormGroupKey.Name" matInput type="text">
-  </mat-form-field>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Budget name</mat-label>
+  <input [formControlName]="FormGroupKey.Name" [id]="FormGroupKey.Name" matInput type="text">
+</mat-form-field>
 
-  <mat-form-field appearance="fill" class="form-field">
-    <mat-label>Owner name</mat-label>
-    <input [formControlName]="FormGroupKey.Owner" [id]="FormGroupKey.Owner" matInput type="text">
-  </mat-form-field>
+<mat-form-field appearance="fill" class="form-field">
+  <mat-label>Owner name</mat-label>
+  <input [formControlName]="FormGroupKey.Owner" [id]="FormGroupKey.Owner" matInput type="text">
+</mat-form-field>
 
-  <button type="submit" class="invisible"> <!-- triggers ngSubmit --> </button>
-</form>
+<button class="invisible" type="submit"> <!-- triggers ngSubmit --> </button>

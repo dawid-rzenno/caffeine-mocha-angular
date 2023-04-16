@@ -1,18 +1,16 @@
-import {ActivatedRoute} from "@angular/router";
 import {AsyncComponentAbstract} from "../../../common/abstracts/async-component.abstract";
-import {Observable} from "rxjs";
-import {StatusService} from "../../../core/status/status.service";
+import {ActivatedRouteSnapshot} from "@angular/router";
 
-export enum RoutedFormGroupRouteDataKey {
-  FormGroup = 'formGroup',
-  Header = 'header',
-}
+export abstract class RoutedFormGroupComponentAbstract<FormGroup, FormGroupRouteData> extends AsyncComponentAbstract {
+  readonly abstract formGroup: FormGroup;
 
-export abstract class RoutedFormGroupComponentAbstract<FormGroup> extends AsyncComponentAbstract {
-  public readonly header: Observable<string> = this.activatedRoute.snapshot.data[RoutedFormGroupRouteDataKey.Header];
-  public readonly formGroup: FormGroup = this.activatedRoute.snapshot.data[RoutedFormGroupRouteDataKey.FormGroup];
-
-  protected constructor(protected activatedRoute: ActivatedRoute, protected override statusService: StatusService) {
-    super(statusService);
+  protected constructor(protected activatedRouteSnapshot: ActivatedRouteSnapshot, protected formGroupRouteDataKey: string) {
+    super();
   }
+
+  protected getFormGroupRouteData(): FormGroupRouteData {
+    return this.activatedRouteSnapshot.data[this.formGroupRouteDataKey];
+  }
+
+  protected abstract createFormGroup(formGroupRouteData?: FormGroupRouteData): FormGroup;
 }
