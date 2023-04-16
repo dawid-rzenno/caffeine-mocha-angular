@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
-import {USER_DIRECT_ROUTE, UserDirectRouteKey} from "../../common/constants/user-direct-route.const";
+import {AUTH_DIRECT_ROUTE, AuthDirectRouteKey} from "../../common/constants/auth-direct-route.const";
 import {controlValueMatches} from "./common/control-value-matches.function";
-import {SignUpFormKey} from "./common/sign-up-form-key.enum";
+import {SignUpForm, SignUpFormKey} from "./common/sign-up-form.type";
 
 @Component({
   selector: 'mocha-sign-up',
@@ -12,34 +12,35 @@ import {SignUpFormKey} from "./common/sign-up-form-key.enum";
 })
 export class SignUpComponent {
   public readonly FormKey: typeof SignUpFormKey = SignUpFormKey;
-  public readonly UserDirectRoute = USER_DIRECT_ROUTE;
-  public readonly UserDirectRouteKey = UserDirectRouteKey;
+  public readonly AuthDirectRoute = AUTH_DIRECT_ROUTE;
+  public readonly AuthDirectRouteKey = AuthDirectRouteKey;
 
-  public formGroup: UntypedFormGroup = SignUpComponent.getFormGroup();
+  public formGroup: FormGroup<SignUpForm> = this.createFormGroup();
 
-  constructor(private userService: AuthService) {
-  }
-
-  private static getFormGroup(): UntypedFormGroup {
-    const formGroup: UntypedFormGroup = new UntypedFormGroup({
-      [SignUpFormKey.Email]: new UntypedFormControl('', {validators: [Validators.required, Validators.email]}),
-      [SignUpFormKey.Password]: new UntypedFormControl('', {validators: [Validators.required]}),
-      [SignUpFormKey.PasswordConfirmation]: new UntypedFormControl('', {validators: [Validators.required]})
-    });
-
-    const passwordControl: UntypedFormControl = formGroup.get(SignUpFormKey.Password) as UntypedFormControl;
-    const passwordConfirmationControl: UntypedFormControl = formGroup.get(SignUpFormKey.PasswordConfirmation) as UntypedFormControl;
-
-    if (passwordControl && passwordConfirmationControl) {
-      passwordConfirmationControl.addValidators(
-        controlValueMatches(passwordControl)
-      )
-    }
-
-    return formGroup;
+  constructor(private authService: AuthService, private fb: FormBuilder) {
   }
 
   public onSubmit(): void {
-    this.userService.signUp().subscribe()
+    this.authService.signUp$().subscribe()
+  }
+
+  private createFormGroup(): FormGroup<SignUpForm> {
+    const passwordControl = this.fb.control<string>('', Validators.required)
+    return this.fb.group({
+      [SignUpFormKey.Email]: this.fb.control<string>('', {
+        validators: [
+          Validators.required,
+          Validators.email
+        ]
+      }),
+      [SignUpFormKey.Password]: passwordControl,
+      [SignUpFormKey.PasswordConfirmation]: this.fb.control<string>('', {
+        validators: [
+          Validators.required,
+          controlValueMatches(passwordControl)
+        ]
+      }),
+      [SignUpFormKey.TosAccepted]: this.fb.control<boolean>(false, Validators.requiredTrue)
+    });
   }
 }

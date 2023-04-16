@@ -4,11 +4,11 @@
   <div class="col-12">
     <mat-card>
       <mat-card-header>Contributors</mat-card-header>
-      <mat-card-subtitle>Total contributors' income — {{totalContributorsIncome | currency: ' '}}</mat-card-subtitle>
+      <mat-card-subtitle>Total contributors' income — {{incomeTotal | currency: ' '}}</mat-card-subtitle>
       <mat-card-content>
         <div class="row">
           <mocha-budget-contributor-tile
-            *ngFor="let contributorTile of contributorTiles"
+            *ngFor="let contributorTile of contributorSummaries"
             [budgetContributorTile]="contributorTile"
             class="col-6"
           ></mocha-budget-contributor-tile>
@@ -20,7 +20,7 @@
   <div class="col-6 mt-4">
     <mat-card>
       <mat-card-title>Outcomes</mat-card-title>
-      <mat-card-subtitle>Total budget's outcome — {{totalBudgetOutcome | currency: ' '}}</mat-card-subtitle>
+      <mat-card-subtitle>Total budget's outcome — {{outcomeTotal | currency: ' '}}</mat-card-subtitle>
       <mat-card-content>
         <mocha-simple-table [dataSource]="outcomes"></mocha-simple-table>
       </mat-card-content>

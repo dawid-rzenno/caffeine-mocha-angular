@@ -1,4 +1,4 @@
-import {USER_DIRECT_ROUTE, UserDirectRouteKey} from "../../common/constants/user-direct-route.const";
+import {AUTH_DIRECT_ROUTE, AuthDirectRouteKey} from "../../common/constants/auth-direct-route.const";
 import {HeaderLinkInterface} from "./header-link.interface";
 import {BUDGET_DIRECT_ROUTE, BudgetDirectRouteKey} from "../../../common/constants/budget-direct-route-key.const";
 
@@ -21,15 +21,15 @@ export const HEADER_LINKS: HeaderLinkInterface[] = [
     links: [
       {
         label: 'Log In',
-        routerLink: USER_DIRECT_ROUTE[UserDirectRouteKey.UserLogIn]
+        routerLink: AUTH_DIRECT_ROUTE[AuthDirectRouteKey.AuthSignIn]
       },
       {
         label: 'Log Out',
-        routerLink: USER_DIRECT_ROUTE[UserDirectRouteKey.UserLogOut]
+        routerLink: AUTH_DIRECT_ROUTE[AuthDirectRouteKey.AuthSignOut]
       },
       {
         label: 'Sign Up',
-        routerLink: USER_DIRECT_ROUTE[UserDirectRouteKey.UserSignUp]
+        routerLink: AUTH_DIRECT_ROUTE[AuthDirectRouteKey.AuthSignUp]
       },
     ]
   },

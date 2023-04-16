@@ -14,7 +14,8 @@
       </div>
       <div class="col-4">
         <b>Free money</b>
-        <p class="total-free"> {{(budgetContributorTile.totalIncome - budgetContributorTile.contributionAmount) | currency: ' '}}</p>
+        <p class="total-free" matTooltip="=Total income subtracted from contribution amount">
+          {{(budgetContributorTile.totalFree) | currency: ' '}}</p>
       </div>
     </div>
   </div>

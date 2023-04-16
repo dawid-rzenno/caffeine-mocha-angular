@@ -1,7 +1,7 @@
 import {TestBed} from "@angular/core/testing";
 
-describe(`BudgetContributorTileComponent`, () => {
-  describe('template', () => {
+describe(``, () => {
+  describe('', () => {
     beforeEach(async () => {
       await TestBed.configureTestingModule({}).compileComponents();
     });

@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-center">
+  <mat-card>
+    <mat-card-title class="p-3">Log In</mat-card-title>
+    <mat-card-content>
+      <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="d-flex flex-column log-in-form">
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Email</mat-label>
+          <input [formControlName]="FormKey.Email" [id]="FormKey.Email" matInput type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Password</mat-label>
+          <input [formControlName]="FormKey.Password" [id]="FormKey.Password" matInput type="password">
+        </mat-form-field>
+
+        <p>
+          <mat-checkbox [formControlName]="FormKey.RememberMe" [id]="FormKey.RememberMe"></mat-checkbox>
+          <small class="remember-me-text"><b>Remember me next time</b></small>
+        </p>
+
+        <button [disabled]="formGroup.invalid" class="log-in-button" color="primary" mat-raised-button type="submit">
+          Sign In
+        </button>
+      </form>
+    </mat-card-content>
+    <mat-card-actions class="text-center p-3">
+      <span>
+        Don't have an account yet?&nbsp;<a [routerLink]="AuthDirectRoute[AuthDirectRouteKey.AuthSignUp]">Sign up!</a>
+      </span>
+    </mat-card-actions>
+  </mat-card>
+</div>

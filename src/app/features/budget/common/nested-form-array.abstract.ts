@@ -20,7 +20,7 @@ export abstract class NestedFormArrayAbstract implements OnInit {
     return this.allowEmptyFormArray ? false : wouldLastElementBeRemoved;
   }
 
-  protected abstract get newFormGroup(): UntypedFormGroup;
+  protected abstract get createFormGroup(): UntypedFormGroup;
 
   ngOnInit() {
     if (!this.formArray.length && !this.allowEmptyFormArray) {
@@ -29,7 +29,7 @@ export abstract class NestedFormArrayAbstract implements OnInit {
   }
 
   addFormGroup(): void {
-    this.formArray.push(this.newFormGroup);
+    this.formArray.push(this.createFormGroup);
   }
 
   removeFormGroup(index: number): void {
