@@ -3,20 +3,20 @@
     <mat-card-header>Sign Up</mat-card-header>
     <mat-card-subtitle>&nbsp;</mat-card-subtitle>
     <mat-card-content>
-      <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="onSubmit()" class="d-flex flex-column sign-up-form">
+      <form *ngIf="formGroup" [formGroup]="formGroup" (ngSubmit)="signUp()" class="d-flex flex-column sign-up-form">
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Email</mat-label>
-          <input [formControlName]="FormKey.Email" [id]="FormKey.Email" matInput type="text">
+          <input formControlName="email" id="email" matInput type="text">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Password</mat-label>
-          <input [formControlName]="FormKey.Password" [id]="FormKey.Password" matInput type="password">
+          <input formControlName="password" id="password" matInput type="password">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Confirm password</mat-label>
-          <input [formControlName]="FormKey.PasswordConfirmation" [id]="FormKey.PasswordConfirmation" matInput
+          <input formControlName="passwordConfirmation" id="passwordConfirmation" matInput
                  type="password">
         </mat-form-field>
 

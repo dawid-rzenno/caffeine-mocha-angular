@@ -1,5 +1,4 @@
-import {DirectRoute} from "../../core/common/constants/direct-route.const";
-import {PathSegment} from "./path-segment.enum";
+import { PathSegment } from "./path-segment.enum";
 
 export enum BudgetDirectRouteKey {
   AllBudgets = 'AllBudgets',
@@ -8,7 +7,7 @@ export enum BudgetDirectRouteKey {
   EditBudget = 'EditBudget',
 }
 
-export const BUDGET_DIRECT_ROUTE: DirectRoute = {
+export const BUDGET_DIRECT_ROUTE: Record<string, any> = {
   [BudgetDirectRouteKey.AllBudgets]: ['/', PathSegment.Budget, PathSegment.All],
   [BudgetDirectRouteKey.CreateBudget]: ['/', PathSegment.Budget, PathSegment.Create],
   [BudgetDirectRouteKey.InspectBudget]: (id: string) => ['/', PathSegment.Budget, PathSegment.Inspect, id],

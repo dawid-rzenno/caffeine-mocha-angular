@@ -1,29 +1,50 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from "@angular/common/http";
+import { catchError, Observable, of, tap } from "rxjs";
+
+export type SignUpBody = {
+  email: string;
+  password: string;
+}
+
+export type SignInBody = SignUpBody & {
+  rememberMe: boolean;
+};
 
 @Injectable()
 export class AuthService {
+  private readonly resourceUrl: string = 'api/auth/';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  logIn(): Observable<any> {
-    return this.httpClient.post('null', null);
+  private _authorizationToken: string | undefined = undefined;
+
+  get authorizationToken(): string {
+    return this._authorizationToken || '';
   }
 
-  logOut(): Observable<any> {
-    return this.httpClient.post('null', null);
+  signIn(body: SignInBody): Observable<any> {
+    return this.httpClient.post<string>(this.resourceUrl + 'sign-in', body).pipe(
+      tap((token: string) => this._authorizationToken = token),
+      catchError(this.catchError)
+    );
   }
 
-  signUp(): Observable<any> {
-    return this.httpClient.post('null', null);
+  signOut(): Observable<any> {
+    return this.httpClient.post(this.resourceUrl + 'sign-out', undefined).pipe(
+      tap(() => this._authorizationToken = undefined),
+      catchError(this.catchError)
+    );
   }
 
-  getAuthorizationToken(): any {
-    // Fake
-    return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.' +
-      'eyJtZXNzYWdlIjoiSldUIFJ1bGVzISIsImlhdCI6MTQ1OTQ0ODExOSwiZXhwIjoxNDU5NDU0NTE5fQ.' +
-      '-yIVBD5b73C75osbmwwshQNRC7frWUYrqaTjTpza2y4';
+  signUp(body: SignUpBody): Observable<any> {
+    return this.httpClient.post(this.resourceUrl + 'sign-up', body).pipe(
+      catchError(this.catchError)
+    );
+  }
+
+  private catchError(error: any): Observable<any> {
+    return of(error)
   }
 }

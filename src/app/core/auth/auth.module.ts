@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {LogInComponent} from './log-in/log-in.component';
-import {LogOutComponent} from './log-out/log-out.component';
+import {SignInComponent} from './sign-in/sign-in.component';
+import {SignOutComponent} from './sign-out/sign-out.component';
 import {RouterModule, Routes} from "@angular/router";
 import {SignUpComponent} from './sign-up/sign-up.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -16,8 +16,8 @@ import {AuthInterceptor} from "./auth.interceptor";
 import {PathSegment} from "../../common/constants/path-segment.enum";
 
 const DECLARATIONS = [
-  LogInComponent,
-  LogOutComponent,
+  SignInComponent,
+  SignOutComponent,
   SignUpComponent
 ];
 
@@ -49,11 +49,11 @@ export class AuthModule {
     children: [
       {
         path: PathSegment.LogIn,
-        component: LogInComponent
+        component: SignInComponent
       },
       {
         path: PathSegment.LogOut,
-        component: LogOutComponent
+        component: SignOutComponent
       },
       {
         path: PathSegment.SignUp,
