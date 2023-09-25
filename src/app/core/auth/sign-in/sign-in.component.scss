@@ -5,3 +5,9 @@
 .log-in-button {
   height: 52px;
 }
+
+:host ::ng-deep {
+  [for='rememberMe-input'] {
+    margin-bottom: 0 !important;
+  }
+}

@@ -14,6 +14,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {AuthService} from "./auth.service";
 import {AuthInterceptor} from "./auth.interceptor";
 import {PathSegment} from "../../common/constants/path-segment.enum";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const DECLARATIONS = [
   SignInComponent,
@@ -32,12 +33,15 @@ const IMPORTS = [
   MatFormFieldModule,
   MatInputModule,
   MatButtonModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatCheckboxModule
 ];
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: IMPORTS,
+    imports: [
+      IMPORTS
+    ],
   providers: [
     AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

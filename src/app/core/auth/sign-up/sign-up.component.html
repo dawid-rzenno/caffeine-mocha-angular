@@ -10,6 +10,16 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" id="username" matInput type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Display Name</mat-label>
+          <input formControlName="displayName" id="displayName" matInput type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="form-field">
           <mat-label>Password</mat-label>
           <input formControlName="password" id="password" matInput type="password">
         </mat-form-field>
@@ -24,8 +34,10 @@
       </form>
     </mat-card-content>
 
-    <mat-card-actions class="text-center">
-      Already have an account? <a [routerLink]="UserDirectRoute[UserDirectRouteKey.UserLogIn]">Log in!</a>
+    <mat-card-actions >
+      <span class="text-center w-100">
+        Already have an account? <a [routerLink]="UserDirectRoute[UserDirectRouteKey.UserLogIn]">Log in!</a>
+      </span>
     </mat-card-actions>
   </mat-card>
 </div>

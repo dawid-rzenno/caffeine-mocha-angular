@@ -4,7 +4,7 @@ import { AuthService, SignInBody } from "../auth.service";
 import { USER_DIRECT_ROUTE, UserDirectRouteKey } from "../../common/constants/user-direct-route.const";
 
 export type SignInForm = {
-  email: FormControl<string>;
+  login: FormControl<string>;
   password: FormControl<string>;
   rememberMe: FormControl<boolean>;
 }
@@ -19,7 +19,7 @@ export class SignInComponent {
   readonly UserDirectRouteKey = UserDirectRouteKey;
 
   readonly formGroup: FormGroup<SignInForm> = new FormGroup<SignInForm>({
-    email: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
+    login: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
     password: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
     rememberMe: new FormControl<boolean>(false, { validators: [Validators.required], nonNullable: true })
   });

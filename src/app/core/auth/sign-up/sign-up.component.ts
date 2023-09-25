@@ -6,6 +6,8 @@ import { controlValueMatches } from "./common/control-value-matches.function";
 
 export type SignUpForm = {
   email: FormControl<string>;
+  username: FormControl<string>;
+  displayName: FormControl<string>;
   password: FormControl<string>;
   passwordConfirmation: FormControl<string>;
 }
@@ -40,6 +42,8 @@ export class SignUpComponent {
   private getFormGroup(): FormGroup<SignUpForm> {
     const formGroup: FormGroup<SignUpForm> = new FormGroup<SignUpForm>({
       email: new FormControl<string>('', { validators: [Validators.required, Validators.email], nonNullable: true }),
+      username: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
+      displayName: new FormControl<string>('', { nonNullable: true }),
       password: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),
       passwordConfirmation: this.passwordConfirmationControl
     });
