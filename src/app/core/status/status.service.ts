@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, map, Observable, take, timer} from "rxjs";
-import {Status} from "./common/status.type";
-import {InstantiatedStatus} from "./common/status-with-id.type";
+import {Status} from "./common/status";
+import {InstantiatedStatus} from "./common/instantiated-status";
 
 @Injectable({
   providedIn: 'root'

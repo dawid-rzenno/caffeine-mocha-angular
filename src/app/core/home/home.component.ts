@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {BUDGET_DIRECT_ROUTE, BudgetDirectRouteKey} from "../../common/constants/budget-direct-route-key.const";
+import {BudgetDirectRouteKeys} from "../../common/constants/budget-direct-route-keys";
+import { budgetDirectRoutes } from "../../common/constants/budget-direct-routes";
 
 @Component({
   selector: 'mocha-home',
@@ -7,6 +8,6 @@ import {BUDGET_DIRECT_ROUTE, BudgetDirectRouteKey} from "../../common/constants/
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
-  readonly BudgetDirectRoute = BUDGET_DIRECT_ROUTE;
-  readonly BudgetDirectRouteKey = BudgetDirectRouteKey;
+  readonly BudgetDirectRoute = budgetDirectRoutes;
+  readonly BudgetDirectRouteKey = BudgetDirectRouteKeys;
 }

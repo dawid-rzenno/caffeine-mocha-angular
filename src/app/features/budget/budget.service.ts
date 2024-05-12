@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {BudgetInterface} from "./budget-form/common/budget.interface";
+import {Budget} from "./budget-form/common/budget";
 
 @Injectable()
 export class BudgetService {
@@ -10,27 +10,27 @@ export class BudgetService {
   constructor(private http: HttpClient) {
   }
 
-  public getAll(apiUrl: string = this.apiUrl): Observable<BudgetInterface[]> {
+  public getAll(apiUrl: string = this.apiUrl): Observable<Budget[]> {
     return BudgetService.handleError(
-      this.http.get<BudgetInterface[]>(`${apiUrl}/all`, {observe: "response"})
+      this.http.get<Budget[]>(`${apiUrl}/all`, {observe: "response"})
     )
   }
 
-  public get(id: string, apiUrl: string = this.apiUrl): Observable<BudgetInterface> {
+  public get(id: string, apiUrl: string = this.apiUrl): Observable<Budget> {
     return BudgetService.handleError(
-      this.http.get<BudgetInterface>(`${apiUrl}/view/${id}`, {observe: "response"})
+      this.http.get<Budget>(`${apiUrl}/view/${id}`, {observe: "response"})
     )
   }
 
-  public create(budget: BudgetInterface, apiUrl: string = this.apiUrl): Observable<BudgetInterface> {
+  public create(budget: Budget, apiUrl: string = this.apiUrl): Observable<Budget> {
     return BudgetService.handleError(
-      this.http.post<BudgetInterface>(`${apiUrl}/create`, budget, {observe: "response"})
+      this.http.post<Budget>(`${apiUrl}/create`, budget, {observe: "response"})
     )
   }
 
-  public edit(budget: BudgetInterface, apiUrl: string = this.apiUrl): Observable<BudgetInterface> {
+  public edit(budget: Budget, apiUrl: string = this.apiUrl): Observable<Budget> {
     return BudgetService.handleError(
-      this.http.patch<BudgetInterface>(`${apiUrl}/edit`, budget, {observe: "response"})
+      this.http.patch<Budget>(`${apiUrl}/edit`, budget, {observe: "response"})
     )
   }
 

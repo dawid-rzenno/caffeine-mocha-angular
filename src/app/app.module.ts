@@ -3,14 +3,14 @@ import {AppComponent} from './app.component';
 import {RouterModule, Routes} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {CoreModule} from "./core/core.module";
-import {PathSegment} from "./common/constants/path-segment.enum";
+import {PathSegments} from "./common/constants/path-segments";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {ReactiveFormsModule} from "@angular/forms";
 
 const FEATURE_ROUTES: Routes = [
   {
-    path: PathSegment.Budget,
+    path: PathSegments.Budget,
     loadChildren: () => import('./features/budget/budget.module').then(m => m.BudgetModule)
   },
 ];

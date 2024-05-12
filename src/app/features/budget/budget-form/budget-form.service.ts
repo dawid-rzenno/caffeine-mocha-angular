@@ -1,12 +1,13 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {map, Observable, takeUntil} from "rxjs";
-import {BudgetInterface} from "./common/budget.interface";
+import {Budget} from "./common/budget";
 import {UntypedFormArray, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
-import {BudgetControlInterface, BudgetControlKey} from "./common/budget-control.interface";
+import {BudgetControl} from "./common/budget-control";
 import {BudgetService} from "../budget.service";
 import {BudgetGeneralControlService} from "../budget-general-control/budget-general-control.service";
 import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
 import {BudgetContributorsControlService} from "../budget-contributors-control/budget-contributors-control.service";
+import { BudgetControlKeys } from "./common/budget-control-keys";
 
 @Injectable()
 export class BudgetFormService {
@@ -15,11 +16,11 @@ export class BudgetFormService {
 
   getFormGroup$(budgetId: string): Observable<UntypedFormGroup> {
     return this.service.get(budgetId).pipe(
-      map((budget: BudgetInterface) => this.getFormGroup(budget))
+      map((budget: Budget) => this.getFormGroup(budget))
     )
   }
 
-  getFormGroup(budget?: BudgetInterface): UntypedFormGroup {
+  getFormGroup(budget?: Budget): UntypedFormGroup {
     const budgetDetailsFormGroup: UntypedFormGroup = BudgetGeneralControlService.attachControlsToFormGroup(
       new UntypedFormGroup({}),
       budget?.details
@@ -36,16 +37,16 @@ export class BudgetFormService {
     );
 
     return new UntypedFormGroup({
-      [BudgetControlKey.ID]: new UntypedFormControl(budget?.id),
-      [BudgetControlKey.Details]: budgetDetailsFormGroup,
-      [BudgetControlKey.Outcomes]: outcomesFormArray,
-      [BudgetControlKey.Contributors]: contributorsFormArray
+      [BudgetControlKeys.ID]: new UntypedFormControl(budget?.id),
+      [BudgetControlKeys.Details]: budgetDetailsFormGroup,
+      [BudgetControlKeys.Outcomes]: outcomesFormArray,
+      [BudgetControlKeys.Contributors]: contributorsFormArray
     });
 
   }
 
-  submitFormGroup$(formGroup: UntypedFormGroup, takeUntil$: EventEmitter<void>): Observable<BudgetControlInterface> {
-    return this.service.create(formGroup.getRawValue() as BudgetControlInterface).pipe(
+  submitFormGroup$(formGroup: UntypedFormGroup, takeUntil$: EventEmitter<void>): Observable<BudgetControl> {
+    return this.service.create(formGroup.getRawValue() as BudgetControl).pipe(
       takeUntil(takeUntil$),
     );
   }

@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
-import {BudgetContributorTileInterface} from "./common/budget-contributor-tile.interface";
+import {BudgetContributorTile} from "./common/budget-contributor-tile";
 
 @Component({
   selector: 'mocha-budget-contributor-tile',
@@ -8,5 +8,5 @@ import {BudgetContributorTileInterface} from "./common/budget-contributor-tile.i
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BudgetContributorTileComponent {
-  @Input() budgetContributorTile!: BudgetContributorTileInterface;
+  @Input() budgetContributorTile!: BudgetContributorTile;
 }

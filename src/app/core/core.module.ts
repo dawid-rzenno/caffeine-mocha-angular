@@ -11,7 +11,7 @@ import {FontAwesomeIconLibraryModule} from "./libraries/font-awesome-icon-librar
 import {FooterComponent} from './layout/footer/footer.component';
 import {MainComponent} from './layout/main/main.component';
 import {AuthModule} from "./auth/auth.module";
-import {PathSegment} from "../common/constants/path-segment.enum";
+import {PathSegments} from "../common/constants/path-segments";
 import {StatusModule} from "./status/status.module";
 
 const EXPORTED_DECLARATIONS = [
@@ -49,14 +49,14 @@ const IMPORTS = [
 export class CoreModule {
   static readonly routes: Routes = [
     {
-      path: PathSegment.Home,
+      path: PathSegments.Home,
       component: HomeComponent
     },
     ...AuthModule.routes,
     {
       path: '',
       pathMatch: 'full',
-      redirectTo: `/${PathSegment.Home}`
+      redirectTo: `/${PathSegments.Home}`
     },
     {
       path: '**',

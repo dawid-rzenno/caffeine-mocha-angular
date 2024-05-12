@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService, SignUpBody } from "../auth.service";
-import { USER_DIRECT_ROUTE, UserDirectRouteKey } from "../../common/constants/user-direct-route.const";
-import { controlValueMatches } from "./common/control-value-matches.function";
+import { userDirectRoutes } from "../../common/user-direct-routes";
+import { controlValueMatches } from "./common/control-value-matches";
+import { UserDirectRouteKeys } from "../../common/user-direct-route-keys";
 
 export type SignUpForm = {
   email: FormControl<string>;
@@ -18,8 +19,8 @@ export type SignUpForm = {
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent {
-  readonly UserDirectRoute: Record<string, any> = USER_DIRECT_ROUTE;
-  readonly UserDirectRouteKey = UserDirectRouteKey;
+  readonly UserDirectRoute: Record<string, any> = userDirectRoutes;
+  readonly UserDirectRouteKey = UserDirectRouteKeys;
 
   readonly passwordConfirmationControl: FormControl<string> = new FormControl<string>('', {
     validators: [Validators.required],

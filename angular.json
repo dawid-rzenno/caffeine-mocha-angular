@@ -74,7 +74,8 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "proxy.conf.json",
-            "open": true
+            "open": true,
+            "port": 4220
           },
           "configurations": {
             "production": {
@@ -139,6 +140,7 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ]
+    ],
+    "analytics": "0b3a0658-95f7-4c04-b71e-fe778068c52c"
   }
 }

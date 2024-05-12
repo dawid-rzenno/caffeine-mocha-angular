@@ -1,11 +1,11 @@
 import {Injectable} from '@angular/core';
 import {UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
-import {BudgetContributorInterface} from "./common/budget-contributor.interface";
+import {BudgetContributor} from "./common/budget-contributor";
 import {SimpleInputTableService} from "../../../common/components/simple-input-table/simple-input-table.service";
+import { BudgetContributorControlKeys } from "./common/budget-contributor-control-keys";
 import {
-  SimpleTableRowControlKey
-} from "../../../common/components/simple-table/common/simple-table-row-control.interface";
+  SimpleTableRowControlKeys
+} from "../../../common/components/simple-table/common/simple-table-row-control-keys";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +13,9 @@ import {
 export class BudgetContributorsControlService {
   public static attachControlsToFormArray(
     formArray: UntypedFormArray,
-    contributors: BudgetContributorInterface[],
+    contributors: BudgetContributor[],
   ): UntypedFormArray {
-    contributors.forEach((contributor: BudgetContributorInterface) => {
+    contributors.forEach((contributor: BudgetContributor) => {
       const incomesFormArray: UntypedFormArray = SimpleInputTableService.attachControlsToFormArray(
         new UntypedFormArray([]),
         contributor.incomes
@@ -33,14 +33,14 @@ export class BudgetContributorsControlService {
 
       formArray.push(
         new UntypedFormGroup({
-          [SimpleTableRowControlKey.ID]: new UntypedFormControl(contributor.id ?? null),
-          [SimpleTableRowControlKey.Name]: new UntypedFormControl(
+          [SimpleTableRowControlKeys.ID]: new UntypedFormControl(contributor.id ?? null),
+          [SimpleTableRowControlKeys.Name]: new UntypedFormControl(
             contributor.name ?? '',
             {validators: [Validators.required]}
           ),
-          [BudgetContributorControlKey.Incomes]: incomesFormArray,
-          [BudgetContributorControlKey.Allowances]: allowancesFormArray,
-          [BudgetContributorControlKey.Deductions]: deductionsFormArray
+          [BudgetContributorControlKeys.Incomes]: incomesFormArray,
+          [BudgetContributorControlKeys.Allowances]: allowancesFormArray,
+          [BudgetContributorControlKeys.Deductions]: deductionsFormArray
         })
       );
     })
