@@ -13,7 +13,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {AuthService} from "./auth.service";
 import {AuthInterceptor} from "./auth.interceptor";
-import {PathSegment} from "../../common/constants/path-segment.enum";
+import {PathSegments} from "../../common/constants/path-segments";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 
 const DECLARATIONS = [
@@ -49,18 +49,18 @@ const IMPORTS = [
 })
 export class AuthModule {
   static readonly routes: Routes = [{
-    path: PathSegment.Auth,
+    path: PathSegments.Auth,
     children: [
       {
-        path: PathSegment.LogIn,
+        path: PathSegments.LogIn,
         component: SignInComponent
       },
       {
-        path: PathSegment.LogOut,
+        path: PathSegments.LogOut,
         component: SignOutComponent
       },
       {
-        path: PathSegment.SignUp,
+        path: PathSegments.SignUp,
         component: SignUpComponent
       },
     ]

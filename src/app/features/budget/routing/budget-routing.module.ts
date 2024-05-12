@@ -1,19 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
-import {RoutedFormRouteDataKey} from "../common/routed-form-component.abstract";
 import {BudgetComponent} from "../budget.component";
-import {PathSegment} from "../../../common/constants/path-segment.enum";
+import {PathSegments} from "../../../common/constants/path-segments";
 import {BudgetFormComponent} from "../budget-form/budget-form.component";
-import {BudgetHeader} from "../common/route-data-header.enum";
+import {BudgetHeaders} from "../common/budget-headers";
 import {BudgetSummaryComponent} from "../budget-summary/budget-summary.component";
 import {BudgetTableComponent} from "../budget-table/budget-table.component";
 import {BudgetResolver} from "./resolvers/budget.resolver";
 import {BudgetsResolver} from "./resolvers/budgets.resolver";
 import {BudgetFormResolver} from "./resolvers/budget-form.resolver";
-import {PathParam} from "../../../common/constants/path-param.enum";
+import {PathParams} from "../../../common/constants/path-params";
+import { RoutedFormRouteDataKeys } from "../common/routed-form-route-data-keys";
 
 export const BudgetRouteDataKey = {
-  ...RoutedFormRouteDataKey,
+  ...RoutedFormRouteDataKeys,
   Budgets: 'budgets',
   Budget: 'budget',
 }
@@ -24,34 +24,34 @@ export const BUDGET_ROUTES: Routes = [
     component: BudgetComponent,
     children: [
       {
-        path: PathSegment.Create,
+        path: PathSegments.Create,
         component: BudgetFormComponent,
         resolve: {
           [BudgetRouteDataKey.FormGroup]: BudgetFormResolver
         },
         data: {
-          [BudgetRouteDataKey.Header]: BudgetHeader.Create
+          [BudgetRouteDataKey.Header]: BudgetHeaders.Create
         }
       },
       {
-        path: `${PathSegment.Edit}/:${PathParam.ID}`,
+        path: `${PathSegments.Edit}/:${PathParams.ID}`,
         component: BudgetFormComponent,
         resolve: {
           [BudgetRouteDataKey.FormGroup]: BudgetFormResolver // ToDo: navigate to "../new" if it can't be resolved
         },
         data: {
-          [BudgetRouteDataKey.Header]: BudgetHeader.Edit
+          [BudgetRouteDataKey.Header]: BudgetHeaders.Edit
         }
       },
       {
-        path: `${PathSegment.Inspect}/:${PathParam.ID}`,
+        path: `${PathSegments.Inspect}/:${PathParams.ID}`,
         component: BudgetSummaryComponent,
         resolve: {
           [BudgetRouteDataKey.Budget]: BudgetResolver // ToDo: navigate to "../new" if it can't be resolved
         }
       },
       {
-        path: PathSegment.All,
+        path: PathSegments.All,
         component: BudgetTableComponent,
         resolve: {
           [BudgetRouteDataKey.Budgets]: BudgetsResolver

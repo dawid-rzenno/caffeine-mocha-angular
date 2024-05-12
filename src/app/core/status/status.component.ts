@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {StatusService} from "./status.service";
 import {Observable} from "rxjs";
-import {InstantiatedStatus} from "./common/status-with-id.type";
+import {InstantiatedStatus} from "./common/instantiated-status";
 
 @Component({
   selector: 'mocha-status',

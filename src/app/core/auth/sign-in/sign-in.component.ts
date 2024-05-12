@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService, SignInBody } from "../auth.service";
-import { USER_DIRECT_ROUTE, UserDirectRouteKey } from "../../common/constants/user-direct-route.const";
+import { userDirectRoutes } from "../../common/user-direct-routes";
+import { UserDirectRouteKeys } from "../../common/user-direct-route-keys";
 
 export type SignInForm = {
   login: FormControl<string>;
@@ -15,8 +16,8 @@ export type SignInForm = {
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent {
-  readonly UserDirectRoute: Record<string, any> = USER_DIRECT_ROUTE;
-  readonly UserDirectRouteKey = UserDirectRouteKey;
+  readonly UserDirectRoute: Record<string, any> = userDirectRoutes;
+  readonly UserDirectRouteKey = UserDirectRouteKeys;
 
   readonly formGroup: FormGroup<SignInForm> = new FormGroup<SignInForm>({
     login: new FormControl<string>('', { validators: [Validators.required], nonNullable: true }),

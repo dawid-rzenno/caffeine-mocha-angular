@@ -1,14 +1,14 @@
 import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-import {BudgetControlInterface} from "../budget-form/common/budget-control.interface";
+import {BudgetControl} from "../budget-form/common/budget-control";
 import {
-  BudgetContributorControlInterface
-} from "../budget-contributors-control/common/budget-contributor-control.interface";
+  BudgetContributorControl
+} from "../budget-contributors-control/common/budget-contributor-control";
 import {ActivatedRoute} from "@angular/router";
-import {BudgetContributorTileInterface} from "../budget-contributor-tile/common/budget-contributor-tile.interface";
-import {BudgetHeader} from "../common/route-data-header.enum";
+import {BudgetContributorTile} from "../budget-contributor-tile/common/budget-contributor-tile";
+import {BudgetHeaders} from "../common/budget-headers";
 import {
-  SimpleTableRowControlInterface
-} from "../../../common/components/simple-table/common/simple-table-row-control.interface";
+  SimpleTableRowControl
+} from "../../../common/components/simple-table/common/simple-table-row-control";
 
 @Component({
   selector: 'mocha-budget-summary',
@@ -17,16 +17,16 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BudgetSummaryComponent implements OnInit {
-  public readonly BudgetHeader = BudgetHeader;
+  public readonly BudgetHeader = BudgetHeaders;
   public budgetName: string = ''
-  public contributorTiles: BudgetContributorTileInterface[] = [];
+  public contributorTiles: BudgetContributorTile[] = [];
   public totalBudgetOutcome: number = 0;
   public totalContributorsIncome: number = 0;
-  public outcomes: SimpleTableRowControlInterface[] = [];
+  public outcomes: SimpleTableRowControl[] = [];
 
   @Input() hideHeader: boolean = false;
 
-  @Input() set budget(budgetFormGroupRawValue: BudgetControlInterface) {
+  @Input() set budget(budgetFormGroupRawValue: BudgetControl) {
     if (budgetFormGroupRawValue) {
       this.budgetName = budgetFormGroupRawValue.details.name;
       this.totalBudgetOutcome = BudgetSummaryComponent.calculateTotalBudgetOutcome(budgetFormGroupRawValue);
@@ -53,36 +53,36 @@ export class BudgetSummaryComponent implements OnInit {
     })
   }
 
-  private static calculateTotalBudgetOutcome(budget: BudgetControlInterface): number {
+  private static calculateTotalBudgetOutcome(budget: BudgetControl): number {
     let total = 0;
 
-    budget.outcomes.forEach((outcome: SimpleTableRowControlInterface) => total += outcome.value)
+    budget.outcomes.forEach((outcome: SimpleTableRowControl) => total += outcome.value)
 
     return total;
   }
 
-  private static calculateTotalContributorsIncome(budget: BudgetControlInterface): number {
+  private static calculateTotalContributorsIncome(budget: BudgetControl): number {
     let total = 0;
 
-    budget.contributors.forEach((contributor: BudgetContributorControlInterface) => {
-      contributor.incomes.forEach((income: SimpleTableRowControlInterface) => total += income.value)
+    budget.contributors.forEach((contributor: BudgetContributorControl) => {
+      contributor.incomes.forEach((income: SimpleTableRowControl) => total += income.value)
     })
 
     return total;
   }
 
   private static createDataForContributorTiles(
-    budget: BudgetControlInterface,
+    budget: BudgetControl,
     totalBudgetIncome: number,
     totalBudgetOutcome: number
-  ): BudgetContributorTileInterface[] {
-    return budget.contributors.map((contributor: BudgetContributorControlInterface) => {
+  ): BudgetContributorTile[] {
+    return budget.contributors.map((contributor: BudgetContributorControl) => {
 
       let totalContributorIncome: number = 0;
 
-      contributor.incomes.forEach((income: SimpleTableRowControlInterface) => totalContributorIncome += income.value);
-      contributor.deductions.forEach((deduction: SimpleTableRowControlInterface) => totalContributorIncome += deduction.value);
-      contributor.allowances.forEach((allowance: SimpleTableRowControlInterface) => totalContributorIncome -= allowance.value);
+      contributor.incomes.forEach((income: SimpleTableRowControl) => totalContributorIncome += income.value);
+      contributor.deductions.forEach((deduction: SimpleTableRowControl) => totalContributorIncome += deduction.value);
+      contributor.allowances.forEach((allowance: SimpleTableRowControl) => totalContributorIncome -= allowance.value);
 
       let percentage: number = 0;
 

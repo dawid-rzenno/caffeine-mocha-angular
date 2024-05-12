@@ -1,26 +1,26 @@
 import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {AbstractControl, UntypedFormArray, UntypedFormControl, UntypedFormGroup, Validators} from "@angular/forms";
-import {BudgetContributorControlKey} from "./common/budget-contributor-control.interface";
 import {MatAccordion, MatExpansionPanel} from "@angular/material/expansion";
-import {NestedFormArrayAbstract} from "../common/nested-form-array.abstract";
+import {NestedFormArrayComponent} from "../common/nested-form-array-component";
+import { BudgetContributorControlKeys } from "./common/budget-contributor-control-keys";
 
 @Component({
   selector: 'mocha-budget-contributors-control',
   templateUrl: './budget-contributors-control.component.html',
   styleUrls: ['./budget-contributors-control.component.scss']
 })
-export class BudgetContributorsControlComponent extends NestedFormArrayAbstract implements OnInit {
-  public readonly ControlKey = BudgetContributorControlKey;
+export class BudgetContributorsControlComponent extends NestedFormArrayComponent implements OnInit {
+  public readonly ControlKey = BudgetContributorControlKeys;
 
   @ViewChildren(MatAccordion) accordions!: QueryList<MatAccordion>;
 
   protected get newFormGroup(): UntypedFormGroup {
     return new UntypedFormGroup({
-      [BudgetContributorControlKey.ID]: new UntypedFormControl(''),
-      [BudgetContributorControlKey.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
-      [BudgetContributorControlKey.Incomes]: new UntypedFormArray([]),
-      [BudgetContributorControlKey.Allowances]: new UntypedFormArray([]),
-      [BudgetContributorControlKey.Deductions]: new UntypedFormArray([]),
+      [BudgetContributorControlKeys.ID]: new UntypedFormControl(''),
+      [BudgetContributorControlKeys.Name]: new UntypedFormControl('', {validators: [Validators.required]}),
+      [BudgetContributorControlKeys.Incomes]: new UntypedFormArray([]),
+      [BudgetContributorControlKeys.Allowances]: new UntypedFormArray([]),
+      [BudgetContributorControlKeys.Deductions]: new UntypedFormArray([]),
     })
   }
 

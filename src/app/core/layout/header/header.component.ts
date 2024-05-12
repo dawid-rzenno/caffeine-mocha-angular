@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { HEADER_LINKS } from "./header-items.const";
-import { HeaderLinkInterface } from "./header-link.interface";
-import { DIRECT_ROUTE, DirectRouteKey } from "../../common/constants/direct-route.const";
+import { headerLinks } from "./common/header-links";
+import { HeaderLink } from "./common/header-link";
+import { directRoutes } from "../../common/direct-routes";
+import { DirectRouteKeys } from "../../common/direct-route-keys";
 
 @Component({
   selector: 'mocha-header',
@@ -9,7 +10,7 @@ import { DIRECT_ROUTE, DirectRouteKey } from "../../common/constants/direct-rout
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  public readonly Items: HeaderLinkInterface[] = HEADER_LINKS;
-  public readonly DirectRoute: Record<string, any> = DIRECT_ROUTE;
-  public readonly DirectRouteKey = DirectRouteKey;
+  public readonly Items: HeaderLink[] = headerLinks;
+  public readonly DirectRoute: Record<string, any> = directRoutes;
+  public readonly DirectRouteKey = DirectRouteKeys;
 }

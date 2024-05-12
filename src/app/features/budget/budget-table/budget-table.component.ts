@@ -1,33 +1,36 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {BudgetTableRowKey, IBudgetTableRowInterface} from "./common/budget-table-row.interface";
-import {TableComponentAbstract} from "../../../common/abstracts/table-component.abstract";
-import {ActionLabel} from 'src/app/common/constants/action-label.enum';
-import {BudgetActionLabel, BudgetColumnLabel} from "../budget-form/common/budget-label.enum";
-import {BudgetInterface} from "../budget-form/common/budget.interface";
-import {BudgetContributorInterface} from "../budget-contributors-control/common/budget-contributor.interface";
-import {SimpleTableRowInterface} from "../../../common/components/simple-table/common/simple-table-row.interface";
-import {BudgetHeader} from "../common/route-data-header.enum";
-import {BUDGET_DIRECT_ROUTE, BudgetDirectRouteKey} from "../../../common/constants/budget-direct-route-key.const";
+import {BudgetTableRow} from "./common/budget-table-row";
+import {TableComponent} from "../../../common/abstracts/table-component";
+import {ActionLabels} from 'src/app/common/constants/action-labels';
+import {BudgetActionLabels} from "../budget-form/common/budget-action-labels";
+import {Budget} from "../budget-form/common/budget";
+import {BudgetContributor} from "../budget-contributors-control/common/budget-contributor";
+import {SimpleTableRow} from "../../../common/components/simple-table/common/simple-table-row";
+import {BudgetHeaders} from "../common/budget-headers";
+import {BudgetDirectRouteKeys} from "../../../common/constants/budget-direct-route-keys";
+import { BudgetColumnLabels } from "../budget-form/common/budget-column-labels";
+import { BudgetTableRowKeys } from "./common/budget-table-row-keys";
+import { budgetDirectRoutes } from "../../../common/constants/budget-direct-routes";
 
 @Component({
   selector: 'mocha-budget-table',
   templateUrl: './budget-table.component.html',
   styleUrls: ['./budget-table.component.scss']
 })
-export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRowInterface, typeof BudgetTableRowKey, BudgetTableRowKey> implements OnInit {
-  public readonly ActionLabels = {...ActionLabel, ...BudgetActionLabel};
-  public readonly BudgetHeader = BudgetHeader;
-  public readonly ColumnLabels = BudgetColumnLabel;
-  public readonly BudgetDirectRoute = BUDGET_DIRECT_ROUTE;
-  public readonly BudgetDirectRouteKey = BudgetDirectRouteKey;
-  public readonly ColumnKey = BudgetTableRowKey;
+export class BudgetTableComponent extends TableComponent<BudgetTableRow, typeof BudgetTableRowKeys, BudgetTableRowKeys> implements OnInit {
+  public readonly ActionLabels = {...ActionLabels, ...BudgetActionLabels};
+  public readonly BudgetHeader = BudgetHeaders;
+  public readonly ColumnLabels = BudgetColumnLabels;
+  public readonly BudgetDirectRoute = budgetDirectRoutes;
+  public readonly BudgetDirectRouteKey = BudgetDirectRouteKeys;
+  public readonly ColumnKey = BudgetTableRowKeys;
   public readonly DisplayedColumnKeys = [
-    BudgetTableRowKey.Name,
-    BudgetTableRowKey.TotalOutcomeValue,
-    BudgetTableRowKey.TotalIncomeValue,
-    BudgetTableRowKey.ContributorsCount,
-    BudgetTableRowKey.Actions
+    BudgetTableRowKeys.Name,
+    BudgetTableRowKeys.TotalOutcomeValue,
+    BudgetTableRowKeys.TotalIncomeValue,
+    BudgetTableRowKeys.ContributorsCount,
+    BudgetTableRowKeys.Actions
   ];
 
   public header: string = '';
@@ -42,26 +45,26 @@ export class BudgetTableComponent extends TableComponentAbstract<IBudgetTableRow
     })
   }
 
-  public static createDataSource(budgets: BudgetInterface[]): IBudgetTableRowInterface[] {
-    return budgets.map((budget: BudgetInterface) => {
+  public static createDataSource(budgets: Budget[]): BudgetTableRow[] {
+    return budgets.map((budget: Budget) => {
 
       let totalOutcomeValue = 0;
       budget.outcomes.forEach(outcome => totalOutcomeValue += outcome.value);
 
       let totalIncomeValue: number = 0;
-      budget.contributors.forEach((contributor: BudgetContributorInterface) => {
-        contributor.incomes.forEach((income: SimpleTableRowInterface) => totalIncomeValue += income.value);
-        contributor.deductions.forEach((deduction: SimpleTableRowInterface) => totalIncomeValue += deduction.value);
-        contributor.allowances.forEach((allowance: SimpleTableRowInterface) => totalIncomeValue -= allowance.value);
+      budget.contributors.forEach((contributor: BudgetContributor) => {
+        contributor.incomes.forEach((income: SimpleTableRow) => totalIncomeValue += income.value);
+        contributor.deductions.forEach((deduction: SimpleTableRow) => totalIncomeValue += deduction.value);
+        contributor.allowances.forEach((allowance: SimpleTableRow) => totalIncomeValue -= allowance.value);
       });
 
       return {
-        [BudgetTableRowKey.ID]: budget.id,
-        [BudgetTableRowKey.Name]: budget.details.name,
-        [BudgetTableRowKey.TotalOutcomeValue]: totalOutcomeValue,
-        [BudgetTableRowKey.TotalIncomeValue]: totalIncomeValue,
-        [BudgetTableRowKey.ContributorsCount]: budget.contributors.length,
-      } as IBudgetTableRowInterface;
+        [BudgetTableRowKeys.ID]: budget.id,
+        [BudgetTableRowKeys.Name]: budget.details.name,
+        [BudgetTableRowKeys.TotalOutcomeValue]: totalOutcomeValue,
+        [BudgetTableRowKeys.TotalIncomeValue]: totalIncomeValue,
+        [BudgetTableRowKeys.ContributorsCount]: budget.contributors.length,
+      } as BudgetTableRow;
     });
   }
 }

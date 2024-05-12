@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {UntypedFormArray, UntypedFormGroup} from "@angular/forms";
-import {BudgetControlKey} from "./common/budget-control.interface";
 import {BudgetFormService} from "./budget-form.service";
-import {RoutedFormComponentAbstract} from "../common/routed-form-component.abstract";
+import {RoutedFormComponent} from "../common/routed-form-component";
 import {StatusService} from "../../../core/status/status.service";
 import {ActivatedRoute} from "@angular/router";
+import { BudgetControlKeys } from "./common/budget-control-keys";
 
 @Component({
   selector: 'mocha-budget-form',
@@ -12,8 +12,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./budget-form.component.scss'],
   providers: [BudgetFormService]
 })
-export class BudgetFormComponent extends RoutedFormComponentAbstract {
-  public readonly FormKey = BudgetControlKey;
+export class BudgetFormComponent extends RoutedFormComponent {
+  public readonly FormKey = BudgetControlKeys;
 
   constructor(
     private formService: BudgetFormService,
@@ -24,15 +24,15 @@ export class BudgetFormComponent extends RoutedFormComponentAbstract {
   }
 
   public get detailsFormGroup(): UntypedFormGroup {
-    return this.formGroup.get(BudgetControlKey.Details) as UntypedFormGroup;
+    return this.formGroup.get(BudgetControlKeys.Details) as UntypedFormGroup;
   }
 
   public get outcomesFormArray(): UntypedFormArray {
-    return this.formGroup.get(BudgetControlKey.Outcomes) as UntypedFormArray;
+    return this.formGroup.get(BudgetControlKeys.Outcomes) as UntypedFormArray;
   }
 
   public get contributorsFormArray(): UntypedFormArray {
-    return this.formGroup.get(BudgetControlKey.Contributors) as UntypedFormArray;
+    return this.formGroup.get(BudgetControlKeys.Contributors) as UntypedFormArray;
   }
 
   public onSave(): void {

@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component} from '@angular/core';
-import {BudgetGeneralControlKey} from "./common/budget-general-control.interface";
-import {NestedFormGroupAbstract} from "../common/nested-form-group.abstract";
+import {NestedFormGroupComponent} from "../common/nested-form-group-component";
 import {BudgetGeneralControlService} from "./budget-general-control.service";
+import { BudgetGeneralControlKeys } from "./common/budget-general-control-keys";
 
 @Component({
   selector: 'mocha-budget-general-control',
@@ -10,6 +10,6 @@ import {BudgetGeneralControlService} from "./budget-general-control.service";
   providers: [BudgetGeneralControlService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BudgetGeneralControlComponent extends NestedFormGroupAbstract {
-  public readonly ControlKey = BudgetGeneralControlKey;
+export class BudgetGeneralControlComponent extends NestedFormGroupComponent {
+  public readonly ControlKey = BudgetGeneralControlKeys;
 }
