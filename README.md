@@ -1,8 +1,8 @@
-# Caffeine | Mocha
+# Mocha
 
 ![pipeline](https://github.com/dawid-rzenno/caffeine-mocha/actions/workflows/main.yml/badge.svg)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.0 (currently 18.2.1).
 
 ## Development server
 
@@ -27,38 +27,3 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-
-## Contribution
-
-This project follows Angular naming conventions and following ones additionally:
-
-- constant
-  - **UPPER_CASE_NAME**
-    - ex. const APPLE_NAME
-  - kebab-case-name.const.ts
-    - ex. apple-name.const.ts
-- enum
-  - **TitleCaseName**
-    - ex. enum ApplePieRecipeOption
-  - kebab-case-name.enum.ts
-    - ex. apple-pie-recipe-option.enum.ts
-- type
-  - **TitleCaseName** + **Type** postfix
-    - ex. type ApplePieType
-  - kebab-case-name.type.ts
-    - ex. apple-pie.type.ts
-- abstract
-  - **TitleCaseName** + **Abstract** postfix
-    - ex. abstract class PieAbstract
-  - kebab-case-name.abstract.ts
-    - ex. pie.abstract.ts
-- interface
-  - **TitleCaseName** + **Interface** postfix
-    - ex. interface ApplePieInterface
-  - kebab-case-name.interface.ts
-    - ex. apple-pie.interface.ts
-- mock of Service or Component
-  - **TitleCaseName** + {postfix} + **Mock** postfix
-    - ApplePieComponentMock
-  - kebab-case-name.{postfix}.mock.ts
-    - apple-pie.component.mock.ts
